@@ -1,0 +1,26 @@
+{
+  "name": "quick_credit",
+  "version": "1.0.0",
+  "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test",
+    "deploy":"gh-pages -d UI"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolaked/Quick_Credit.git"
+  },
+  "keywords": [
+    "Quick_Credit"
+  ],
+  "author": "Akere Adetola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tolaked/Quick_Credit/issues"
+  },
+  "homepage": "https://github.com/tolaked/Quick_Credit#readme",
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}
