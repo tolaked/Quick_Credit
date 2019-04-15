@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sign Up | Quick Credit</title>
+    <title>Sign In | Quick Credit</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -17,10 +16,9 @@
                 ><img class="logo-img" src="img/kwikapp1.png"
               /></a>
             </p>
-            <i id="nav-icon" class="fa fa-bars"></i>
           </div>
 
-          <div class="navbar" id="navigation" data-page="nav">
+          <div class="navbar" id="navigation" input-page="nav">
             <a href="index.html">Home</a>
             <a href="sign-up.html">Sign Up</a>
             <a href="sign-in.html">Log In</a>
@@ -29,34 +27,15 @@
       </header>
 
       <div class="container">
-        <form id="form">
+        <form id="login-form" action="">
           <div>
-            <h3>Create Account</h3>
-            <p class="label"><label for="firstName" class="label">First Name</label></p>
-            <input
-              type="text"
-              id="firstName"
-              class="signup-input"
-              name="firstName"
-              placeholder="First name"
-              required
-            />
-
-            <p class="label"><label for="lastName" class="label">Last Name</label></p>            
-            <input
-              type="text"
-              id="lastName"
-              class="signup-input"
-              name="lastName"
-              placeholder="Last name"
-              required
-            />
+            <h3>Please enter your credentials to log in</h3>
 
             <p class="label"><label for="email" class="label">Email</label></p>
+            
             <input
               type="text"
               id="email"
-              class="signup-input"
               name="email"
               placeholder="Enter email"
               required
@@ -66,26 +45,19 @@
             <input
               type="password"
               id="password"
-              class="signup-input"
               name="password"
               placeholder="Enter password"
               required
             />
-
-            <p class="label"><label for="confirm-password" class="label">Confirm password</label><i class="fa fa-asterisk"></i></p>
-            <input
-              type="password"
-              id="confirm-password"
-              class="signup-input"
-              name="confirm-password"
-              placeholder="Re-enter password"
-              required
-            />
-
-            <button type="submit" id="submit">Submit</button>
+            <button type="submit" id="submit-login">Login</button>
             <p class="acct">
-              Already have an account?
-              <a class="sign-link" href="sign-in.html">Log In</a>
+              <a class="sign-link forgot-password" href="reset-password.html"
+                >Forgot Password?</a
+              >
+            </p>
+            <p class="acct">
+              Don't have an account yet?
+              <a class="sign-link" href="sign-up.html">Sign Up</a>
             </p>
           </div>
         </form>
@@ -97,7 +69,6 @@
           Copyright &copy; 2019 Quick Credit. All rights reserved
         </p>
       </div>
-    </footer>
-
+    </footer>  
   </body>
 </html>

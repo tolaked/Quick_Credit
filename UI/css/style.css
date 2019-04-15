@@ -368,6 +368,7 @@ a {
 
 /*SIGN UP/ SIGN IN */
 
+
 .container {
   max-width: 400px;
   margin: 130px auto 80px auto;
@@ -375,6 +376,18 @@ a {
   background: white;
   border-radius: 3px;
 }
+#page-nav {
+  color: #eee;
+}
+#page-nav .navbar a {
+  text-transform: uppercase;
+}
+
+div[input-page="nav"] {
+  padding-right: 2em;
+  background: inherit;
+}
+
 form .label {
   margin-bottom: 5px;
   color: #32669a;
@@ -447,7 +460,7 @@ button[type="submit"]:focus {
 }
 
 @media screen and (max-width: 900px) {
-  div[data-page="nav"] {
+  div[input-page="nav"] {
     padding-right: 20px;
   }
   #page-nav .navbar a {
