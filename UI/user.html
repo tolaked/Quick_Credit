@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/user.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Quick Credit | User-Dashboard</title>
+  </head>
+  <body>
+    <div class="headerr">
+      <a href="dashboard.html" class="brand-container">
+        <div class="menu-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="logo-container">
+          <span class="logo-icon"><img src="img/kwikapp1.png"></span> 
+        </div>
+      </a>
+
+      <div class="dropdown">
+        <button class="dropicon"><i class="fas fa-user"></i></button>
+        <div class="dropdown-content">
+          <p class="signout"><a class="signout" href="index.html">logout</a></p>
+          <div class="reset-password">
+            <p class="reset-password">
+              <a class="reset-password" href="resetpassword.html"
+                >Reset password</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+
+    <main class="main-body">
+      <section class="sidebar">
+        <div class="apply">Apply for loan</div>
+
+        <div class="sidebar-icon">
+          
+        
+          <div class="repayment">Loan repayment history</div>
+        </div>
+
+        <div class="create-loan-form">
+          <form action="" class="create-ln-form">
+            <div class="loan_container create-new-form-modified">
+              <div class="message_wrapper">
+                <ul>
+                  <li class="message_wrapper_header">
+                    <h1 class="message-header">Loan Application</h1>
+                  </li>
+                  <li class="cancel-message-wrapper">
+                    <div class="cancel-form">x</div>
+                  </li>
+                </ul>
+              </div>
+
+              <hr />
+              <div  class="modal-body">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                placeholder="First Name"
+                name="groupname"
+                id="firstName"
+                required
+              />
+              <label for="LastName">Last Name</label>
+              <input
+                type="text"
+                placeholder="Participant's name"
+                name="groupname"
+                id="LastName"
+                required
+              />
+              <label for="email">Email</label>
+              <input
+                type="text"
+                placeholder="Email"
+                name="email"
+                id="email"
+                required
+              />
+              <label for="tenor">Tenor</label>
+              <input
+                type="number"
+                min="1"
+                max="5"
+                placeholder="Tenor"
+                name="tenor"
+                id="tenor"
+                required
+              />
+              <label for="amount">Loan Amount</label>
+              <input
+                type="text"
+                placeholder="amount"
+                name="amount"
+                id="amount"
+                required
+              />
+              
+              <label for="rate">Interest rate</label>
+              <input
+                type="text"
+                value="5%"
+                placeholder="Participant's name"
+                name="rate"
+                id="rate"
+                required
+              />
+              <label for="installment">Payment installment</label>
+              <select name="cars">
+                  <option value="0">--Select--</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Yearly">Yearly</option>
+                </select>
+              <p>By clicking submit, you agree with our terms of service</p>
+              
+              </div>
+              <hr />
+              <div class="add-loan-btn">
+                <button type="submit" class="add-loan-button">Submit</button>
+                <button type="submit" class="cancel-loan-btn">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      
+      <section class="content">
+        <div class="compose-box compose-container content-item">
+            <form action="" class="box">
+                <p class="close"><i class="fas fa-window-close"></i></p>
+               
+              </form>
+            
+        </div>
+
+        
+        <div class="inbox-list inbox-container content-item">
+          <div class="loan-container">
+            <div class="messages">
+              <div class="loan-details">Loan Type</div>
+              <div class="loan-details">26th August 2017</div>
+              
+              <div class="delete-icon"><button class="loan">Loan details</button></div>
+            </div>
+
+            <div class="messages">
+                <div class="loan-details">Loan Type</div>
+                <div class="loan-details">26th August 2017</div>
+                
+                <div class="delete-icon"><button class="loan">Loan details</button> </div>
+            </div>
+          </div>
+        </div>
+       
+
+        <div class="main-loan-body">
+          <div class="check-loan">
+            <div class="subject-wrapper">
+              <h1 class="subject">Dear Candidate, Welcome On board</h1>
+              <p class="time-received"></p>
+            </div>
+
+            <hr />
+            <div class="users">
+              <h1 class="from">Akere Adetola</h1>
+              <p class="epic">< tolaked@epic.com></p>
+              <p class="to">to: andela@epicmail.com</p>
+            </div>
+
+            <div class="loanContent">
+              
+            <hr />
+
+            <div class="subject-wrapper">
+              <h1 class="subject"></h1>
+              <p class="time-received"></p>
+            </div>
+
+            <div class="users">
+              <h1 class="from">Andela</h1>
+              <p class="epic">< Tolaked@epicmail.com></p>
+              <p class="to">to: surifoll@epicmail.com</p>
+            </div>
+
+            <div class="message__body">
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Temporibus facere, vitae qui a soluta ratione labore nemo
+                veritatis nisi itaque sit odio dolorum molestiae perferendis,
+                eius commodi dolorem? Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Ipsum eos facilis soluta, ad expedita, quod
+                quasi aliquam voluptates sunt quidem culpa debitis at in.
+                Pariatur, aperiam ea! Cupiditate itaque eligendi non excepturi
+                perferendis quibusdam accusantium dolore sequi? Nulla,
+                cupiditate sunt. Vel voluptate nam, consequatur debitis iure
+                quasi reprehenderit facilis quos quia magnam repellat? Deleniti
+                accusantium excepturi sit corrupti vitae vel commodi nemo
+                recusandae cum ex distinctio corporis ducimus vero sint
+                similique, minima quidem rem eligendi quaerat? Dolores commodi
+                saepe sunt iste dolorum debitis laboriosam, libero expedita
+                inventore eligendifh fjjfj vitae atque at animi reprehenderit
+                molestias ex? Quae fugiat facilis mollitia nesciunt?
+              </p>
+            </div>
+            <hr />
+          </div>
+        </div>
+     </section>
+     </main>
+    
+
+    <script src="js/userdashboard.js"></script>
+  </body>
+</html>
