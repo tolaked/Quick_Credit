@@ -1,4 +1,4 @@
-  /*====================================================
+/*====================================================
   Basic css reset
   ====================================================*/
 
@@ -11,38 +11,15 @@
     font-family: Verdana, "Geneva", Tahoma, sans-serif;
     font-size: 100%;
     color:#6c757d;
+    
   }
-  
-  .main-header {
-    height: 60px;
-    background: #fff; 
-    box-sizing: border-box;
-    padding: 20px;
-    font-size: 30px;
-    font-weight: bold;
-    border-bottom: 1px solid blue;
-    min-width: 300px;
-  }
-  
-  .welcome-note {
-    font-style: italic;
-    color: blueviolet;
-  }
-  
-  .logo {
-    text-decoration: none;
-  }
-  
+ 
+
   .logo-icon {
     color: blue;
   }
   
-  .main-section {
-    background: url("../img/image-signin.jpeg") center center/cover;
-    display: flex;
-    justify-content: center;
-    min-height: calc(100vh - 60px);
-  }
+ 
   
   
   /* styles and overwrites default styles of hr */
@@ -76,29 +53,6 @@
     border: 1px solid blue;
   }
   
-  /*sets a style for the log in and sign in button*/
-  
-  
- 
-  /* Sets style for link to sign in to dashboard */
-  
-  
-  .back-login {
-    text-align: center;
-  }
-  .no-account {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
-  .psw {
-    text-align: center;
-    margin-top: 10px;
-    text-decoration: none;
-    color: blue;
-  }
-  
-  
   /*====================================================
     users Dashboard styles 
     ====================================================*/
@@ -110,16 +64,7 @@
     border: none;
     cursor: pointer;
   }
-  .loan{
-    background-color: #35577a;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    height: 40px;
-    color: white;
-    border-radius: 4px;
-  }
+
   
   .dropicon:hover {
     color: #fff;
@@ -156,6 +101,7 @@
     display: block;
   }
   
+  /* Styles the header */
   .headerr {
     display: flex;
     justify-content: space-between;
@@ -182,6 +128,7 @@
     min-width: 300px;
   }
   
+  /* Styles the side bar */
   .sidebar {
     background: #f4f4f4;
     padding-top: 20px;
@@ -209,12 +156,6 @@
     color: white;
   }
   
-  .content {
-    display: flex;
-    flex-direction: column;
-    width:100%;
-    padding:10px;
-}
   
   .content-item {
     min-width: calc(95vw - 220px);
@@ -235,21 +176,11 @@
     transition: 0.2s;
   }
   
-  .loan-container {
-    flex-direction: column;
+  .repayment{
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
   }
-  
-  .loan-details {
-    padding: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    justify-content: space-around;
-  }
-  
-  .delete-icon {
-    color: red;
-  }
-  
   
   .repayment:hover {
     background: #212d57;
@@ -263,77 +194,6 @@
     
   }
   
-  .sent {
-    margin-bottom: 20px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .repayment{
-    margin-bottom: 20px;
-    padding: 10px;
-    cursor: pointer;
-    /* width: 100%; */
-  }
-  
-  
-  
-  /* =================================================================
-  Compose message box
-   =================================================================*/
-
-  
-  .box input[type="text"],
-  .box textarea {
-    display: block;
-    width: 100%;
-    padding: 2px;
-    font-size: 10px;
-  }
-  
-  .recipent {
-    display: block;
-    margin-bottom: 15px;
-    margin-top: 10px;
-    height: 30px;
-    width: 95%;
-    padding-left: 5px;
-  }
-  
-  .subject {
-    display: block;
-    margin-bottom: 15px;
-    height: 30px;
-    width: 95%;
-    padding-left: 5px;
-  }
-  
-  .cc {
-    display: block;
-    margin-bottom: 15px;
-    height: 30px;
-    width: 95%;
-    padding-left: 5px;
-  }
-  
-  .write-a-message {
-    display: block;
-    margin-bottom: 15px;
-    height: 200px;
-    width: 95%;
-    padding-left: 5px;
-  }
-  
-  .send {
-    padding-right: 5px;
-    width: 40%;
-    background: #35577a;
-    height: 50px;
-    margin-top: 15px;
-    align-content: center;
-    color: #fff;
-    border: none;
-  }
   .close {
     color: red;
     text-align: right;
@@ -341,32 +201,8 @@
     font-size: 20px;
   }
   
-  .sent-list,
-  .draft-list {
-    display: none;
-  }
-  
-  /* ==============Read Email============================= */
-  .subject-wrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-bottom: 10px;
-  }
-  .subject {
-    width: 60%;
-  }
-  
   .time-received {
     width: 40%;
-  }
-  
-  .users {
-    margin-bottom: 25px;
-  }
-  .loanContent {
-    padding-right: 40%;
-    margin-bottom: 25px;
   }
   
   .main-loan-body {
@@ -374,9 +210,9 @@
     padding: 17px;
   }
   
-  
   .compose-box {
     display: none;
+    
   }
 
   /* styles and overwrites default styles of hr */
@@ -388,24 +224,7 @@
   .input-container {
     margin-bottom: 25px;
   }
-  
-  /*styles the labels for the input field*/
-  .label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  /* sets style for the input fields*/
-  .input {
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    background: #f4f4f4;
-    width: 100%;
-    height: 20px;
-    padding: 10px 5px;
-    font-size: 16px;
-  }
+
   
   .input:focus {
     border: 1px solid blue;
@@ -439,8 +258,6 @@
     color: black;
     transition: 0.2s;
   }
-  
-  /* ==================NEW GROUP================= */
   
   .loan_container {
     width: 40%;
@@ -492,11 +309,118 @@
     z-index: 1;
     
   }
+ 
+  #admin-dashboard-section {
+    padding-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+  }
   
+  #admin-dashboard-section h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+  .account-details {
+    width: 60vw;
+    margin: 0.4em auto;
+    background: #ffffffc2;
+    color: teal;
+    font-weight: bolder;
+    padding: 0.7em;
+    border-radius: 0.5em;
+  }
+ .dashboard-main{ padding-top: 5em;
+    margin-left: 1em;
+    margin-right: 1em;}
+  
+  .account-details article {
+    padding:0.4em;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.3px solid;
+  }
+  
+  article.buttons {
+    border-bottom: 0px;
+  }
+  
+  .account-details a {
+    text-decoration: none;
+    width: 30%;
+  }
+  .account-details a button {
+    width: 100%;
+    padding: 0.6em 1.3em 0.6em 1.3em;
+  }
+  
+  .account-details button {
+    margin-top: 1em;
+    background: rgba(0, 0, 0, 0.1);
+    color: teal;
+    padding: 0.5em 0 0.5em 0;
+    width: 30%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: 0.6s;
+    border-radius: 4px;
+  }
+  
+  .account-details button:hover {
+    background: teal;
+    color: white;
+  }
+  #dashboard-section {
+    padding-top: 5em;
+    margin-left: 1em;
+    margin-right: 1em;
+    background: #ffffffc2;
+    color: teal;
+    font-weight: bolder;
+    
+  }
+  
+#account a {
+  text-decoration: none;
+}
+
+  #profile {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }  
+  .card-img {
+    object-fit: contain;
+    height: 50%;
+  }
+  
+  .container {
+    text-align: center;
+    background: #ffffffc2;
+    color: teal;
+  }
+  .details {
+    flex-basis: 70%;
+    margin-bottom: 1em;
+  }
+  
+  .details article {
+    border-bottom: 3px solid #dfe0e2;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .details p {
+    margin-top: 0.5em;
+    font-size: 1.6em;
+    margin-bottom: 0.5em;
+    padding: 0.2em;
+  }
   .loan_container input[type="text"],
   .loan_container input[type="number"],
   .loan_containerr input[type="password"],
-  .loan_container select[name="cars"],
+  .loan_container select[name="inst"],
 
   .loan_container textarea {
     width: 90%;
@@ -535,11 +459,6 @@
     display: block;
   }
   
-  .compose-button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
   .add-loan-btn {
     margin: 8px 0;
     cursor: pointer;
@@ -549,7 +468,6 @@
     z-index: -1;
   }
   
-  /* Styles the add group button */
   .add-loan-button,
   .cancel-loan-btn {
     background-color: #35577a;
@@ -560,8 +478,7 @@
     font-size: 15px;
     color: white;
   }
-  
-  /* ======Group drop down menu */
+ 
   
   .dropdown-content {
     display: none;
@@ -594,18 +511,46 @@
     display: block;
     text-align: left;
   }
+
   .logo-icon {
     display: inline-block;
   }
+
   .dropdown-content a:hover {
     background-color: #ddd;
   }
-  
-  .show {
-    display: block;
+
+  #profile {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
-  
-  @media only screen and (max-width: 600px) {
+
+  .details {
+    width: 100%;
+  }
+
+  .details p {
+    font-size: 1.1em;
+  }
+
+  #account button {
+    width: auto;
+    height:30%;
+  }
+
+  #account-form {
+    width: 95%;
+  }
+  #account-modal {
+    width: 98%;
+  }
+
+  #account-form button {
+    width: 70%;
+  }
+
+  @media only screen and (max-width: 680px) {
     .main-body {
       flex-direction: column;
     }
@@ -613,7 +558,14 @@
     .sidebar {
       display: none;
     }
-  
+    #dashboard-section{
+        width:100%;
+    }
+
+    .details article{
+      min-width:100%;
+    }
+    
     .logo-container {
       display: none;
     }
@@ -630,11 +582,48 @@
       width: 70vw;
       margin: 20px;
     }
+
     .hearder {
       min-width: 400px;
     }
-    /* .form-container{
-      min-height:480px;
-    } */
+
+    .add-loan-button,
+  .cancel-loan-btn {
+    background-color: #35577a;
+    border: none;
+    cursor: pointer;
+    width: 60%;
+    padding: 16px 20px;
+    display:flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: white;
+  }
+  
+  }
+  @media (max-width: 769px) {
+    #admin-dashboard-main {
+      height: 90vh;
+      overflow: auto;
+    }
+  
+    .account-details {
+      width: 80vw;
+      font-weight: 500;
+    }
+  
+    .account-details button {
+      font-size: 0.9em;
+      width: 43%;
+      padding: 0.7em 0.3em 0.7em 0.3em;
+    }
+  
+    .account-details a {
+      width: 43%;
+    }
+  
+    .account-details a button {
+      padding: 0.7em 1em 0.7em 1em;
+    }
   }
   
