@@ -126,6 +126,9 @@
     display: flex;
     min-height: calc(100vh - 59px);
     min-width: 300px;
+    background-image: url("../img/loan1.jpg");
+    background-repeat: no-repeat;
+  background-size: cover;
   }
   
   /* Styles the side bar */
@@ -311,8 +314,8 @@
   }
  
   #admin-dashboard-section {
-    padding-top: 1em;
-    margin-left: 1em;
+    /* padding-top: 0.2em; */
+    margin-left: 3em;
     margin-right: 1em;
     
   }
@@ -352,6 +355,8 @@
   .account-details a button {
     width: 100%;
     padding: 0.6em 1.3em 0.6em 1.3em;
+    background-color: teal;
+    color:white;
   }
   
   .account-details button {
@@ -378,7 +383,7 @@
     background: #ffffffc2;
     color: teal;
     font-weight: bolder;
-    
+    width:100%;
   }
   
 #account a {
@@ -480,6 +485,11 @@
     border-radius: 2px;
     
   }
+  /* .h1{
+    color: black;
+    font-weight: bold;
+  } */
+
   .cancel-loan-btn:hover{
     background-color: rgba(0, 0, 255, 0.664);
   }
