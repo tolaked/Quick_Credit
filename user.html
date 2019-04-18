@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/user.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Quick Credit | User-Dashboard</title>
+  </head>
+  <body>
+    <div class="headerr">
+      <a href="index.html" class="brand-container">
+        <div class="menu-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="logo-container">
+          <span class="logo-icon"><img src="img/kwikapp1.png"></span> 
+        </div>
+      </a>
+
+      <div class="dropdown">
+        <button class="dropicon"><i class="fas fa-user"></i></button>
+        <div class="dropdown-content">
+          <p class="signout"><a class="signout" href="index.html">logout</a></p>
+          <div class="reset-password">
+            <p class="reset-password">
+              <a class="reset-password" href="resetpassword.html"
+                >Reset password</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+    <main class="main-body">
+      <section class="sidebar">
+        <div class="apply">Apply for loan</div>
+
+        <div class="sidebar-icon">
+          
+          <div class="repayment">Loan repayment history</div>
+        </div>
+
+        <div class="create-loan-form">
+          <form action="" class="create-ln-form">
+            <div class="loan_container create-new-form-modified">
+              <div class="message_wrapper">
+                <ul>
+                  <li class="message_wrapper_header">
+                    <h1 class="message-header">Loan Application</h1>
+                  </li>
+                  <li class="cancel-message-wrapper">
+                    <div class="cancel-form">x</div>
+                  </li>
+                </ul>
+              </div>
+
+              <hr />
+              <div  class="modal-body">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                placeholder="First Name"
+                name="groupname"
+                id="firstName"
+                required
+              />
+              <label for="LastName">Last Name</label>
+              <input
+                type="text"
+                placeholder="Last Name"
+                name="groupname"
+                id="LastName"
+                required
+              />
+              <label for="email">Email</label>
+              <input
+                type="text"
+                placeholder="Email"
+                name="email"
+                id="email"
+                required
+              />
+              <label for="tenor">Tenor</label>
+              <input
+                type="number"
+                min="1"
+                max="5"
+                placeholder="Tenor"
+                name="tenor"
+                id="tenor"
+                required
+              />
+              <label for="amount">Loan Amount</label>
+              <input
+                type="text"
+                placeholder="amount"
+                name="amount"
+                id="amount"
+                required
+              />
+              
+              <label for="rate">Interest rate</label>
+              <input
+                type="text"
+                value="5%"
+                placeholder="rate"
+                name="rate"
+                id="rate"
+                required
+              />
+              <label for="installment">Payment installment</label>
+              <select name="inst">
+                  <option value="0">--Select--</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Yearly">Yearly</option>
+                </select>
+              <p>By clicking submit, you agree with our terms of service</p>
+              
+              </div>
+              <hr />
+              <div class="add-loan-btn">
+                <button type="submit" class="add-loan-button">Submit</button>
+                <button type="submit" class="cancel-loan-btn">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      
+      <section class="content">
+        <div class="compose-box compose-container">
+            <form action="" class="box">
+                <p class="close"><i class="fas fa-window-close"></i></p>
+                <section id="admin-dashboard-section">
+                    <h1>Loan repayment history</h1>
+                    <section class ="accounts">
+                      <article class="account-details">
+                        <article>
+                          <p>Fullname</p>
+                          <p>Ajala Bayeku</p>
+                        </article>
+                        <article>
+                          <p>Created on</p>
+                          <p class="time-received"></p>
+                        </article>
+                        <article>
+                          <p>Tenor</p>
+                          <p>12months</p>
+                        </article>
+                        <article>
+                          <p>Balance</p>
+                          <p>&#8358; 0.00</p>
+                        </article>
+                        <article>
+                            <p>Interest</p>
+                            <p>5%</p>
+                          </article>
+                          <article>
+                              <p>Payment Installment</p>
+                              <p>&#8358; 10000.00</p>
+                            </article>
+                        <article class ="buttons">
+                          <p>Status</p>
+                          <p>Approved</p>
+                        </article>
+                        <hr><br><br>
+                        <article>
+                            <p>Fullname</p>
+                            <p>Ajala Bayeku</p>
+                          </article>
+                          <article>
+                            <p>Created on</p>
+                            <p class="time-received"></p>
+                          </article>
+                          <article>
+                            <p>Tenor</p>
+                            <p>12months</p>
+                          </article>
+                          <article>
+                            <p>Balance</p>
+                            <p>&#8358; 0.00</p>
+                          </article>
+                          <article>
+                              <p>Interest</p>
+                              <p>5%</p>
+                            </article>
+                            <article>
+                                <p>Payment Installment</p>
+                                <p>&#8358; 300000.00</p>
+                              </article>
+                          <article class ="buttons">
+                            <p>Status</p>
+                            <p>Approved</p>
+                          </article>
+                          <hr><br><br>
+                          <article>
+                              <p>Full Name</p>
+                              <p>Ajala Bayeku</p>
+                            </article>
+                            <article>
+                              <p>Created on</p>
+                              <p class="time-received"></p>
+                            </article>
+                            <article>
+                              <p>Tenor</p>
+                              <p>12months</p>
+                            </article>
+                            <article>
+                              <p>Balance</p>
+                              <p>&#8358; 0.00</p>
+                            </article>
+                            <article>
+                                <p>Interest</p>
+                                <p>5%</p>
+                              </article>
+                              <article>
+                                  <p>Payment Installment</p>
+                                  <p>&#8358; 200000.00</p>
+                                </article>
+                            <article class ="buttons">
+                              <p>Status</p>
+                              <p>Rejected</p>
+                            </article>
+                            <hr><br><br>
+                      </article> 
+                    </section>
+                    </section>
+              </form>
+            
+        </div>
+        </section>
+
+          <div class="loan-container content-item">
+           
+            <section id="dashboard-section">
+                <section id="profile">
+                    <article class="container">
+                      <p>Welcome, Adekunle</p>
+                    </article>
+                  
+                  <article class="details">
+                    <article>
+                      <p>
+                        Name
+                      </p>
+                      <p class="account-number">Adekunle Andrew</p>
+                    </article>
+                    <article>
+                      <p>address</p>
+                      <p class="account-balance">20, Aba Road, Aba</p>
+                    </article>
+                    <article>
+                      <p>Email</p>
+                      <p class="account-status">Adekunle@gmail.com</p>
+                    </article>
+                    <article>
+                        <p>
+                          status
+                        </p>
+                        <p class="account-number">Verified</p>
+                      </article>
+                  </article>
+                </section>
+                </section>
+                
+          </div>
+        
+        <div class="main-loan-body">
+          <div class="check-loan">
+              <section id="admin-dashboard-section">
+                  <h1>Loan repayment history</h1>
+               
+                  </section>
+                  </div>
+        </div>
+     </section>
+     </main>
+    <script src="js/userdashboard.js"></script>
+  </body>
+</html>
