@@ -11,6 +11,7 @@ const showMessageContent = (evt) => {
   }
 };
 
+
 const showListContent = (clickedElement) => {
   // hides sidebar if on responsive mode
   if (window.innerWidth <= 600) {
@@ -81,4 +82,4 @@ const closeIt=document.querySelector('.close');
 closeIt.addEventListener('click', ()=>{
   const closeForm = (document.querySelector('.compose-box').style.display ='none');
   const showM = (document.querySelector('.loan-container').style.display ='block');
-})
+});
