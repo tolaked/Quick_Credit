@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/user.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Quick Credit | User-Dashboard</title>
+  </head>
+  <body>
+    <div class="headerr">
+      <a href="index.html" class="brand-container">
+        <div class="menu-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="logo-container">
+          <span class="logo-icon"><img src="img/kwikapp1.png"></span> 
+        </div>
+      </a>
+
+      <div class="dropdown">
+        <button class="dropicon"><i class="fas fa-user"></i></button>
+        <div class="dropdown-content">
+          <p class="signout"><a class="signout" href="index.html">logout</a></p>
+          <div class="reset-password">
+            <p class="reset-password">
+              <a class="reset-password" href="resetpassword.html"
+                >Reset password</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+    <main class="main-body">
+      <section class="sidebar">
+        <div class="apply">Verification</div>
+
+        <!-- <div class="sidebar-icon">
+          
+          <div class="repayment">Loan repayment history</div>
+        </div> -->
+
+        <div class="create-loan-form">
+          <form action="" class="create-ln-form">
+            <div class="loan_container create-new-form-modified">
+              <div class="message_wrapper">
+                <ul>
+                  <li class="message_wrapper_header">
+                    <h1 class="message-header">Address Verification</h1>
+                  </li>
+                  <li class="cancel-message-wrapper">
+                    <div class="cancel-form">x</div>
+                  </li>
+                </ul>
+              </div>
+
+              <hr />
+              <div  class="modal-body">
+              <label for="firstName">Client's Name</label>
+              <input
+                type="text"
+                placeholder="Client's Name"
+                name="firstName"
+                id="firstName"
+                required
+              />
+              <label for="phone">Mobile number</label>
+              <input
+                type="text"
+                placeholder="Mobile Number"
+                name="phone"
+                id="phone"
+                required
+              />
+              <label for="email">Email</label>
+              <input
+                type="text"
+                placeholder="Email"
+                name="email"
+                id="email"
+                required
+              />
+              
+              <label for="address">Verified Address</label>
+              <input
+                type="text"
+                placeholder="address"
+                name="address"
+                id="address"
+                required
+              />
+              <label for="verification">Verification status</label>
+              <select name="inst">
+                  <option value="0">--Select--</option>
+                  <option value="monthly">Verified</option>
+                  <option value="Quarterly">Not verified</option>
+                </select>
+              
+              </div>
+              <hr />
+              <div class="add-loan-btn">
+                <button type="submit" class="add-loan-button">Submit</button>
+                <button type="submit" class="cancel-loan-btn">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      
+      <section class="content">
+        <div class="compose-box compose-container">
+         
+            
+        </div>
+        </section>
+
+          <div class="loan-container content-item">
+           
+            <section id="dashboard-section">
+                <section id="profile">
+                    <article class="container">
+                      <p>Welcome, Adekunle</p>
+                    </article>
+                  
+                  <article class="details">
+                    <article>
+                      <p>
+                        Name
+                      </p>
+                      <p class="account-number">Adekunle Andrew</p>
+                    </article>
+                    <article>
+                      <p>Logged in as</p>
+                      <p class="account-balance">Administrator</p>
+                    </article>
+                    <article>
+                      <p>Email</p>
+                      <p class="account-status">Adekunle@quickcredit.com</p>
+                    </article>
+                  </article>
+                </section>
+                </section>
+                
+          </div>
+        
+        <div class="main-loan-body">
+          <div class="check-loan">
+              <section id="admin-dashboard-section">
+                 
+                  </section>
+                  </div>
+        </div>
+     </section>
+     </main>
+    <script src="js/userdashboard.js"></script>
+  </body>
+</html>

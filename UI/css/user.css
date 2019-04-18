@@ -477,6 +477,14 @@
     padding: 16px 20px;
     font-size: 15px;
     color: white;
+    border-radius: 2px;
+    
+  }
+  .cancel-loan-btn:hover{
+    background-color: rgba(0, 0, 255, 0.664);
+  }
+  .add-loan-button:hover{
+    background-color: rgba(0, 0, 255, 0.664);
   }
  
   

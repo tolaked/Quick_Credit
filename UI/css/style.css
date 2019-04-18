@@ -460,7 +460,17 @@ button[type="submit"]:hover {
 button[type="submit"]:focus {
   outline: none;
 }
-
+#submit{
+  margin: 40px 0;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 14px 0;
+  background: var(--sec-color);
+  border: none;
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+}
 
 #footer {
   margin-top: 50px;
