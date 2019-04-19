@@ -49,14 +49,24 @@ const displaMainContent = (evt) => {
     const createForm = (document.querySelector('.compose-box').style.display = 'block');
     const createdForm = (document.querySelector('.loan-container').style.display = 'none');
     document.querySelector('.main-loan-body').style.display = 'none';
-    document.querySelector('.newdiv').style.display='none';
+    document.querySelector('.unpaid').style.display='none';
+    document.querySelector('.repaid').style.display='none';
   }
 
   if (evt.target.classList.contains('repay')) {
     const createForm = (document.querySelector('.compose-box').style.display = 'none');
     const createdForm = (document.querySelector('.loan-container').style.display = 'none');
     document.querySelector('.main-loan-body').style.display = 'none';
-    document.querySelector('.newdiv').style.display='block'
+    document.querySelector('.unpaid').style.display='block';
+    document.querySelector('.repaid').style.display='none';
+  }
+
+  if (evt.target.classList.contains('paid')) {
+    const createForm = (document.querySelector('.compose-box').style.display = 'none');
+    const createdForm = (document.querySelector('.loan-container').style.display = 'none');
+    document.querySelector('.main-loan-body').style.display = 'none';
+    document.querySelector('.unpaid').style.display='none';
+    document.querySelector('.repaid').style.display='block'
   }
 };
 
@@ -86,8 +96,13 @@ const updTime= document.querySelectorAll('.time-received');
 for(let i =0; i <updTime.length; i++){
 updTime[i].textContent = new Date().toUTCString();}
 
-const closeIt=document.querySelector('.close');
-closeIt.addEventListener('click', ()=>{
+const closeIt=document.querySelectorAll('.close');
+for(let i =0; i<closeIt.length; i++){
+closeIt[i].addEventListener('click', ()=>{
   const closeForm = (document.querySelector('.compose-box').style.display ='none');
   const showM = (document.querySelector('.loan-container').style.display ='block');
+  const closeRepaid = (document.querySelector('.repaid').style.display ='none');
+  const closeUnpaid = (document.querySelector('.unpaid').style.display ='none');
+
 });
+}
