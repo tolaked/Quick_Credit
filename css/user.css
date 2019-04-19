@@ -14,11 +14,11 @@
     
   }
  
-
+/* 
   .logo-icon {
     color: blue;
   }
-  
+   */
  
   
   
@@ -170,8 +170,32 @@
     background: #212d57;
     color: white;
   }
-  a:hover {
+  
+  .aply {
+    background: #ffaf30;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-weight: normal;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    margin: 0 10px 20px;
+    text-align: center;
+    transition: 0.2s;
+    text-decoration: none;
+    border-radius: 3px;
+  }
+  .aply a{text-decoration: none;
+  color:white;
+width:100%;}
+
+  
+  .aply:hover {
     background: #212d57;
+    color: white;
+  }
+  a:hover {
+    /* background: #212d57; */
     color: white;
   }
   
@@ -208,6 +232,24 @@
   
   
   .repayment.active {
+    background: #212d57;
+    color: white;
+    
+  }
+
+  .repay{
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .repay:hover {
+    background: #212d57;
+    color: white;
+  }
+  
+  
+  .repay.active {
     background: #212d57;
     color: white;
     
@@ -359,7 +401,10 @@
     justify-content: space-between;
     border-bottom: 0.3px solid;
   }
-  
+  /* .buttton{
+    background-color: teal;
+  }
+   */
   .ref {
     border-bottom: 0px;
     background-color: teal;
@@ -373,12 +418,25 @@
   
   .account-details a {
     text-decoration: none;
-    width: 30%;
+    /* width: 30%; */
   }
   .account-details a button {
     width: 100%;
     padding: 0.6em 1.3em 0.6em 1.3em;
     background-color: teal;
+    color:white;
+  }
+ .acctt{
+
+  padding: 0.6em 1.3em 0.6em 1.3em;
+  background-color: teal;
+  color:white;
+  text-align: center;
+ }
+  .buttons{
+   
+    padding: 0.6em 1.3em 0.6em 1.3em;
+    /* background-color: teal; */
     color:white;
   }
   
