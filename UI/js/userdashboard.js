@@ -49,6 +49,14 @@ const displaMainContent = (evt) => {
     const createForm = (document.querySelector('.compose-box').style.display = 'block');
     const createdForm = (document.querySelector('.loan-container').style.display = 'none');
     document.querySelector('.main-loan-body').style.display = 'none';
+    document.querySelector('.newdiv').style.display='none';
+  }
+
+  if (evt.target.classList.contains('repay')) {
+    const createForm = (document.querySelector('.compose-box').style.display = 'none');
+    const createdForm = (document.querySelector('.loan-container').style.display = 'none');
+    document.querySelector('.main-loan-body').style.display = 'none';
+    document.querySelector('.newdiv').style.display='block'
   }
 };
 
