@@ -13,13 +13,6 @@
     color:#6c757d;
     
   }
- 
-/* 
-  .logo-icon {
-    color: blue;
-  }
-   */
- 
   
   
   /* styles and overwrites default styles of hr */
@@ -195,7 +188,6 @@ width:100%;}
     color: white;
   }
   a:hover {
-    /* background: #212d57; */
     color: white;
   }
   
@@ -212,6 +204,7 @@ width:100%;}
     border-radius: 2px;
   }
   
+  /* Styles the side bar */
   .sidebar-icon {
     margin-bottom: 20px;
     padding: 10px;
@@ -404,7 +397,6 @@ width:100%;}
   }
  
   #admin-dashboard-section {
-    /* padding-top: 0.2em; */
     margin-left: 3em;
     margin-right: 1em;
     
@@ -433,10 +425,7 @@ width:100%;}
     justify-content: space-between;
     border-bottom: 0.3px solid;
   }
-  /* .buttton{
-    background-color: teal;
-  }
-   */
+  
   .ref {
     border-bottom: 0px;
     background-color: teal;
@@ -450,7 +439,6 @@ width:100%;}
   
   .account-details a {
     text-decoration: none;
-    /* width: 30%; */
   }
   .account-details a button {
     width: 100%;
@@ -468,7 +456,6 @@ width:100%;}
   .buttons{
    
     padding: 0.6em 1.3em 0.6em 1.3em;
-    /* background-color: teal; */
     color:white;
   }
   
