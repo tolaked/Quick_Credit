@@ -218,11 +218,15 @@ width:100%;}
     cursor: pointer;
     transition: 0.2s;
   }
+
+  .unpaid{display:none;}
+  .repaid{display:none;}
   
   .repayment{
     margin-bottom: 20px;
     padding: 10px;
     cursor: pointer;
+    color:black;
   }
   
   .repayment:hover {
@@ -241,6 +245,7 @@ width:100%;}
     margin-bottom: 20px;
     padding: 10px;
     cursor: pointer;
+    color:black;
   }
   
   .repay:hover {
@@ -255,6 +260,26 @@ width:100%;}
     
   }
   
+  .paid{
+    margin-bottom: 20px;
+    padding: 10px;
+    color:black;
+    cursor: pointer;
+  }
+  
+  .paid:hover {
+    background: #212d57;
+    color: white;
+  }
+  
+  
+  .paid:active {
+    background: #212d57;
+    color: white;
+    
+  }
+
+  
   .close {
     color: red;
     text-align: right;
@@ -262,6 +287,13 @@ width:100%;}
     font-size: 20px;
   }
   
+  .closePaid {
+    color: red;
+    text-align: right;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
   .time-received {
     width: 40%;
   }
