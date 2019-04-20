@@ -51,6 +51,7 @@ const displaMainContent = (evt) => {
     document.querySelector('.main-loan-body').style.display = 'none';
     document.querySelector('.unpaid').style.display='none';
     document.querySelector('.repaid').style.display='none';
+    (document.querySelector('.loan-payment').style.display ='none');
   }
 
   if (evt.target.classList.contains('repay')) {
@@ -59,6 +60,7 @@ const displaMainContent = (evt) => {
     document.querySelector('.main-loan-body').style.display = 'none';
     document.querySelector('.unpaid').style.display='block';
     document.querySelector('.repaid').style.display='none';
+  (document.querySelector('.loan-payment').style.display ='none');
   }
 
   if (evt.target.classList.contains('paid')) {
@@ -66,7 +68,8 @@ const displaMainContent = (evt) => {
     const createdForm = (document.querySelector('.loan-container').style.display = 'none');
     document.querySelector('.main-loan-body').style.display = 'none';
     document.querySelector('.unpaid').style.display='none';
-    document.querySelector('.repaid').style.display='block'
+    document.querySelector('.repaid').style.display='block';
+(document.querySelector('.loan-payment').style.display ='none');
   }
 };
 
@@ -103,6 +106,17 @@ closeIt[i].addEventListener('click', ()=>{
   const showM = (document.querySelector('.loan-container').style.display ='block');
   const closeRepaid = (document.querySelector('.repaid').style.display ='none');
   const closeUnpaid = (document.querySelector('.unpaid').style.display ='none');
+  const closeFormm = (document.querySelector('.loan-payment').style.display ='none');
 
 });
 }
+
+const post=document.querySelector('.post');
+post.addEventListener('click', ()=>{
+  const closeFormm = (document.querySelector('.compose-box').style.display ='none');
+  const showMm = (document.querySelector('.loan-container').style.display ='none');
+  const closeRepaidm = (document.querySelector('.repaid').style.display ='none');
+  const closeUnpaidm = (document.querySelector('.unpaid').style.display ='none');
+  const paid = (document.querySelector('.loan-payment').style.display ='block');
+  
+});

@@ -234,6 +234,25 @@ width:100%;}
     
   }
 
+  .post{
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
+    color:black;
+  }
+  
+  .post:hover {
+    background: #212d57;
+    color: white;
+  }
+  
+  
+  .post.active {
+    background: #212d57;
+    color: white;
+    
+  }
+
   .repay{
     margin-bottom: 20px;
     padding: 10px;
@@ -414,7 +433,31 @@ width:100%;}
     font-weight: bolder;
     padding: 0.7em;
     border-radius: 0.5em;
+    justify-content: space-between;
   }
+
+  .post-account-details {
+    width: 40vw;
+    margin: 0.4em auto;
+    background: #ffffffc2;
+    color: teal;
+    font-weight: bolder;
+    padding: 0.7em;
+    border-radius: 0.5em;
+    text-align: center;
+  }
+
+    .post-account-details input{
+      width: 80%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: 2px solid rgba(110, 108, 108, 0.5);
+      background: rgba(223, 217, 217, 0.5);
+      border-radius: 5px;
+     
+    }
+    
  .dashboard-main{ padding-top: 5em;
     margin-left: 1em;
     margin-right: 1em;}
@@ -546,6 +589,8 @@ width:100%;}
     background-color: #ddd;
   }
   
+  .loan-payment{display:none;}
+
   .create-loan-form {
     display: none;
     position: fixed;
@@ -584,8 +629,41 @@ width:100%;}
     font-size: 15px;
     color: white;
     border-radius: 2px;
+    }
+
+    .post-loan-btn {
+      margin: 8px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      z-index: -1;
+    }
     
-  }
+    .post-loan-button{
+      background-color: teal;
+      border: none;
+      cursor: pointer;
+      width: 25%;
+      padding: 16px 20px;
+      font-size: 15px;
+      color: white;
+      margin:0 auto;
+      border-radius: 7px;
+      
+    }
+    .pst-loan-btn {
+      background-color: teal;
+      border: none;
+      cursor: pointer;
+      width: 25%;
+      margin:0 auto;
+      padding: 16px 20px;
+      font-size: 15px;
+      color: white;
+      border-radius: 7px;
+    }
+    .loan-payment{display: none;}
   h1{
     color: teal;
     font-weight: bold;

@@ -50,6 +50,7 @@
           <div class="repayment">Loan Applications</div>
           <div class="repay">Current Loans</div>
           <div class="paid">Repaid Loans</div>
+          <div class="post">Post Repayment</div>
         </div>
 
         <div class="create-loan-form">
@@ -387,9 +388,50 @@
                           <hr>
                   </article> 
                 </section>
+
               
      </section>
      </div>
+     
+     <div class="loan-payment">
+        <p class="close"><i class="fas fa-window-close"></i></p>
+        <section id="admin-dashboard-section">
+   
+            <h1 class="h1">Repaid loans</h1>
+            <section class ="accounts">
+              <article class="post-account-details">
+
+            <label class="labell" for="id">Client's id</label>
+        <article>
+            <input type="text"
+             placeholder="Name"
+             >
+          </article>
+          <label for="CreatedOn">Created On</label>
+
+          <article>
+              <input type="date"
+               placeholder="Name"
+               id="CreatedOn"
+               >
+            </article>
+            <label for="Amount">Amount</label>
+
+            <article>
+                <input type="text"
+                 placeholder="Amount"
+                 id="Amount"
+                 >
+              </article>
+              
+              <div class="post-loan-btn">
+                  <button type="submit" class="post-loan-button">Submit</button>
+                  <button type="submit" class="pst-loan-btn">Cancel</button>
+                </div>
+          </article>
+          </section>
+          </section>
+    </div>
      </main>
     <script src="js/userdashboard.js"></script>
   </body>
