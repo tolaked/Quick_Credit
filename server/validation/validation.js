@@ -19,6 +19,18 @@ class validate {
         });
         return Joi.validate(user, schema);
     }
+
+    /**
+     * @param{details} string
+     */
+  static validateLogin(details) {
+    const schema = Joi.object().keys({
+      email: Joi.string().email().trim().required(),
+      password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).trim().required(),
+    });
+    return Joi.validate(details, schema);
+  }
+
 }
 
 export default validate;

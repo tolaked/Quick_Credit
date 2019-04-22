@@ -1,8 +1,10 @@
+import bcrypt from 'bcrypt';
 class Helper{
-    // generate unique id
-   generateId(dataArray, index) {
-    return dataArray.length > 0 ? dataArray[index].id + 1 : 0;
-  }
+  
+  static comparePassword(password, hash) {
+    const result = bcrypt.compareSync(password, hash);
+    return result;
 }
+  }
 
 export default Helper;
