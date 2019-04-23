@@ -55,7 +55,7 @@ let models =
       firstName: 'Dimeji',
       lastName: 'Akere',
       password: '$2a$10$yd1/RwcpZRXiy6i2zuoAE.tyHWnA9vtAVrQGgFgJNExhu/RsY5VFu',
-      Status:'Verified',
+      status:'verified',
       Address: '20,okusaga',
       isAdmin: true,
       createdOn: '2019-04-22T11:26:27.010Z',

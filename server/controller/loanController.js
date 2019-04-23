@@ -42,7 +42,7 @@ class  Loans {
       for (let i = 0; i < existLoan.length; i += 1) {
         if (existLoan[i].repaid === false) {
           return res.status(402).json({
-            status: '402',
+            status: 402,
             message: 'you have an outstanding loan',
           });
         }
@@ -50,7 +50,7 @@ class  Loans {
       }
       models.Loans.push(applyLoan);
       return res.status(201).json({
-        status: '201',
+        status: 201,
         data: applyLoan,
       });
     }

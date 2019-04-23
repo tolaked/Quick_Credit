@@ -9,9 +9,9 @@ class validate {
     static validateUser(user) {
         const schema = Joi.object().keys({
             email: Joi.string().email().trim().required(),
-            firstName: Joi.string().regex(/^[A-Z]+$/).trim().uppercase(),
-            lastName: Joi.string().trim(),
-            password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).trim().min(7).alphanum().required(),
+            firstName: Joi.string().regex(/^[a-zA-Z]+$/).trim().required(),
+            lastName: Joi.string().regex(/^[a-zA-Z]+$/).trim().required(),
+            password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).min(7).alphanum().required(),
             address: Joi.string().required(),
             status: Joi.string().insensitive().default('unverified'),
             isAdmin: Joi.string().default('false'),
@@ -42,6 +42,21 @@ class validate {
       amount: Joi.number().required(),
     });
     return Joi.validate(loan, schema);
+  }
+
+  
+  /**
+   *
+   * @param {user} object
+   */
+  static verifyUser(user) {
+    const schema = Joi.object().keys({
+      status: Joi.string().insensitive().valid('unverified', 'verified').required(),
+      // lastName: Joi.string().trim(),
+      // password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).trim().required(),
+      // address: Joi.string().required(),
+    });
+    return Joi.validate(user, schema);
   }
 }
 
