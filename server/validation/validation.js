@@ -31,6 +31,20 @@ class validate {
     return Joi.validate(details, schema);
   }
 
+   /**
+   *
+   * @param {user} object
+   */
+  static validateLoan(loan) {
+    const schema = Joi.object().keys({
+      tenor: Joi.number().integer().min(1).max(12)
+        .required(),
+      amount: Joi.number().required(),
+    });
+    return Joi.validate(loan, schema);
+  }
 }
+
+
 
 export default validate;
