@@ -92,7 +92,6 @@ class userController {
 
     //  find user by email
 
-     
      const userExists = models.Users.find(user => user.email === req.body.email);
      
      // check if user exists in our data structure
