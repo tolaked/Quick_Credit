@@ -4,6 +4,7 @@ import userData from '../model/userData';
 import faker from 'faker';
 import supertest from 'supertest';
 import chaiHttp from 'chai-http';
+import { getMaxListeners } from 'cluster';
 
 
 
@@ -70,7 +71,65 @@ describe('POST api/v1/auth/signup', () => {
       });
   });
 });
-  
+
+// Test for invalid signup details
+describe('POST api/v1/auth/signup', () => {
+  it('Should return an error if signup inputs are invalid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.message).to.be.a('string');
+
+        done();
+      });
+  });
+});
+
+//   Test suite for POST /login route
+describe('POST api/v1/auth/login', () => {
+  it('Should successfully login a user account if inputs are valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({email:'dimeji@gmail.com',
+      password:'Sweetmum'
+  }
+      )
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equals(200);
+        expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});
 
 
+// Test suite for POST /login route invalid
+describe('POST api/v1/auth/login', () => {
+  it('Should return an error if login inputs are invalid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(422);
+        expect(body.message).to.be.a('string');
+
+        done();
+      });
+  });
+});
 

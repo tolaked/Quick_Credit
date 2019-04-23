@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import http from 'http';
 import users from './routes/api/users';
 import loans from './routes/api/loans';
+import admin from './routes/api/admin';
 
 // Initialize express app
 const app = express();
@@ -24,6 +25,8 @@ app.get('/', (req, res) => res.status(200).json({
 
 app.use('/api/v1/auth', users);
 app.use('/api/v1/auth', loans);
+app.use('/api/v1', admin);
+
 
 
 
