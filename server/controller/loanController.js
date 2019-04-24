@@ -26,7 +26,7 @@ class  Loans {
       
 
       const applyLoan = {
-        id: lastLoanId,
+        id: lastLoanId +1,
         user: models.Users[0].email,
         createdOn: moment(new Date()),
         status: 'pending',

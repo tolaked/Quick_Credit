@@ -235,3 +235,43 @@ describe('GET api/v1/auth/loan/firstuser@gmail.com/repayments', () => {
       });
   });
 });
+
+// Test suite to create loan application
+describe('POST api/v1/auth/loans', () => {
+  it('Should successfully create a loan application', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/loans')
+      .send({tenor:3,
+        amount:800000})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(201);
+        expect(body.data).to.be.an('object');
+        expect(body.data).to.be.haveOwnProperty('user');
+        done();
+      });
+  });
+});
+
+// Test suite to create loan application
+describe('POST api/v1/auth/loans', () => {
+  it('Should return an error if require inputs are not provided', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/loans')
+      .send({ tenor: 3})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(422);
+        expect(body.message).to.be.an('string');
+        done();
+      });
+  });
+});
