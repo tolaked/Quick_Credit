@@ -55,12 +55,12 @@ describe('POST api/v1/auth/signup', () => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
-      .send({email: faker.internet.email(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      password: faker.internet.password(),
-      address: faker.address.streetAddress(),
-      status: 'unverified'})
+      .send({email:"alamu@gmail.com",
+      firstName: "maryde",
+      lastName: "alamu",
+      password: "Sweetmum",
+      address: "20,Okusaga",
+     })
       .end((err, res) => {
         if (err) done();
         const { body } = res;

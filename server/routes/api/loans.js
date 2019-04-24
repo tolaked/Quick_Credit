@@ -1,9 +1,8 @@
 import express from 'express';
 import loanController from '../../controller/loanController';
-import Auth from '../../middleware/isAuth';
 
 
-const {trimmer} = Auth;
+
 const router = express.Router();
 const{applyloan,paidLoans} = loanController
 

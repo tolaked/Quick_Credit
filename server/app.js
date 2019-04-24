@@ -29,6 +29,7 @@ app.use('/api/v1', admin);
 
 
 
+
 // Handle non existing route with with proper message
 app.all('*', (req, res) => res.status(404).json({
   status: 404,
