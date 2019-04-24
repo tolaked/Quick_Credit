@@ -11,5 +11,6 @@ const router = express.Router();
 router.patch('/users/:email/verify',trimmer, admin.verifyClient);
 // Admin view specific loan by id
 router.get('/loans/:id', admin.specificLoan);
+router.get('/loans', admin.getAllLoans);
 
 export default router;
