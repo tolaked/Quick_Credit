@@ -26,6 +26,7 @@ describe('GET /', () => {
           expect(body.status).to.be.equals(200);
           expect(body.data[0]).to.haveOwnProperty('message');
           expect(body.data[0].message).to.be.a('string');
+          
           done();
         });
     });
@@ -66,7 +67,8 @@ describe('POST api/v1/auth/signup', () => {
         expect(body).to.be.an('object');
         expect(body.status).to.be.a('number');
         expect(body.status).to.be.equals(200);
-        expect(res.body).to.have.property('data');
+        expect(body.data[0]).to.haveOwnProperty('token');
+        expect(body.data[0].token).to.be.a('string');
         done();
       });
   });
@@ -96,7 +98,7 @@ describe('POST api/v1/auth/login', () => {
     chai
       .request(app)
       .post('/api/v1/auth/login')
-      .send({email:'dimeji@gmail.com',
+      .send({email:'firstuser@gmail.com',
       password:'Sweetmum'
   }
       )
@@ -119,7 +121,29 @@ describe('POST api/v1/auth/login', () => {
     chai
       .request(app)
       .post('/api/v1/auth/login')
-      .send({})
+      .send({email:'dim@gmail.com',
+      password:'Sweeum'})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(404);
+        expect(body.error).to.be.a('string');
+        expect(body.error).to.be.equal('User does not exist');
+        done();
+      });
+  });
+});
+
+// Test suite for POST /login route invalid
+describe('POST api/v1/auth/login', () => {
+  it('Should return an error if required credentials are not provided', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({email:'dim@gmail.com'
+      })
       .end((err, res) => {
         if (err) done();
         const { body } = res;
@@ -127,9 +151,87 @@ describe('POST api/v1/auth/login', () => {
         expect(body.status).to.be.a('number');
         expect(body.status).to.be.equal(422);
         expect(body.message).to.be.a('string');
-
         done();
       });
   });
 });
 
+// Test suite for all repaid loans
+describe('GET api/v1/auth/loan/seun@gmail.com/repayments', () => {
+  it('Should successfully get all loan repayment', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/auth/loan/seun@gmail.com/repayments')
+      .send({user: "seun@gmail.com",
+      createdOn: "2019-04-22T14:34:25.265Z",
+      status: "approved",
+      repaid: true,
+      tenor: 3,
+      amount: 400000,
+      paymentInstallment: 140000,
+      balance: 420000,
+      interest: 20000
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(201);
+        expect(body.data).to.be.an('object');
+        expect(body.data).to.be.haveOwnProperty('user');
+        done();
+      });
+  });
+});
+
+// Test suite for No loan record found
+describe('GET api/v1/auth/loan/dimeji@gmail.com/repayments', () => {
+  it('Should throw an error if no record found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/auth/loan/dimeji@gmail.com/repayments')
+      .send({
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(409);
+        expect(body.error).to.be.an('string');
+        expect(body.error).to.be.equal('No loan record found');
+        done();
+      });
+  });
+});
+
+// Test suite for no repaid loans
+describe('GET api/v1/auth/loan/firstuser@gmail.com/repayments', () => {
+  it('Should successfully get all loan repayment', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/auth/loan/firstuser@gmail.com/repayments')
+      .send({
+        user: "firstuser@gmail.com",
+        createdOn: "2019-04-22T14:34:25.265Z",
+        status: "pending",
+        repaid: false,
+        tenor: 3,
+        amount: 400000,
+        paymentInstallment: 140000,
+        balance: 420000,
+        interest: 20000
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(409);
+        expect(body.error).to.be.an('string');
+        expect(body.error).to.be.equal('No repaid loans');
+        done();
+      });
+  });
+});
