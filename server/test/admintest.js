@@ -90,5 +90,22 @@ describe('POST api/v1/users/firstuser@gmail.com/verify', () => {
     });
   });
 
- 
- 
+  describe('GET api/v1/loans?status=approved&repaid=true', () => {
+  it('should view all paid loans successfully', (done) => {
+    chai
+    .request(app)
+      .get('/api/v1/loans?status=approved&repaid=true')
+      .send()
+      .end((err,res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an('object');
+        expect(body.status).to.be.a('number');
+        expect(body.status).to.be.equal(200);
+        expect(body.data).to.be.an('array');
+        expect(body.data[0]).to.be.an('object');
+        expect(body.data[0]).to.be.haveOwnProperty('user');
+        done();
+      });
+    });
+  });

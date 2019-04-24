@@ -68,5 +68,28 @@ class Admin {
         loanCount,
       });
     }
+
+    static loanPayment(req, res, next) {
+      const { status, repaid } = req.query;
+      let paymentFilter;
+      const loans = models.Loans;
+      if (status && repaid) {
+        const boolRepaid = JSON.parse(repaid);
+        paymentFilter = loans.filter(loan => loan.status === status.toLowerCase()
+          && loan.repaid === boolRepaid);
+        if (paymentFilter.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            message: 'Not Found',
+          });
+        }
+        if(status=='approved' && repaid==true){
+        return res.status(200).json({
+          status: 200,
+          data: paymentFilter,
+        });
+      }}
+      next();
+    }
 }
 export default Admin;
