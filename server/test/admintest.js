@@ -4,10 +4,12 @@ import userData from '../model/userData';
 import faker from 'faker';
 import supertest from 'supertest';
 import chaiHttp from 'chai-http';
-
+import models from '../model/userData';
+const Loan=models.Loans
 chai.use(chaiHttp);
 
 const { expect } = chai;
+
 
 // Test for an admin to verify a user
 describe('POST api/v1/users/firstuser@gmail.com/verify', () => {
@@ -67,4 +69,26 @@ describe('POST api/v1/users/firstuser@gmail.com/verify', () => {
         });
     });
   });
+ 
+  // Test suite to get all loan applictions
+  describe('GET api/v1/loans', () => {
+    it('Should get all loan applications', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/loans')
+        .send()
+        .end((err, res) => {
+          if (err) done();
+          const { body } = res;
+          expect(body).to.be.an('object');
+          expect(body.status).to.be.a('number');
+          expect(body.status).to.be.equal(200);
+          expect(body.data).to.be.an('array');
+          expect(body.data[0]).to.be.an('object');
+          done();
+        });
+    });
+  });
+
+ 
  
