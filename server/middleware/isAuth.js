@@ -23,17 +23,15 @@ class Auth {
 
 
   /**
-   *create a token
-   * @param {*} email
-   * @param {*} id
-   * @param {*} isAdmin
+   *Generate token
+   *
+   * @param {number} id
    */
-  static createToken(email, id, isAdmin) {
+  static generateToken(id) {
     const token = jwt.sign(
       {
-        email,
         id,
-        isAdmin,
+        
       },
       process.env.SECRET_KEY,
       { expiresIn: '24h' },
@@ -43,45 +41,47 @@ class Auth {
   }
 
   /**
-   *verify token provided by user
-   * @param {*} req
-   * @param {*} res
-   * @param {*} next
+   * Verify token
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
    */
   static verifyToken(req, res, next) {
     const { token } = req.headers;
 
-    // check if token was provided
+    // check if user provides a token
     if (!token) {
       return res.status(403).json({
         status: 403,
-        error: 'Unauthorized!, you have to login',
+        error: 'Unauthorize, please login',
       });
     }
 
+    // check if token is valid
     try {
-      // verify user provided token against existing token
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      // decode and get token
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
-      // check if user already exists
-      const userExists = models.Users.find(user => user.email === req.body.email);
-      // check for valid user
-      if (!userExists) {
+      // find user by email
+      const user = models.Users.find(user => user.email === req.body.email);
+
+      // check if user exist
+      if (!user) {
         return res.status(401).json({
           status: 401,
-          error: 'The token you provided is invalid',
+          error: 'Invalid token provided',
         });
       }
 
-      // get user id, email and isAdmin
-      req.user = decoded;
+      // make current logged in user id available
+      req.user = decodedToken;
 
-      // fire next middleware
-      return next();
+      next();
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        errors: [error],
+        error,
       });
     }
   }

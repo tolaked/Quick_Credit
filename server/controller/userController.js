@@ -7,8 +7,6 @@ import helper from '../helper/users';
 
 const { genSaltSync, hashSync, compareSync } = bcrypt;
 
-const { createToken } = Auth
-
 class userController {
   /**
    *
@@ -16,6 +14,7 @@ class userController {
    * @param {res} object
    */
   static createUser(req, res) {
+    const { body } = req;
     const { error } = validation.validateUser(req.body);
     if (error)
       return res.status(422).json({ message: error.details[0].message });
@@ -31,9 +30,8 @@ class userController {
         });
       }
 
-      const { body } = req;
 
-      const salt = genSaltSync(10);
+      const salt = bcrypt.genSaltSync(10);
       const hash = hashSync(body.password, salt);
 
       
@@ -46,7 +44,7 @@ class userController {
       email: req.body.email,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: body.password,
+      password: bcrypt.hashSync(body.password, salt),
       status: 'unverified',
       address:req.body.address,
       isAdmin: 'false',
@@ -55,12 +53,16 @@ class userController {
     };
   
     models.Users.push(post);
-
+    const token = Auth.generateToken(models.Users[0].id);
+    
     return res.status(201).json({
       status: 200,
       data: [
         {
-          username: post,
+          
+          token,
+          post,
+          
         },
       ],
     }
@@ -81,6 +83,8 @@ class userController {
    * @param {*} res
    */
   static loginUser(req, res) {
+
+    const { body } = req;
     // check if user pass valid and required data
     const { error } = validation.validateLogin(req.body);
     if (error) {
@@ -93,7 +97,7 @@ class userController {
     //  find user by email
 
      const userExists = models.Users.find(user => user.email === req.body.email);
-     
+
      // check if user exists in our data structure
      if (!userExists) {
        return res.status(404).json({
@@ -102,12 +106,23 @@ class userController {
        });
      }
      
- 
+     const hashedPassword = userExists.password;
+
+     // check if user provided password matches existing password
+    if (!bcrypt.compareSync(body.password, hashedPassword)) {
+      return res.status(401).json({
+        status: 401,
+        error: 'Invalid email/password',
+      });
+    }
+       // get generated token
+       const token = Auth.generateToken(models.Users[0].id);
+
      return res.status(200).json({
        status: 200,
        data: [
          {
-           userExists
+           token,
          },
        ],
      });

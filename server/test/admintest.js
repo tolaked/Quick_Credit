@@ -10,11 +10,11 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 // Test for an admin to verify a user
-describe('POST api/v1/users/seun@gmail.com/verify', () => {
+describe('POST api/v1/users/firstuser@gmail.com/verify', () => {
     it('Should mark a user as verified', (done) => {
       chai
         .request(app)
-        .patch('/api/v1/users/seun@gmail.com/verify')
+        .patch('/api/v1/users/firstuser@gmail.com/verify')
         .send({status: 'verified'})
         .end((err, res) => {
           if (err) done();
@@ -41,9 +41,9 @@ describe('POST api/v1/users/seun@gmail.com/verify', () => {
           const { body } = res;
           expect(body).to.be.an('object');
           expect(body.status).to.be.a('number');
-          expect(body.status).to.be.equal(201);
-          expect(body.data).to.be.an('object');
-  
+          expect(body.status).to.be.equal(404);
+          expect(body.message).to.be.an('string');
+          expect(body.message).to.be.equal('user already verified');
           done();
         });
     });

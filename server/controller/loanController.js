@@ -39,8 +39,9 @@ class  Loans {
       };
       const existLoan = models.Loans.filter(email => email.user === models.Users[0].email);
       
-      for (let i = 0; i < existLoan.length; i += 1) {
-        if (existLoan[i].repaid === false) {
+      for (let i = 0; i < existLoan.length; i += 1) 
+       {
+        if (existLoan.repaid === false) {
           return res.status(402).json({
             status: 402,
             message: 'you have an outstanding loan',
@@ -53,6 +54,31 @@ class  Loans {
         status: 201,
         data: applyLoan,
       });
+
     }
+    static paidLoans(req,res){
+      const loans = models.Loans.find(oneUser=> oneUser.user ===req.params.email )
+      if(!loans){
+        return res.status(409).json({
+          status: 409,
+          error: 'No loan record found',
+        });
+      }
+        if(loans.status ==="approved" && loans.repaid === true){
+       return res.status(201).json({
+        status: 201,
+        data: loans,
+      });
+    }
+    res.status(409).json({
+      status: 409,
+      error: 'No repaid loans',
+    });
+  
+  }
+
+    
+      
+    
 }
 export default Loans;
