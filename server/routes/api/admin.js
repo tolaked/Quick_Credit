@@ -7,8 +7,9 @@ const {trimmer} = Auth;
 
 const router = express.Router();
 
-
-// apply loan route
+// Admin verify user route
 router.patch('/users/:email/verify',trimmer, admin.verifyClient);
+// Admin view specific loan by id
+router.get('/loans/:id', admin.specificLoan);
 
 export default router;

@@ -49,4 +49,22 @@ describe('POST api/v1/users/firstuser@gmail.com/verify', () => {
     });
   });
 
+  describe('GET api/v1/loans/1', () => {
+    it('Should get a specific loan by id', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/loans/1')
+        .send()
+        .end((err, res) => {
+          if (err) done();
+          const { body } = res;
+          expect(body).to.be.an('object');
+          expect(body.status).to.be.a('number');
+          expect(body.status).to.be.equal(201);
+          expect(body.data).to.be.an('object');
+          expect(body.data).to.be.haveOwnProperty('user');
+          done();
+        });
+    });
+  });
  

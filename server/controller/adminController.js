@@ -35,5 +35,22 @@ class Admin {
       data: user,
     });
     }
+
+    static specificLoan(req,res){
+      
+      const currentLoan = req.params.id;
+      const getLoan = models.Loans.find(oneLoan => oneLoan.id == currentLoan);
+      if (!getLoan) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Loan does not exist',
+        });
+      }
+      
+      return res.status(201).json({
+        status: 201,
+        data: getLoan,
+      });
+    }
 }
 export default Admin;
