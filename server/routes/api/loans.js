@@ -1,15 +1,12 @@
-import express from 'express';
-import loanController from '../../controller/loanController';
-
-
+import express from "express";
+import loanController from "../../controller/loanController";
 
 const router = express.Router();
-const{applyloan,paidLoans} = loanController
+const { applyloan, paidLoans } = loanController;
 
 // apply loan route
-router.post('/loans', applyloan);
+router.post("/loans", applyloan);
 // get loan repayment history by email
-router.get('/loan/:email/repayments', paidLoans);
-
+router.get("/loans/:id/repayments", paidLoans);
 
 export default router;

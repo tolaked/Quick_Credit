@@ -220,11 +220,11 @@ describe("POST api/v1/auth/login", () => {
 });
 
 // Test suite for all repaid loans
-describe("GET api/v1/auth/loan/bayomi@gmail.com/repayments", () => {
+describe("GET api/v1/auth/loans/3/repayments", () => {
   it("Should successfully get all loan repayment", done => {
     chai
       .request(app)
-      .get("/api/v1/auth/loan/bayomi@gmail.com/repayments")
+      .get("/api/v1/auth/loans/3/repayments")
       .send({
         user: "bayomi@gmail.com",
         createdOn: "2019-04-22T14:34:25.265Z",
@@ -250,11 +250,11 @@ describe("GET api/v1/auth/loan/bayomi@gmail.com/repayments", () => {
 });
 
 // Test suite for No loan record found
-describe("GET api/v1/auth/loan/dimeji@gmail.com/repayments", () => {
+describe("GET api/v1/auth/loans/9/repayments", () => {
   it("Should throw an error if no record found", done => {
     chai
       .request(app)
-      .get("/api/v1/auth/loan/dimeji@gmail.com/repayments")
+      .get("/api/v1/auth/loans/9/repayments")
       .send({})
       .end((err, res) => {
         if (err) done();
@@ -270,11 +270,11 @@ describe("GET api/v1/auth/loan/dimeji@gmail.com/repayments", () => {
 });
 
 // Test suite for no repaid loans
-describe("GET api/v1/auth/loan/firstuser@gmail.com/repayments", () => {
-  it("Should successfully get all loan repayment", done => {
+describe("GET api/v1/auth/loans/1/repayments", () => {
+  it("Should successfully throw an error if no repaid loans", done => {
     chai
       .request(app)
-      .get("/api/v1/auth/loan/firstuser@gmail.com/repayments")
+      .get("/api/v1/auth/loans/1/repayments")
       .send({
         user: "firstuser@gmail.com",
         createdOn: "2019-04-22T14:34:25.265Z",
