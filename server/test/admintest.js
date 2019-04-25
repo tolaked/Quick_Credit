@@ -150,7 +150,7 @@ describe("GET api/v1/loans?status=approved&repaid=true", () => {
 
 // Test suite to get all repaid loans
 describe("GET api/v1/loans?status=approved&repaid=false", () => {
-  it("should view all paid loans successfully", done => {
+  it("should view all unpaid loans successfully", done => {
     chai
       .request(app)
       .get("/api/v1/loans?status=approved&repaid=false")
@@ -164,6 +164,109 @@ describe("GET api/v1/loans?status=approved&repaid=false", () => {
         expect(body.data).to.be.an("array");
         expect(body.data[0]).to.be.an("object");
         expect(body.data[0]).to.be.haveOwnProperty("user");
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
+describe("PATCH api/v1/loans/1", () => {
+  it("should successfully approve a loan", done => {
+    chai
+      .request(app)
+      .patch("/api/v1/loans/1")
+      .send({
+        status: "approved"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(200);
+        expect(body.data).to.be.an("object");
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
+describe("PATCH api/v1/loans/8", () => {
+  it("should throw an error if no loan found", done => {
+    chai
+      .request(app)
+      .patch("/api/v1/loans/8")
+      .send({ status: "approved" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equals("Loan not found");
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
+describe("PATCH api/v1/loans/3", () => {
+  it("should throw an error if loan already approved", done => {
+    chai
+      .request(app)
+      .patch("/api/v1/loans/3")
+      .send({
+        status: "approved"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(409);
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equals(
+          "This loan has been approved previously"
+        );
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
+describe("PATCH api/v1/loans/2", () => {
+  it("should throw an error if no required field ", done => {
+    chai
+      .request(app)
+      .patch("/api/v1/loans/2")
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.error).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
+describe("PATCH api/v1/loans/2", () => {
+  it("should throw an error if required field is invalid", done => {
+    chai
+      .request(app)
+      .patch("/api/v1/loans/2")
+      .send({ status: "33" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.error).to.be.a("string");
         done();
       });
   });

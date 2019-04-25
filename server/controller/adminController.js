@@ -87,5 +87,40 @@ class Admin {
     }
     next();
   }
+  static approveRejectLoan(req, res) {
+    const { body } = req;
+    const loanId = req.params.id;
+    const clientLoans = models.Loans;
+    const loanToapprove = clientLoans.find(loan => loan.id == loanId);
+
+    if (!loanToapprove) {
+      return res.status(404).json({
+        status: 404,
+        error: "Loan not found"
+      });
+    }
+    const { error } = validation.loanApproval(req.body);
+    if (error) {
+      return res.status(422).json({
+        status: 422,
+        error: error.details[0].message
+      });
+    }
+
+    if (loanToapprove.status === "approved") {
+      return res.status(409).json({
+        status: 409,
+        message: `This loan has been approved previously`
+      });
+    }
+    if (loanToapprove) {
+      loanToapprove.status = req.body.status;
+      loanToapprove.modifiedOn = moment(new Date());
+      return res.status(200).json({
+        status: 200,
+        data: loanToapprove
+      });
+    }
+  }
 }
 export default Admin;
