@@ -88,6 +88,12 @@ class validate {
     });
     return Joi.validate(user, schema);
   }
+  static postLoan(loan) {
+    const schema = Joi.object().keys({
+      paidAmount: Joi.number().required()
+    });
+    return Joi.validate(loan, schema);
+  }
 }
 
 export default validate;
