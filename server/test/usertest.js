@@ -321,11 +321,29 @@ describe("POST api/v1/auth/loans", () => {
 
 // Test suite to create loan application
 describe("POST api/v1/auth/loans", () => {
-  it("Should return an error if require inputs are not provided", done => {
+  it("Should return an error if required inputs are not provided", done => {
     chai
       .request(app)
       .post("/api/v1/auth/loans")
       .send({ tenor: 3 })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.message).to.be.an("string");
+        done();
+      });
+  });
+});
+// Test suite to create loan application
+describe("POST api/v1/auth/loans", () => {
+  it("Should return an error if required inputs are incorrect", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/loans")
+      .send({ tenor: "ab", amount: "gdg" })
       .end((err, res) => {
         if (err) done();
         const { body } = res;

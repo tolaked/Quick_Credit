@@ -99,6 +99,21 @@ let models = {
       balance: 630000,
       interest: 30000
     }
+  ],
+  Repayment: [
+    {
+      id: 1,
+      loanId: 1,
+      user: "firstuser@gmail.com",
+      createdOn: "2019-04-24T23:43:10.644Z",
+      repaid: false,
+      tenor: 5,
+      amount: 600000,
+      monthlyInstallment: 210000,
+      balance: 630000,
+      interest: 30000,
+      paidAmount: 5000
+    }
   ]
 };
 

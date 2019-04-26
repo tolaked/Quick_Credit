@@ -7,7 +7,8 @@ const {
   getAllLoans,
   specificLoan,
   verifyClient,
-  approveRejectLoan
+  approveRejectLoan,
+  postPayment
 } = admin;
 
 const router = express.Router();
@@ -22,5 +23,6 @@ router.get("/loans", loanRepayment);
 router.get("/loans", getAllLoans);
 // Admin approve or reject loan route
 router.patch("/loans/:id", approveRejectLoan);
+router.post("/loans/:id/repayment", postPayment);
 
 export default router;

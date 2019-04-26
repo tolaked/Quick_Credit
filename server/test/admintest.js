@@ -271,3 +271,122 @@ describe("PATCH api/v1/loans/2", () => {
       });
   });
 });
+
+// Test suite to POST loan repayment in favour of a client
+describe("POST api/v1/loans/1/repayment", () => {
+  it("should successfully post loan repayment in favour of a client", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/1/repayment")
+      .send({ paidAmount: 50000 })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data).to.haveOwnProperty("user");
+        done();
+      });
+  });
+});
+
+// Test suite to POST loan repayment in favour of a client
+describe("POST api/v1/loans/3/repayment", () => {
+  it("should throw an error if loan has been repaid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/3/repayment")
+      .send({ paidAmount: 500000 })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(409);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals(
+          "Loan with the id 3 has been fully repaid"
+        );
+        done();
+      });
+  });
+});
+
+// Test suite to POST loan repayment in favour of a client
+describe("POST api/v1/loans/30/repayment", () => {
+  it("should throw an error if no loan found", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/30/repayment")
+      .send({ paidAmount: 500000 })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(404);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals("No loan found");
+        done();
+      });
+  });
+});
+// Test suite to POST loan repayment in favour of a client
+describe("POST api/v1/loans/1/repayment", () => {
+  it("should throw an error if there is no required input", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/1/repayment")
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.error).to.be.an("string");
+        done();
+      });
+  });
+});
+
+describe("POST api/v1/loans/1/repayment", () => {
+  it("should throw an error if required input is invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/1/repayment")
+      .send({ paidAmount: "hdhd" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.error).to.be.an("string");
+        done();
+      });
+  });
+});
+
+describe("POST api/v1/loans/4/repayment", () => {
+  it("should throw an error if amount posted exceeds the remaining balance", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/4/repayment")
+      .send({ paidAmount: 4000000 })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(409);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals(
+          "amount greater than remaining balance"
+        );
+        done();
+      });
+  });
+});

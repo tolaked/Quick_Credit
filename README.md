@@ -1,7 +1,7 @@
 # Quick_Credit
 
 Quick Credit is an online lending platform that provides short term soft loans to individuals.
-ThiS helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.
+This helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.
 
 [![Build Status](https://travis-ci.org/tolaked/Quick_Credit.svg?branch=develop)](https://travis-ci.org/tolaked/Quick_Credit)
 [![Coverage Status](https://coveralls.io/repos/github/tolaked/Quick_Credit/badge.svg?branch=develop)](https://coveralls.io/github/tolaked/Quick_Credit?branch=develop)

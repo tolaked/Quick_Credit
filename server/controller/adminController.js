@@ -122,5 +122,62 @@ class Admin {
       });
     }
   }
+
+  static postPayment(req, res) {
+    const { body } = req;
+    const loanId = req.params.id;
+    const clientLoans = models.Loans;
+    const repaymentTrans = clientLoans.find(loan => loan.id == loanId);
+    if (!repaymentTrans) {
+      return res.status(404).json({
+        status: 404,
+        error: "No loan found"
+      });
+    }
+    if (repaymentTrans.repaid === true) {
+      return res.status(409).json({
+        status: 409,
+        error: `Loan with the id ${loanId} has been fully repaid`
+      });
+    }
+    const { error } = validation.postLoan(req.body);
+    if (error) {
+      return res.status(422).json({
+        status: 422,
+        error: error.details[0].message
+      });
+    }
+    const paidAmount = parseFloat(req.body.paidAmount);
+    const repaymentLength = models.Repayment.length;
+    const lastRepaymentId = models.Repayment[repaymentLength - 1].id;
+    const balance = repaymentTrans.balance - parseFloat(paidAmount);
+
+    const postLoanRepaid = {
+      user: repaymentTrans.user,
+      id: lastRepaymentId + 1,
+      loanId: req.params.id,
+      createdOn: moment(new Date()),
+      amount: repaymentTrans.amount,
+      monthlyInstallment: repaymentTrans.paymentInstallment,
+      paidAmount,
+      balance,
+      interest: repaymentTrans.interest
+    };
+    repaymentTrans.balance = balance;
+    if (balance === 0) {
+      repaymentTrans.repaid = true;
+    }
+    if (paidAmount > repaymentTrans.balance) {
+      return res.status(200).json({
+        status: 409,
+        error: "amount greater than remaining balance"
+      });
+    }
+    models.Repayment.push(postLoanRepaid);
+    return res.status(200).json({
+      status: 200,
+      data: postLoanRepaid
+    });
+  }
 }
 export default Admin;
