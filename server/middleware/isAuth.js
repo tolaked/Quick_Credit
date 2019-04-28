@@ -5,15 +5,35 @@ import models from "../model/userData";
 dotenv.config();
 
 class Auth {
+  /*
+   **
+   * trim input whitespaces
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  static trimmer(req, res, next) {
+    const { body } = req;
+    if (body) {
+      const trimmed = {};
+
+      Object.keys(body).forEach(key => {
+        const value = body[key];
+        Object.assign(trimmed, { [key]: value.trim() });
+      });
+      req.body = trimmed;
+    }
+    next();
+  }
   /**
    *Generate token
    *
    * @param {number} id
    */
-  static generateToken(id) {
+  static generateToken(email) {
     const token = jwt.sign(
       {
-        id
+        email
       },
       process.env.SECRET_KEY,
       { expiresIn: "24h" }
@@ -47,16 +67,17 @@ class Auth {
 
       // find user by email
       const user = models.Users.find(user => user.email === req.body.email);
+      const client = (user, decodedToken);
 
       // check if user exist
-      if (!user) {
+      if (!client) {
         return res.status(401).json({
           status: 401,
           error: "Invalid token provided"
         });
       }
 
-      // make current logged in user id available
+      // make current logged in user email available
       req.user = decodedToken;
     } catch (error) {
       return res.status(400).json({

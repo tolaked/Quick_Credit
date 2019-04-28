@@ -71,7 +71,7 @@ header {
   top: 0;
   right: 0;
   text-align: right;
-  color:black;
+  color: black;
   width: 68%;
 }
 div[data-home="nav"] {
@@ -210,8 +210,6 @@ a {
   font-weight: normal;
 }
 
-
-
 @media screen and (max-width: 760px) {
   #background {
     height: 35em;
@@ -338,7 +336,6 @@ a {
 
 /*SIGN UP/ SIGN IN */
 
-
 .container {
   max-width: 400px;
   margin: 130px auto 80px auto;
@@ -352,7 +349,6 @@ a {
 #page-nav .navbar a {
   text-transform: uppercase;
 }
-
 
 form .label {
   margin-bottom: 5px;
@@ -388,7 +384,6 @@ form .label .fa {
 /* SITE OPTIONS */
 #site-options {
   padding-top: 7em;
-  
 }
 
 #option-article {
@@ -402,33 +397,32 @@ form .label .fa {
   text-align: center;
 }
 
-#option-article{
+#option-article {
   text-align: center;
 }
-#option-article h1{
-  font-size:2.5em;
-  color:teal;
-  margin-bottom:.6em;
+#option-article h1 {
+  font-size: 2.5em;
+  color: teal;
+  margin-bottom: 0.6em;
 }
 
-#option-article li{
-  font-size:1.5em;
-  color:teal;
-  list-style-type:none;
-  padding:.4em;
+#option-article li {
+  font-size: 1.5em;
+  color: teal;
+  list-style-type: none;
+  padding: 0.4em;
   font-weight: bold;
 }
 
-#option-article li a{
-    color: inherit;
-    outline: none;
-    text-decoration: none;
-    
-    background-size: 100% .6em;
-    background-repeat: no-repeat;
-    background-position: left 0 bottom -40%;
-}
+#option-article li a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
 
+  background-size: 100% 0.6em;
+  background-repeat: no-repeat;
+  background-position: left 0 bottom -40%;
+}
 
 form input {
   width: 100%;
@@ -460,7 +454,7 @@ button[type="submit"]:hover {
 button[type="submit"]:focus {
   outline: none;
 }
-#submit{
+#submit {
   margin: 40px 0;
   margin-bottom: 20px;
   width: 100%;
@@ -501,8 +495,7 @@ button[type="submit"]:focus {
   .container {
     margin: 100px auto 0px auto;
   }
-  
- 
+
   #login-form input {
     width: 100%;
   }
@@ -511,24 +504,3 @@ button[type="submit"]:focus {
     width: 100%;
   }
 }
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
