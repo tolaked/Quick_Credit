@@ -30,3 +30,65 @@ This helps solve problems of financial inclusion as a way to alleviate poverty a
 - Babel
 - Travis CI
 - Code Climate & Coveralls
+
+## Requirements and Installation
+
+To install and run this project you would need to have listed stack installed:
+
+- Node Js
+- Git
+
+To run:
+
+```sh
+git clone <https://github.com/tolaked/Quick_Credit>
+cd EPIC_Mail
+npm install
+npm start
+```
+
+## Testing
+
+```sh
+npm test
+```
+
+## API-ENDPOINTS
+
+`- POST /api/v1/auth/signup Create a new user.`
+
+`- POST /api/v1/auth/login Login a user.`
+
+`- POST /api/v1/auth/loans Create a loan application.`
+
+`- GET /api/v1/auth/loans/<:id>/repayments Get loan repayment history.`
+
+`- PATCH /api/v1/users/<:email>/verify Mark a user as verified.`
+
+`- GET /api/v1/loans/<:id> View specific loan by id.`
+
+`- GET /api/v1/loans?status=approved&repaid=fals Get loan repayment status.`
+
+`- GET /api/v1/loans Get all loans.`
+
+`- PATCH /api/v1/loans/<:id>" Approve or reject a loan application.`
+
+`- POST /api/v1/loans/<:id>/repayment" Post loan repayment transaction in favour of a client.`
+
+## Pivotal Tracker stories
+
+[https://www.pivotaltracker.com/n/projects/2326850](https://www.pivotaltracker.com/n/projects/2326850)
+
+## Template UI
+
+You can see a hosted version of the template at [https://tolaked.github.io/Quick_Credit/index.html](https://tolaked.github.io/Quick_Credit/index.html)
+
+### API
+
+The API is currently in version 1 (v1) and is hosted at
+
+[https://my-quick-credit-app.herokuapp.com/](https://my-quick-credit-app.herokuapp.com/)
+
+## Author
+
+Akere Adetola
