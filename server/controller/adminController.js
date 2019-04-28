@@ -1,6 +1,7 @@
 import models from "../model/userData";
 import moment from "moment";
 import validation from "../validation/validation";
+import Auth from "../middleware/isAuth";
 
 class Admin {
   static verifyClient(req, res) {

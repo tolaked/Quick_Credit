@@ -13,7 +13,6 @@ class validate {
         .required(),
       firstName: Joi.string()
         .regex(/^[a-zA-Z]+$/)
-        .trim()
         .required(),
       lastName: Joi.string()
         .regex(/^[a-zA-Z]+$/)
