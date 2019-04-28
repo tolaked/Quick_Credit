@@ -10,19 +10,19 @@ const {
   approveRejectLoan,
   postPayment
 } = admin;
-const { verifyToken, trimmer } = Auth;
+const { trimmer } = Auth;
 const router = express.Router();
 
 // Admin verify user route
-router.patch("/users/:email/verify", verifyToken, verifyClient);
+router.patch("/users/:email/verify", verifyClient);
 // Admin view specific loan by id
-router.get("/loans/:id", verifyToken, specificLoan);
+router.get("/loans/:id", specificLoan);
 // Admin get loan repayment status
-router.get("/loans", trimmer, verifyToken, loanRepayment);
+router.get("/loans", trimmer, loanRepayment);
 // Admin get all loans route
-router.get("/loans", verifyToken, getAllLoans);
+router.get("/loans", getAllLoans);
 // Admin approve or reject loan route
-router.patch("/loans/:id", trimmer, verifyToken, approveRejectLoan);
-router.post("/loans/:id/repayment", verifyToken, postPayment);
+router.patch("/loans/:id", trimmer, approveRejectLoan);
+router.post("/loans/:id/repayment", postPayment);
 
 export default router;

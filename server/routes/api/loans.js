@@ -7,8 +7,8 @@ const router = express.Router();
 const { applyloan, paidLoans } = loanController;
 
 // apply loan route
-router.post("/loans", verifyToken, applyloan);
+router.post("/loans", applyloan);
 // get loan repayment history by email
-router.get("/loans/:id/repayments", verifyToken, paidLoans);
+router.get("/loans/:id/repayments", paidLoans);
 
 export default router;

@@ -98,6 +98,30 @@ describe("POST api/v1/auth/signup", () => {
   });
 });
 
+describe("POST api/v1/auth/signup", () => {
+  it("Should throw an error if email input is invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/signup")
+      .send({
+        email: "bayomigmailcom",
+        firstName: "maryde",
+        lastName: "alamu",
+        password: "Sweetmum",
+        address: "20,Okusaga"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
 // Test for invalid signup details
 describe("POST api/v1/auth/signup", () => {
   it("Should return an error if signup inputs are invalid", done => {

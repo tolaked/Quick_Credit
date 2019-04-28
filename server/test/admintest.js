@@ -10,12 +10,14 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
+
 // Test for an admin to verify a user
 describe("POST api/v1/users/bayomi@gmail.com/verify", () => {
   it("Should mark a user as verified", done => {
     chai
       .request(app)
       .patch("/api/v1/users/bayomi@gmail.com/verify")
+
       .send({ status: "verified" })
       .end((err, res) => {
         if (err) done();
@@ -36,6 +38,7 @@ describe("POST api/v1/users/bayomi@gmail.com/verify", () => {
     chai
       .request(app)
       .patch("/api/v1/users/bayomi@gmail.com/verify")
+     
       .send({ status: "verified" })
       .end((err, res) => {
         if (err) done();
@@ -339,6 +342,7 @@ describe("POST api/v1/loans/1/repayment", () => {
     chai
       .request(app)
       .post("/api/v1/loans/1/repayment")
+
       .send({})
       .end((err, res) => {
         if (err) done();
@@ -357,6 +361,7 @@ describe("POST api/v1/loans/1/repayment", () => {
     chai
       .request(app)
       .post("/api/v1/loans/1/repayment")
+
       .send({ paidAmount: "hdhd" })
       .end((err, res) => {
         if (err) done();
@@ -375,6 +380,7 @@ describe("POST api/v1/loans/4/repayment", () => {
     chai
       .request(app)
       .post("/api/v1/loans/4/repayment")
+
       .send({ paidAmount: 4000000 })
       .end((err, res) => {
         if (err) done();
