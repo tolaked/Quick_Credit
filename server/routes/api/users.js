@@ -1,6 +1,6 @@
 import express from "express";
 import userController from "../../controller/userController";
-import Helper from "../../Helper/users";
+import Helper from "../../helper/users";
 
 const { createUser, loginUser } = userController;
 const { trimmer } = Helper;
