@@ -5,39 +5,15 @@ import models from "../model/userData";
 dotenv.config();
 
 class Auth {
-  /*
-   **
-   * trim input whitespaces
-   * @param {*} req
-   * @param {*} res
-   * @param {*} next
-   */
-  static trimmer(req, res, next) {
-    const { body } = req;
-    if (body) {
-      const trimmed = {};
-
-      Object.keys(body).forEach(key => {
-        const value = body[key];
-        Object.assign(trimmed, { [key]: value.trim() });
-      });
-      req.body = trimmed;
-    }
-    next();
-  }
   /**
    *Generate token
    *
    * @param {number} id
    */
-  static generateToken(email) {
-    const token = jwt.sign(
-      {
-        email
-      },
-      process.env.SECRET_KEY,
-      { expiresIn: "24h" }
-    );
+  static generateToken(email, isadmin, id) {
+    const token = jwt.sign({ email, isadmin, id }, process.env.SECRET_KEY, {
+      expiresIn: "48h"
+    });
 
     return token;
   }
@@ -66,14 +42,42 @@ class Auth {
       const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
       // find user by email
-      const user = models.Users.find(user => user.email === req.body.email);
-      const client = (user, decodedToken);
+      const user = models.Users.find(user => user.id === decodedToken.id);
 
       // check if user exist
-      if (!client) {
+      if (!user) {
         return res.status(401).json({
           status: 401,
           error: "Invalid token provided"
+        });
+      }
+
+      // make current logged in user email available
+      req.user = decodedToken;
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error
+      });
+    }
+    next();
+  }
+  static adminOnly(req, res, next) {
+    const { token } = req.headers;
+
+    // check if token is valid
+    try {
+      // decode and get token
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+
+      // find user by email
+      const user = models.Users.find(user => user.id === decodedToken.id);
+      const authorizedAdmin = user.isAdmin;
+      // check if user exist
+      if (!authorizedAdmin) {
+        return res.status(403).json({
+          status: 403,
+          error: "Unauthorized access,admin only route"
         });
       }
 

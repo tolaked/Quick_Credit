@@ -1,7 +1,6 @@
 import models from "../model/userData";
 import moment from "moment";
 import validation from "../validation/validation";
-import Auth from "../middleware/isAuth";
 
 class Admin {
   static verifyClient(req, res) {
@@ -26,6 +25,7 @@ class Admin {
         message: "user already verified"
       });
     }
+
     user.status = req.body.status;
     user.modifiedOn = moment(new Date());
     return res.status(201).json({
@@ -141,14 +141,14 @@ class Admin {
         error: `Loan with the id ${loanId} has been fully repaid`
       });
     }
-    const { error } = validation.postLoan(req.body);
+    const { error } = validation.postLoan(body);
     if (error) {
       return res.status(422).json({
         status: 422,
         error: error.details[0].message
       });
     }
-    const paidAmount = parseFloat(req.body.paidAmount);
+    const paidAmount = parseFloat(req.body.paidamount);
     const repaymentLength = models.Repayment.length;
     const lastRepaymentId = models.Repayment[repaymentLength - 1].id;
     const balance = repaymentTrans.balance - parseFloat(paidAmount);

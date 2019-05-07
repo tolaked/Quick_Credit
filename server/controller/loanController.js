@@ -8,6 +8,17 @@ class Loans {
    * @param{res} object
    */
   static applyloan(req, res) {
+    const verifiedClient = models.Users.find(user => user.id === req.user.id);
+    if (
+      verifiedClient.status === "pending" ||
+      verifiedClient.status === "unverified"
+    ) {
+      return res.status(400).json({
+        status: 400,
+        error: "Sorry, you cannot apply for a loan until status is verified"
+      });
+    }
+
     const { error } = validation.validateLoan(req.body);
     if (error) {
       return res.status(422).json({
@@ -26,7 +37,7 @@ class Loans {
 
     const applyLoan = {
       id: lastLoanId + 1,
-      user: models.Users[0].email,
+      user: req.user.email,
       createdOn: moment(new Date()),
       status: "pending",
       repaid: false,
@@ -36,12 +47,13 @@ class Loans {
       balance: amount + interest,
       interest
     };
-    const existLoan = models.Loans.filter(
-      email => email.user === models.Users[0].email
+
+    const loanExists = models.Loans.filter(
+      email => email.user === req.user.email
     );
 
-    for (let i = 0; i < existLoan.length; i += 1) {
-      if (existLoan.repaid === false) {
+    for (let i = 0; i < loanExists.length; i += 1) {
+      if (loanExists[i].repaid === false) {
         return res.status(402).json({
           status: 402,
           message: "you have an outstanding loan"
