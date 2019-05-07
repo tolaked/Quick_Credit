@@ -48,12 +48,48 @@ let models = {
       isAdmin: true,
       createdOn: "2019-04-22T11:26:27.010Z",
       modifiedOn: "2019-04-22T11:26:27.011Z"
+    },
+    {
+      id: 8,
+      email: "bimpe@gmail.com",
+      firstName: "peter",
+      lastName: "segun",
+      password: "$2a$10$mcDT.GKu8q2zP8lSOlg9TeccXaiEfPTUXKqa44GgfQpK3R.GrK11C",
+      status: "unverified",
+      Address: "20,okusaga",
+      isAdmin: true,
+      createdOn: "2019-05-04T17:11:15.781Z",
+      modifiedOn: "2019-05-04T17:11:15.784Z"
+    },
+    {
+      id: 9,
+      email: "bimp@gmail.com",
+      firstName: "peter",
+      lastName: "segun",
+      password: "$2a$10$L0F2UisejZ/WhA1ad4Z/MOCNLMljNmk2RdYe3eaIuL7vHtgxwORc.",
+      status: "unverified",
+      Address: "20,okusaga",
+      isAdmin: true,
+      createdOn: "2019-05-04T17:20:52.545Z",
+      modifiedOn: "2019-05-04T17:20:52.546Z"
+    },
+    {
+      id: 10,
+      email: "khalid@gmail.com",
+      firstName: "peter",
+      lastName: "segun",
+      password: "$2a$10$bvHa7pGEVX/TRJs6IAAW2e1iO2sUmQ59tab4Cv9Xv4cB/KnJ6G6WS",
+      status: "verified",
+      Address: "20,okusaga",
+      isAdmin: true,
+      createdOn: "2019-05-04T17:29:01.804Z",
+      modifiedOn: "2019-05-04T17:29:01.808Z"
     }
   ],
   Loans: [
     {
       id: 1,
-      user: "firstuser@gmail.com",
+      user: "bayomi@gmail.com",
       createdOn: "2019-04-22T14:34:25.265Z",
       status: "pending",
       repaid: false,
@@ -67,7 +103,7 @@ let models = {
       id: 2,
       user: "bayomi@gmail.com",
       createdOn: "2019-04-22T14:34:25.265Z",
-      status: "approved",
+      status: "pending",
       repaid: true,
       tenor: 3,
       amount: 800000,
@@ -98,6 +134,18 @@ let models = {
       paymentInstallment: 210000,
       balance: 630000,
       interest: 30000
+    },
+    {
+      id: 5,
+      user: "khalid@gmail.com",
+      createdOn: "2019-05-04T17:37:33.736Z",
+      status: "pending",
+      repaid: true,
+      tenor: 6,
+      amount: 7500000,
+      paymentInstallment: 1312500,
+      balance: 0,
+      interest: 375000
     }
   ],
   Repayment: [

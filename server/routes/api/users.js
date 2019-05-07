@@ -1,8 +1,10 @@
 import express from "express";
 import userController from "../../controller/userController";
-import Auth from "../../middleware/isAuth";
+import Helper from "../../Helper/users";
+
 const { createUser, loginUser } = userController;
-const { trimmer } = Auth;
+const { trimmer } = Helper;
+
 const router = express.Router();
 
 // user signup route

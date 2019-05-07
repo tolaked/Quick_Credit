@@ -7,6 +7,7 @@
   margin: 0;
 }
 
+/* Style for body */
 body {
   font-family: Verdana, "Geneva", Tahoma, sans-serif;
   font-size: 100%;
@@ -50,7 +51,7 @@ hr {
 /*====================================================
     users Dashboard styles 
     ====================================================*/
-
+/* style for drop down menu */
 .dropicon {
   color: #35577a;
   padding: 16px;
@@ -59,17 +60,20 @@ hr {
   cursor: pointer;
 }
 
+/* style for dropdown icon on hover state */
 .dropicon:hover {
   color: #fff;
   background: #212d57;
 }
 
+/* Style for dropdown container */
 .dropdown {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
 }
 
+/* Style for dropdown contents */
 .dropdown-content {
   position: absolute;
   right: 8px;
@@ -122,7 +126,6 @@ hr {
   min-width: 310px;
   background-image: url("../img/loan1.jpg");
   background-repeat: no-repeat;
-  /* background-size: cover; */
   margin-right: 0px;
   overflow: initial;
 }
@@ -137,6 +140,7 @@ hr {
   margin-left: 0px;
 }
 
+/* Style for loan application tab */
 .apply {
   background: #ffaf30;
   margin-bottom: 20px;
@@ -155,12 +159,14 @@ hr {
   color: white;
 }
 
+/* Loan application tab on hover state */
 .apply:hover {
   background: #212d57;
   color: white;
 }
 
-.aply {
+/* Style for back tab on the loan application page,to return to dashboard */
+.back {
   background: #ffaf30;
   margin-bottom: 20px;
   padding: 10px;
@@ -174,13 +180,14 @@ hr {
   text-decoration: none;
   border-radius: 3px;
 }
-.aply a {
+.back a {
   text-decoration: none;
   color: white;
   width: 100%;
 }
 
-.aply:hover {
+/* style for back tab on hover state */
+.back:hover {
   background: #212d57;
   color: white;
 }
@@ -188,16 +195,9 @@ a:hover {
   color: white;
 }
 
+/* user dashboard container */
 .content-item {
   min-width: calc(95vw - 220px);
-}
-
-.messages {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  transition: 0.2s;
-  border-radius: 2px;
 }
 
 /* Styles the side bar */
@@ -215,6 +215,7 @@ a:hover {
   display: none;
 }
 
+/* style for loan repayments on admin dashboard */
 .repayment {
   margin-bottom: 20px;
   padding: 10px;
@@ -222,6 +223,7 @@ a:hover {
   color: black;
 }
 
+/* repayment on hover state */
 .repayment:hover {
   background: #212d57;
   color: white;
@@ -232,6 +234,7 @@ a:hover {
   color: white;
 }
 
+/* style for post loan tab repayment on admin dashboard */
 .post {
   margin-bottom: 20px;
   padding: 10px;
@@ -239,6 +242,7 @@ a:hover {
   color: black;
 }
 
+/* post repayment tab on hover state */
 .post:hover {
   background: #212d57;
   color: white;
@@ -249,6 +253,7 @@ a:hover {
   color: white;
 }
 
+/* style for current loans tab on admin dashboard */
 .repay {
   margin-bottom: 20px;
   padding: 10px;
@@ -256,6 +261,7 @@ a:hover {
   color: black;
 }
 
+/* current loans tab on hover state */
 .repay:hover {
   background: #212d57;
   color: white;
@@ -266,6 +272,7 @@ a:hover {
   color: white;
 }
 
+/* style for repaid loans tab n admin dashboard */
 .paid {
   margin-bottom: 20px;
   padding: 10px;
@@ -273,6 +280,7 @@ a:hover {
   cursor: pointer;
 }
 
+/* repaid loans tab on hover state */
 .paid:hover {
   background: #212d57;
   color: white;
@@ -283,6 +291,7 @@ a:hover {
   color: white;
 }
 
+/* style for close icon */
 .close {
   color: red;
   text-align: right;
@@ -301,6 +310,7 @@ a:hover {
   width: 40%;
 }
 
+/* style for admin dashboard */
 .main-loan-body {
   display: none;
   padding: 17px;
@@ -345,6 +355,7 @@ hr {
   background: rgb(0, 0, 255);
 }
 
+/* Style for reset password and logout link in user and admin dashboard */
 .reset-password,
 .signout {
   text-decoration: none;
@@ -352,6 +363,7 @@ hr {
   transition: 0.2s;
 }
 
+/* Style for loan user verification page */
 .loan_container {
   width: 40%;
   padding: 20px;
@@ -388,6 +400,7 @@ hr {
   width: 10%;
 }
 
+/* style for cancel icon inuser verification tab */
 .cancel-form {
   color: red;
   width: 10%;
@@ -395,6 +408,8 @@ hr {
   font-size: 20px;
   margin-left: 90%;
 }
+
+/* style for modal box */
 .modal-body {
   height: 100%;
   max-height: calc(100vh - 210px);
@@ -402,6 +417,7 @@ hr {
   z-index: 1;
 }
 
+/* style for admin dashboard */
 #admin-dashboard-section {
   margin-left: 3em;
   margin-right: 1em;
@@ -411,6 +427,8 @@ hr {
   font-size: 2em;
   text-align: center;
 }
+
+/* style for admin profile on dashboard */
 .account-details {
   width: 60vw;
   margin: 0.4em auto;
@@ -422,6 +440,7 @@ hr {
   justify-content: space-between;
 }
 
+/* style for post loan repayment */
 .post-account-details {
   width: 40vw;
   margin: 0.4em auto;
@@ -433,6 +452,7 @@ hr {
   text-align: center;
 }
 
+/* style for loan repayment input field */
 .post-account-details input {
   width: 80%;
   padding: 15px;
@@ -443,12 +463,7 @@ hr {
   border-radius: 5px;
 }
 
-.dashboard-main {
-  padding-top: 5em;
-  margin-left: 1em;
-  margin-right: 1em;
-}
-
+/* dashboard text content */
 .account-details article {
   padding: 0.4em;
   display: flex;
@@ -476,6 +491,8 @@ hr {
   background-color: teal;
   color: white;
 }
+
+/* style for view loan application tab */
 .acctt {
   padding: 0.6em 1.3em 0.6em 1.3em;
   background-color: teal;
@@ -486,6 +503,7 @@ hr {
   padding: 0.6em 1.3em 0.6em 1.3em;
 }
 
+/* style for view loan application button */
 .account-details button {
   margin-top: 1em;
   background: rgba(0, 0, 0, 0.1);
@@ -504,6 +522,8 @@ hr {
   background: teal;
   color: white;
 }
+
+/* dashboard for repaid loans */
 #dashboard-section {
   padding-top: 5em;
   margin-left: 0;
@@ -675,19 +695,11 @@ h1 {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-.groups-dropdown-content {
-  display: none;
-  right: 8px;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(26, 5, 5, 0.2);
-  z-index: 2;
-}
-
 .show-dropdown-content {
   display: block;
 }
 
+/* style for drop down content link */
 .dropdown-content a {
   float: none;
   color: black;
@@ -705,6 +717,7 @@ h1 {
   background-color: #ddd;
 }
 
+/* style for admin profile on dashboard */
 #profile {
   flex-direction: column;
   align-items: center;
@@ -735,6 +748,7 @@ h1 {
   width: 70%;
 }
 
+/* Dashboard Responsiveness */
 @media only screen and (max-width: 680px) {
   .body {
     width: 200%;
@@ -776,15 +790,7 @@ h1 {
     display: block;
   }
 
-  .create-ln-form-modified {
-    width: 70vw;
-    margin: 20px;
-  }
-
-  .hearder {
-    min-width: 400px;
-  }
-
+  /* Style for aend and cancel in loan application */
   .add-loan-button,
   .cancel-loan-btn {
     background-color: #35577a;
@@ -804,6 +810,8 @@ h1 {
   .account-details {
     width: 90%;
   }
+
+  /* dashboard content */
   .account-details button {
     font-size: 0.9em;
     width: 43%;
@@ -818,24 +826,3 @@ h1 {
     padding: 0.7em 1em 0.7em 1em;
   }
 }
-/* @media only screen and (max-width: 769px) {
-  .account-details {
-    width: 80vw;
-    font-weight: 500;
-  }
-  .account-details {
-    width: 90%;
-  }
-  .account-details button {
-    font-size: 0.9em;
-    width: 43%;
-    padding: 0.7em 0.3em 0.7em 0.3em;
-  }
-
-  .account-details a {
-    width: 43%;
-  }
-
-  .account-details a button {
-    padding: 0.7em 1em 0.7em 1em;
-  } */

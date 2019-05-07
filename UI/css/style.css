@@ -2,6 +2,7 @@
 html {
   height: 100%;
 }
+/* Style for body */
 body {
   padding: 0;
   width: 100%;
@@ -28,6 +29,7 @@ body {
 * {
   box-sizing: border-box;
 }
+/* Style for button */
 button {
   font-family: sans-serif;
   font-weight: bold;
@@ -36,6 +38,7 @@ button {
 header {
   font-size: 17px;
 }
+/* Styling for navigation bar container */
 .nav-container {
   margin: 0;
   padding: 0;
@@ -49,10 +52,13 @@ header {
 .home nav-container {
   justify-content: space-between;
 }
+/* style for logo container */
 .brand-icon {
   width: 31%;
   margin-top: 0px;
 }
+
+/* style for logo */
 .logo {
   padding: 0px;
   margin-top: 15px;
@@ -64,6 +70,7 @@ header {
   padding: 0px;
   max-width: 240px;
 }
+/* Style for navigation bar */
 .navbar {
   padding: 0;
   background-color: #fff;
@@ -80,6 +87,8 @@ div[data-home="nav"] {
 .home.nav-container {
   box-shadow: 0 8px 6px -6px black;
 }
+
+/* style for navbar link */
 .navbar a {
   display: inline-block;
   letter-spacing: 1px;
@@ -104,7 +113,7 @@ div[data-home="nav"] a:hover {
   color: white;
   border-radius: 5px;
 }
-
+/* Style for landing page background */
 #background {
   height: 40em;
   position: absolute;
@@ -117,6 +126,7 @@ div[data-home="nav"] a:hover {
   background-size: cover;
   z-index: -1;
 }
+/* Style for landing page welcome note */
 .header-text {
   text-align: center;
   padding-top: 1em;
@@ -124,13 +134,14 @@ div[data-home="nav"] a:hover {
   margin-top: 60px;
   font-family: "Raleway", sans-serif;
 }
-
+/* Style for welcome text */
 .quick-header {
   font-size: 60px;
   padding: 0 2em;
   line-height: 2em;
   margin-bottom: 0px;
 }
+/* Style for Notes in landing page */
 .sub-text {
   font-size: 30px;
   margin-top: 10px;
@@ -140,6 +151,7 @@ div[data-home="nav"] a:hover {
   margin: 30px 0px;
   text-align: center;
 }
+/* Style for landing page sign up and learn more button */
 .start-btn {
   text-decoration: none;
   color: white;
@@ -154,6 +166,7 @@ div[data-home="nav"] a:hover {
   margin: 30px 10px;
   display: inline-block;
 }
+/* style for button hover state */
 .start-btn:hover {
   background: var(--sec-color);
   border: solid 2px var(--sec-color);
@@ -162,10 +175,12 @@ div[data-home="nav"] a:hover {
   background: transparent;
   border: solid white 2px;
 }
+/* style for link */
 a {
   color: var(--sec-color);
   text-decoration: none;
 }
+/* Style for Reset password link */
 .sign-link {
   color: var(--sec-color);
   font-size: 15px;
@@ -210,6 +225,7 @@ a {
   font-weight: normal;
 }
 
+/* Responsivenes on mobile for landing page */
 @media screen and (max-width: 760px) {
   #background {
     height: 35em;
@@ -466,6 +482,7 @@ button[type="submit"]:focus {
   cursor: pointer;
 }
 
+/* Styles the footer */
 #footer {
   margin-top: 50px;
   padding: 4em 2em;

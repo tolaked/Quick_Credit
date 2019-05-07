@@ -89,7 +89,7 @@ class validate {
   }
   static postLoan(loan) {
     const schema = Joi.object().keys({
-      paidAmount: Joi.number().required()
+      paidamount: Joi.number().required()
     });
     return Joi.validate(loan, schema);
   }

@@ -54,16 +54,14 @@ class userController {
       };
 
       models.Users.push(post);
-      const token = Auth.generateToken(models.Users[0].id);
+      const token = Auth.generateToken(post.email, post.isAdmin, post.id);
 
       return res.status(201).json({
-        status: 200,
-        data: [
-          {
-            token,
-            post
-          }
-        ]
+        status: 201,
+        data: {
+          token,
+          post
+        }
       });
     } catch (e) {
       return res.status(400).json({
@@ -111,15 +109,17 @@ class userController {
       });
     }
     // get generated token
-    const token = Auth.generateToken(models.Users[0].id);
+    const token = Auth.generateToken(
+      userExists.email,
+      userExists.isAdmin,
+      userExists.id
+    );
 
     return res.status(200).json({
       status: 200,
-      data: [
-        {
-          token
-        }
-      ]
+      data: {
+        token
+      }
     });
   }
 }
