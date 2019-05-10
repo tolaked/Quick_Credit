@@ -2,7 +2,8 @@
   Basic css reset
   ====================================================*/
 
-* {
+html,
+body {
   padding: 0;
   margin: 0;
 }
@@ -107,7 +108,7 @@ hr {
   color: white;
   font-size: 30px;
   font-weight: bold;
-  width: 96.9%;
+  min-width: 300px;
   overflow: inherit;
 }
 
@@ -123,11 +124,10 @@ hr {
 .main-body {
   display: flex;
   min-height: calc(100vh - 59px);
-  min-width: 310px;
   background-image: url("../img/loan1.jpg");
   background-repeat: no-repeat;
-  margin-right: 0px;
-  overflow: initial;
+  background-size: cover;
+  margin: auto;
 }
 
 /* Styles the side bar */
@@ -412,7 +412,7 @@ hr {
 /* style for modal box */
 .modal-body {
   height: 100%;
-  max-height: calc(100vh - 210px);
+  max-height: calc(100vh - 300px);
   overflow-y: auto;
   z-index: 1;
 }
@@ -750,19 +750,29 @@ h1 {
 
 /* Dashboard Responsiveness */
 @media only screen and (max-width: 680px) {
-  .body {
-    width: 200%;
+  body {
+    width: 80%;
+  }
+  * {
+    margin: 0;
+    padding: 0;
   }
   .main-body {
+    margin: auto;
+    min-width: 60%;
+    flex-direction: column;
+  }
+  .loan-container {
+    width: 92%;
     margin: 0;
-    width: 120%;
+    padding: 0;
   }
   .box {
     width: 20%;
     margin-right: 0;
   }
   .headerr {
-    width: 97.2%;
+    min-width: 60%;
   }
   .close {
     width: 90%;
@@ -790,7 +800,15 @@ h1 {
     display: block;
   }
 
-  /* Style for aend and cancel in loan application */
+  .create-ln-form-modified {
+    width: 70vw;
+    margin: 20px;
+  }
+
+  .hearder {
+    min-width: 400px;
+  }
+
   .add-loan-button,
   .cancel-loan-btn {
     background-color: #35577a;
@@ -810,8 +828,6 @@ h1 {
   .account-details {
     width: 90%;
   }
-
-  /* dashboard content */
   .account-details button {
     font-size: 0.9em;
     width: 43%;
@@ -824,5 +840,56 @@ h1 {
 
   .account-details a button {
     padding: 0.7em 1em 0.7em 1em;
+  }
+
+  #admin-dashboard-section {
+    margin-left: 3em;
+    margin-right: 1em;
+    min-width: 300px;
+  }
+
+  .add-loan-btn {
+    margin: 8px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    min-width: 300px;
+    z-index: -1;
+  }
+
+  .post-loan-btn {
+    margin: 8px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    min-width: 100%;
+    z-index: -1;
+  }
+  .post-loan-button {
+    min-width: 40%;
+    text-align: center;
+    font-size: 10px;
+  }
+
+  .pst-loan-btn {
+    min-width: 40%;
+    text-align: center;
+    font-size: 10px;
+  }
+
+  .add-loan-btn {
+    min-width: 30%;
+  }
+
+  .add-loan-button {
+    text-align: center;
+    width: 60px;
+    font-size: 10px;
+  }
+
+  .cancel-loan-btn {
+    text-align: center;
+    width: 60px;
+    font-size: 10px;
   }
 }

@@ -23,7 +23,6 @@ body {
   background: #fff;
 }
 :root {
-  /* --pri-color: #19334d; */
   --sec-color: #e34b3b;
 }
 * {
@@ -281,6 +280,8 @@ a {
   div[data-home="nav"] {
     text-align: center;
   }
+
+  /* Style for navigation bar */
   .navbar {
     margin-top: 60px;
     text-align: center;
@@ -382,10 +383,14 @@ form .label .fa {
   margin-left: 10px;
 }
 
+.reset-text {
+  padding: 10px;
+  font-size: 15px;
+}
+
 .acct {
   text-align: center;
   font-size: 16px;
-  /* font-weight: bold; */
 }
 #option-article {
   height: 50vh;
