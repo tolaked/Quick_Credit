@@ -1,0 +1,284 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Quick_Credit
+  description: Quick Credit is an online lending platform that provides short term soft loans to individuals. This helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.
+  contact: {}
+host: my-quick-credit-app.herokuapp.com
+basePath: /api/v1
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /auth/signup:
+    post:
+      description: 'TODO: Add Description'
+      summary: Signup
+      tags:
+      - Auth
+      operationId: AuthSignupPost
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: firstName
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: lastName
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: address
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /auth/login:
+    post:
+      description: 'TODO: Add Description'
+      summary: Login
+      tags:
+      - Auth
+      operationId: AuthLoginPost
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /loans:
+    post:
+      description: 'TODO: Add Description'
+      summary: Apply for Loan
+      tags:
+      - User-Loans
+      operationId: LoansPost
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: amount
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: tenor
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    get:
+      description: 'TODO: Add Description'
+      summary: Repayment status
+      tags:
+      - Admin
+      operationId: LoansGet
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: status
+        in: query
+        required: true
+        type: string
+        description: ''
+      - name: repaid
+        in: query
+        required: true
+        type: boolean
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    patch:
+      description: 'TODO: Add Description'
+      summary: Approve/Reject Loans
+      tags:
+      - Admin
+      operationId: LoansPatch
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: status
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /loans/3/repayments:
+    get:
+      description: 'TODO: Add Description'
+      summary: Repayment status by id
+      tags:
+      - User-Loans
+      operationId: Loans3RepaymentsGet
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /users/bayomi@gmail.com/verify:
+    patch:
+      description: 'TODO: Add Description'
+      summary: Verify User
+      tags:
+      - Admin
+      operationId: UsersBayomiGmailComVerifyPatch
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: status
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /loans/2:
+    get:
+      description: 'TODO: Add Description'
+      summary: View specific loan
+      tags:
+      - Admin
+      operationId: Loans2Get
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /loans/4/repayment:
+    post:
+      description: 'TODO: Add Description'
+      summary: Post loan repayment
+      tags:
+      - Admin
+      operationId: Loans4RepaymentPost
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: paidamount
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+tags:
+- name: Auth
+- name: User-Loans
+- name: Admin

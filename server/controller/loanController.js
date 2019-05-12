@@ -67,7 +67,8 @@ class Loans {
     });
   }
   static paidLoans(req, res) {
-    // const loans = models.Loans.find(oneloan => oneloan.id === req.params.id);
+    const getUser = req.user.email;
+
     const getloanId = req.params.id;
     const clientLoans = models.Loans;
     const loanToview = clientLoans.find(oneloan => oneloan.id == getloanId);
@@ -76,6 +77,12 @@ class Loans {
       return res.status(409).json({
         status: 409,
         error: "No loan record found"
+      });
+    }
+    if (loanToview.user !== getUser) {
+      return res.status(403).json({
+        status: 403,
+        error: "Sorry, you can't view this loan"
       });
     }
     if (loanToview.status === "approved" && loanToview.repaid === true) {

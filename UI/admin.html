@@ -43,14 +43,14 @@
     
     <main class="main-body">
       <section class="sidebar">
-        <div class="apply">Verification</div>
+        <div class="apply"><i class="fas fa-user-check"></i>Verification</div>
 
         <div class="sidebar-icon">
           
-          <div class="repayment">Loan Applications</div>
-          <div class="repay">Current Loans</div>
-          <div class="paid">Repaid Loans</div>
-          <div class="post">Post Repayment</div>
+          <div class="repayment active"><i class="fas fa-hand-holding-usd"></i>Loan Applications</div>
+          <div class="repay"><i class="fas fa-money-check-alt"></i> Current Loans</div>
+          <div class="paid"><i class="fas fa-thumbs-up"></i> Repaid Loans</div>
+          <div class="post"><i class="fab fa-usps"></i> Post Repayment</div>
         </div>
 
         <div class="create-loan-form">
@@ -120,6 +120,8 @@
         </div>
       </section>
       
+      <div class="allContent">
+      <div class="repayment-container">
       <section class="content">
         <div class="compose-box compose-container">
          
@@ -187,7 +189,7 @@
               </form>
         </div>
         </section>
-
+      </div>
           <div class="loan-container content-item">
            
             <section id="dashboard-section">
@@ -245,6 +247,7 @@
                   
                   </div>
         </div>
+        <div class="repay-container">
         <div class="unpaid">
             <p class="close"><i class="fas fa-window-close"></i></p>
             <section id="admin-dashboard-section">
@@ -288,8 +291,10 @@
                   </article> 
                 </section>
         </div>
+      </div>
+      
 
-        
+        <div class="paid-container">
         <div class="repaid">
             <p class="close"><i class="fas fa-window-close"></i></p>
             <section id="admin-dashboard-section">
@@ -392,7 +397,9 @@
               
      </section>
      </div>
+    </div>
      
+    <div class="post-container">
      <div class="loan-payment">
         <p class="close"><i class="fas fa-window-close"></i></p>
         <section id="admin-dashboard-section">
@@ -432,6 +439,8 @@
           </section>
           </section>
     </div>
+  </div>
+  </div>
      </main>
     <script src="js/userdashboard.js"></script>
   </body>

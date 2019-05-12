@@ -9,7 +9,7 @@ const router = express.Router();
 
 // apply loan route
 router.post("/loans", verifyToken, applyloan);
-// get loan repayment history by email
+// get loan repayment history by id
 router.get("/loans/:id/repayments", verifyToken, paidLoans);
 
 export default router;

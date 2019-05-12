@@ -13,9 +13,8 @@ const { expect } = chai;
 let signUpuserToken;
 let userToken;
 let unAuthorizedUserToken;
-let DbUserToken;
-let loggedInUserToken;
-let clientToken;
+let newUserToken;
+let loanUserToken;
 let id;
 
 const user = {
@@ -174,7 +173,52 @@ describe("POST api/v1/auth/login", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
+
         userToken = body.data.token;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.token).to.be.a("string");
+        done();
+      });
+  });
+});
+
+//   Test suite for POST /login route
+describe("POST api/v1/auth/login", () => {
+  it("Should successfully login a user account if inputs are valid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/login")
+      .send({ email: "bolaji@gmail.com", password: "Sweetmum" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+
+        loanUserToken = body.data.token;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.token).to.be.a("string");
+        done();
+      });
+  });
+});
+
+//   Test suite for POST /login route
+describe("POST api/v1/auth/login", () => {
+  it("Should successfully login a user account if inputs are valid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/login")
+      .send({ email: "bimpe@gmail.com", password: "Sweetmum" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+
+        newUserToken = body.data.token;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
@@ -223,6 +267,7 @@ describe("POST api/v1/auth/login", () => {
       });
   });
 });
+
 // Test suite for POST /login route invalid
 describe("POST api/v1/auth/login", () => {
   it("Should return an error if user does not exist", done => {
@@ -249,7 +294,7 @@ describe("POST api/v1/loans", () => {
     chai
       .request(app)
       .post("/api/v1/loans")
-      .set("token", userToken)
+      .set("token", loanUserToken)
       .send({ tenor: 3, amount: 800000 })
       .end((err, res) => {
         if (err) done();
@@ -265,23 +310,13 @@ describe("POST api/v1/loans", () => {
 });
 
 // Test suite for all repaid loans
-describe("GET api/v1/loans/3/repayments", () => {
+describe("GET api/v1/loans/5/repayments", () => {
   it("Should successfully get all loan repayment", done => {
     chai
       .request(app)
-      .get("/api/v1/loans/3/repayments")
+      .get("/api/v1/loans/5/repayments")
       .set("token", userToken)
-      .send({
-        user: "khalid@gmail.com",
-        createdOn: "2019-04-22T14:34:25.265Z",
-        status: "approved",
-        repaid: true,
-        tenor: 3,
-        amount: 400000,
-        paymentInstallment: 140000,
-        balance: 420000,
-        interest: 20000
-      })
+      .send({})
       .end((err, res) => {
         if (err) done();
         const { body } = res;
@@ -305,7 +340,7 @@ describe("GET api/v1/loans/9/repayments", () => {
       .send({})
       .end((err, res) => {
         if (err) done();
-        const { body } = res;
+        const body = res.body;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equal(409);
@@ -316,12 +351,33 @@ describe("GET api/v1/loans/9/repayments", () => {
   });
 });
 
+// Test suite for user can not viw loan
+describe("GET api/v1/loans/3/repayments", () => {
+  it("Should throw an error if user tries to view a loan that is not theirs", done => {
+    chai
+      .request(app)
+      .get("/api/v1/loans/3/repayments")
+      .set("token", userToken)
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(403);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("Sorry, you can't view this loan");
+        done();
+      });
+  });
+});
+
 // Test suite for no repaid loans
-describe("GET api/v1/loans/1/repayments", () => {
+describe("GET api/v1/loans/6/repayments", () => {
   it("Should throw an error if no repaid loans", done => {
     chai
       .request(app)
-      .get("/api/v1/loans/1/repayments")
+      .get("/api/v1/loans/6/repayments")
       .set("token", userToken)
       .send({
         user: "bayomi@gmail.com",
@@ -674,7 +730,7 @@ describe("POST api/v1/loans/1/repayment", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
-        console.log(body);
+
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equal(200);

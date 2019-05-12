@@ -4,9 +4,15 @@ import http from "http";
 import users from "./routes/api/users";
 import loans from "./routes/api/loans";
 import admin from "./routes/api/admin";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
 
 // Initialize express app
 const app = express();
+
+const swaggerDocument = YAML.load(`${__dirname}/../swagger.yaml`);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // body-parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));

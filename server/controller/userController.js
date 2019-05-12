@@ -3,9 +3,8 @@ import moment from "moment";
 import validation from "../validation/validation";
 import Auth from "../middleware/isAuth";
 import bcrypt from "bcryptjs";
-import helper from "../helper/users";
 
-const { genSaltSync, hashSync, compareSync } = bcrypt;
+const { hashSync } = bcrypt;
 
 class userController {
   /**
