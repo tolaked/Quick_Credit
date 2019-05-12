@@ -223,13 +223,20 @@ a:hover {
   color: black;
 }
 
-/* repayment on hover state */
-.repayment:hover {
+/* side bar tabs on hover state */
+.repayment:hover,
+.paid:hover,
+.repay:hover,
+.post:hover {
   background: #212d57;
   color: white;
 }
 
-.repayment.active {
+/* side bar tabs on active state */
+.repayment.active,
+.paid.active,
+.repay.active,
+.post.active {
   background: #212d57;
   color: white;
 }
@@ -242,17 +249,6 @@ a:hover {
   color: black;
 }
 
-/* post repayment tab on hover state */
-.post:hover {
-  background: #212d57;
-  color: white;
-}
-
-.post.active {
-  background: #212d57;
-  color: white;
-}
-
 /* style for current loans tab on admin dashboard */
 .repay {
   margin-bottom: 20px;
@@ -261,34 +257,12 @@ a:hover {
   color: black;
 }
 
-/* current loans tab on hover state */
-.repay:hover {
-  background: #212d57;
-  color: white;
-}
-
-.repay.active {
-  background: #212d57;
-  color: white;
-}
-
 /* style for repaid loans tab n admin dashboard */
 .paid {
   margin-bottom: 20px;
   padding: 10px;
   color: black;
   cursor: pointer;
-}
-
-/* repaid loans tab on hover state */
-.paid:hover {
-  background: #212d57;
-  color: white;
-}
-
-.paid:active {
-  background: #212d57;
-  color: white;
 }
 
 /* style for close icon */
@@ -558,6 +532,7 @@ hr {
   margin-bottom: 1em;
 }
 
+/* Dashboard text style */
 .details article {
   border-bottom: 3px solid #dfe0e2;
   display: flex;
@@ -596,6 +571,7 @@ textarea:focus {
   display: none;
 }
 
+/* Style tag for loan form */
 .create-loan-form {
   display: none;
   position: fixed;
@@ -615,6 +591,7 @@ textarea:focus {
   display: block;
 }
 
+/* style for verification form buttons */
 .add-loan-btn {
   margin: 8px 0;
   cursor: pointer;
@@ -624,6 +601,7 @@ textarea:focus {
   z-index: -1;
 }
 
+/* style for submit and cancel button in verification form */
 .add-loan-button,
 .cancel-loan-btn {
   background-color: #35577a;
@@ -636,6 +614,7 @@ textarea:focus {
   border-radius: 2px;
 }
 
+/* style for submit loan appliation */
 .post-loan-btn {
   margin: 8px 0;
   cursor: pointer;
@@ -709,6 +688,7 @@ h1 {
   text-align: left;
 }
 
+/* style for logo icon */
 .logo-icon {
   display: inline-block;
 }
@@ -809,6 +789,7 @@ h1 {
     min-width: 400px;
   }
 
+  /* style for submit and cancel butttons,loan application */
   .add-loan-button,
   .cancel-loan-btn {
     background-color: #35577a;
@@ -842,12 +823,14 @@ h1 {
     padding: 0.7em 1em 0.7em 1em;
   }
 
+  /* style for admin dashboard */
   #admin-dashboard-section {
     margin-left: 3em;
     margin-right: 1em;
     min-width: 300px;
   }
 
+  /* style for user verification submit button */
   .add-loan-btn {
     margin: 8px 0;
     cursor: pointer;
@@ -857,6 +840,7 @@ h1 {
     z-index: -1;
   }
 
+  /* style for  loan application cancel button */
   .post-loan-btn {
     margin: 8px 0;
     cursor: pointer;
@@ -865,28 +849,34 @@ h1 {
     min-width: 100%;
     z-index: -1;
   }
+
+  /* style for loan application submit button */
   .post-loan-button {
     min-width: 40%;
     text-align: center;
     font-size: 10px;
   }
 
+  /* style for cancel button,user verification */
   .pst-loan-btn {
     min-width: 40%;
     text-align: center;
     font-size: 10px;
   }
 
+  /* style for user verification form buttons */
   .add-loan-btn {
     min-width: 30%;
   }
 
+  /* style for submit button,user verification */
   .add-loan-button {
     text-align: center;
     width: 60px;
     font-size: 10px;
   }
 
+  /* style for cancel button,user verification form */
   .cancel-loan-btn {
     text-align: center;
     width: 60px;

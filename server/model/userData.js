@@ -67,7 +67,7 @@ let models = {
       firstName: "peter",
       lastName: "segun",
       password: "$2a$10$L0F2UisejZ/WhA1ad4Z/MOCNLMljNmk2RdYe3eaIuL7vHtgxwORc.",
-      status: "unverified",
+      status: "verified",
       Address: "20,okusaga",
       isAdmin: true,
       createdOn: "2019-05-04T17:20:52.545Z",
@@ -76,6 +76,18 @@ let models = {
     {
       id: 10,
       email: "khalid@gmail.com",
+      firstName: "peter",
+      lastName: "segun",
+      password: "$2a$10$bvHa7pGEVX/TRJs6IAAW2e1iO2sUmQ59tab4Cv9Xv4cB/KnJ6G6WS",
+      status: "verified",
+      Address: "20,okusaga",
+      isAdmin: true,
+      createdOn: "2019-05-04T17:29:01.804Z",
+      modifiedOn: "2019-05-04T17:29:01.808Z"
+    },
+    {
+      id: 10,
+      email: "bolaji@gmail.com",
       firstName: "peter",
       lastName: "segun",
       password: "$2a$10$bvHa7pGEVX/TRJs6IAAW2e1iO2sUmQ59tab4Cv9Xv4cB/KnJ6G6WS",
@@ -139,12 +151,24 @@ let models = {
       id: 5,
       user: "khalid@gmail.com",
       createdOn: "2019-05-04T17:37:33.736Z",
-      status: "pending",
+      status: "approved",
       repaid: true,
       tenor: 6,
       amount: 7500000,
       paymentInstallment: 1312500,
       balance: 0,
+      interest: 375000
+    },
+    {
+      id: 6,
+      user: "khalid@gmail.com",
+      createdOn: "2019-05-04T17:37:33.736Z",
+      status: "approved",
+      repaid: false,
+      tenor: 6,
+      amount: 7500000,
+      paymentInstallment: 1312500,
+      balance: 690000,
       interest: 375000
     }
   ],

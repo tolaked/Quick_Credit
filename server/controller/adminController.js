@@ -100,7 +100,7 @@ class Admin {
         error: "Loan not found"
       });
     }
-    const { error } = validation.loanApproval(req.body);
+    const { error } = validation.loanApproval(body);
     if (error) {
       return res.status(422).json({
         status: 422,

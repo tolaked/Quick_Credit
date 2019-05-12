@@ -89,6 +89,10 @@ The API is currently in version 1 (v1) and is hosted at
 
 [https://my-quick-credit-app.herokuapp.com/](https://my-quick-credit-app.herokuapp.com/)
 
+## API Documentation
+
+[https://myepic-mail.herokuapp.com/api-docs](https://myepic-mail.herokuapp.com/api-docs)
+
 ## Author
 
 Akere Adetola
