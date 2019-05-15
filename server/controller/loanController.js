@@ -8,6 +8,13 @@ class Loans {
    * @param{res} object
    */
   static applyloan(req, res) {
+    const { error } = validation.validateLoan(req.body);
+    if (error) {
+      return res.status(422).json({
+        status: 422,
+        message: error.details[0].message
+      });
+    }
     const verifiedClient = models.Users.find(user => user.id === req.user.id);
     if (
       verifiedClient.status === "pending" ||
@@ -16,14 +23,6 @@ class Loans {
       return res.status(400).json({
         status: 400,
         error: "Sorry, you cannot apply for a loan until status is verified"
-      });
-    }
-
-    const { error } = validation.validateLoan(req.body);
-    if (error) {
-      return res.status(422).json({
-        status: 422,
-        message: error.details[0].message
       });
     }
 
@@ -74,17 +73,19 @@ class Loans {
     const loanToview = clientLoans.find(oneloan => oneloan.id == getloanId);
 
     if (!loanToview) {
-      return res.status(409).json({
-        status: 409,
+      return res.status(404).json({
+        status: 404,
         error: "No loan record found"
       });
     }
+    // Check if loan belongs to the user trying to view a loan
     if (loanToview.user !== getUser) {
       return res.status(403).json({
         status: 403,
         error: "Sorry, you can't view this loan"
       });
     }
+    // check for repaid loans
     if (loanToview.status === "approved" && loanToview.repaid === true) {
       return res.status(201).json({
         status: 201,

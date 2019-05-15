@@ -1,36 +1,73 @@
 import chai from "chai";
 import app from "../app";
-import userData from "../model/userData";
-import supertest from "supertest";
 import chaiHttp from "chai-http";
-import { getMaxListeners } from "cluster";
 import faker from "faker";
+import bcrypt from "bcryptjs";
+import validation from "../validation/validation";
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-let signUpuserToken;
 let userToken;
 let unAuthorizedUserToken;
-let newUserToken;
 let loanUserToken;
+let signUpuserToken;
+let newUserToken;
 let id;
 
 const user = {
-  firstname: faker.name.firstName(),
-  lastname: faker.name.lastName(),
-  email: faker.internet.email(),
+  firstName: "Adeola",
+  lastName: "Laide",
+  email: "lamijih@gmail.com",
   password: "Sweetmum",
   address: "20,Okusaga"
 };
 
 const wronguser = {
-  firstname: faker.name.firstName(),
-  lastame: faker.name.lastName(),
-  email: faker.internet.email(),
-  passwrd: "Sweetmum",
-  address: ""
+  firstName: "Adeola",
+  lastName: "Laid3e",
+  email: "lamijih@gmail.com",
+  password: "Sweetmum",
+  address: "20,Okusaga"
+};
+
+const wrongemail = {
+  firstName: "Adeola",
+  lastName: "Laid3e",
+  email: "lamijih@gmail.com",
+  password: "Sweetmum",
+  address: "20,Okusaga"
+};
+const wronglogin = {
+  efmail: "lamijihgmail.com",
+  password: "Sweetmum"
+};
+
+const noemail = {
+  efmail: "",
+  password: "Sweetmum"
+};
+const nopassword = {
+  efmail: "firstuser@gmail.com",
+  password: ""
+};
+
+const newloan = {
+  amount: 800000,
+  tenor: 3
+};
+const noamount = {
+  amount: "h",
+  tenor: 3
+};
+const notenor = {
+  amount: 55999,
+  tenor: "gd"
+};
+
+const verify = {
+  status: "verified"
 };
 
 // Test suite for home route
@@ -92,6 +129,8 @@ describe("POST api/v1/auth/signup", () => {
         expect(body.status).to.be.equals(201);
         expect(body.data).to.be.an("object");
         expect(body.data.token).to.be.a("string");
+        expect(body.data.userDetails).to.be.an("object");
+        expect(body.data.userDetails).to.haveOwnProperty("firstName");
         done();
       });
   });
@@ -158,6 +197,58 @@ describe("POST api/v1/auth/signup", () => {
         const { body } = res;
         expect(body).to.be.an("object");
         expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// Test for invalid signup details
+describe("POST api/v1/auth/signup", () => {
+  it("Should return an error if signup inputs are invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/signup")
+      .send({
+        email: "bayomijig@gmailcom",
+        firstName: "ma#ryde",
+        lastName: "alamu",
+        password: "Sweetmum",
+        address: "20,Okusaga"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equals(
+          "Firstname is required and must contain only alphabets"
+        );
+        done();
+      });
+  });
+});
+
+// Test for invalid signup details
+describe("POST api/v1/auth/signup", () => {
+  it("Should return an error if signup inputs are invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/signup")
+      .send({
+        email: "bayomijig@gmailcom",
+        firstName: "maryde",
+        lastName: "ala^mu",
+        password: "Sweetmum",
+        address: "20,Okusaga"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equals(
+          "Lastname is required and must contain only alphabets"
+        );
         done();
       });
   });
@@ -343,7 +434,7 @@ describe("GET api/v1/loans/9/repayments", () => {
         const body = res.body;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equal(409);
+        expect(body.status).to.be.equal(404);
         expect(body.error).to.be.an("string");
         expect(body.error).to.be.equal("No loan record found");
         done();
@@ -422,6 +513,7 @@ describe("POST api/v1/loans", () => {
       });
   });
 });
+
 // Test suite to create loan application
 describe("POST api/v1/loans", () => {
   it("Should return an error if required inputs are incorrect", done => {
@@ -429,7 +521,7 @@ describe("POST api/v1/loans", () => {
       .request(app)
       .post("/api/v1/loans")
       .set("token", userToken)
-      .send({ tenor: "ab", amount: "gdg" })
+      .send({ tenor: "ab", amount: 6000 })
       .end((err, res) => {
         if (err) done();
         const { body } = res;
@@ -437,6 +529,32 @@ describe("POST api/v1/loans", () => {
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equal(422);
         expect(body.message).to.be.an("string");
+        expect(body.message).to.be.equal(
+          "tenor is required and must contain only numbers between 1 & 12"
+        );
+        done();
+      });
+  });
+});
+
+// Test suite to create loan application
+describe("POST api/v1/loans", () => {
+  it("Should return an error if required inputs are incorrect", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans")
+      .set("token", userToken)
+      .send({ tenor: 4, amount: "ggd" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(422);
+        expect(body.message).to.be.an("string");
+        expect(body.message).to.be.equal(
+          "Amount is required and must contain only number"
+        );
         done();
       });
   });
@@ -771,7 +889,7 @@ describe("POST api/v1/loans/30/repayment", () => {
       .request(app)
       .post("/api/v1/loans/30/repayment")
       .set("token", userToken)
-      .send({ paidAmount: 500000 })
+      .send({ paidamount: 500000 })
       .end((err, res) => {
         if (err) done();
         const { body } = res;
@@ -818,6 +936,9 @@ describe("POST api/v1/loans/1/repayment", () => {
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equal(422);
         expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals(
+          "paidamount is required and must contain only be a number or decimal"
+        );
         done();
       });
   });
@@ -905,5 +1026,136 @@ describe("PATCH api/v1/users/bimpe@gmail.com/verify", () => {
         expect(body.error).to.be.equals("Unauthorized access,admin only route");
         done();
       });
+  });
+});
+
+// tTESSSSSSSSSSSSSS=========IJHHHHHHHHHHH
+
+// Test suite for hashPassword(password)
+describe("Helper.hashPassword(password)", () => {
+  it("Should return hashed password (string)", () => {
+    const result = bcrypt.hashSync("Sweetmum");
+    expect(result).to.be.a("string");
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("Helper.comparePassword(password, hashedPassword)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = bcrypt.compareSync(
+      "Sweetmum",
+      "$2a$10$bvHa7pGEVX/TRJs6IAAW2e1iO2sUmQ59tab4Cv9Xv4cB/KnJ6G6WS"
+    );
+    expect(result).to.be.equal(true);
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("Helper.comparePassword(password, hashedPassword)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = bcrypt.compareSync(
+      "Sweetmum",
+      "$2a$10$bvHa7pGEVX/TRJs6IAAW2e1iO2sUmQ59tab4Cv9Xv4cB/KnG6WS"
+    );
+    expect(result).to.be.equal(false);
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("validation.validateUser(user)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateUser(user);
+    expect(result).to.be.an("object");
+    expect(result).to.be.haveOwnProperty("value");
+    expect(result.value).to.be.an("object");
+    expect(result.value.firstName).to.be.a("string");
+    expect(result.value.lastName).to.be.a("string");
+    expect(result.value.email).to.be.a("string");
+    expect(result.value.address).to.be.a("string");
+    expect(result.value.isAdmin).to.be.a("string");
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("validation.validateUser(wronguser)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateUser(wronguser);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("validation.validateUser(wrongemail)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateUser(wrongemail);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for comparePassword if password matches hash
+describe("validation.validateUser(wrongemail)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLogin(wronglogin);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for no email input
+describe("validation.validateUser(noemail)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLogin(noemail);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for no email input
+describe("validation.validateUser(nopassword)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLogin(nopassword);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for validate loan
+describe("validation.validateLoan(newloan)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLoan(newloan);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+    expect(result.value).to.be.an("object");
+    expect(result.value.tenor).to.be.an("number");
+  });
+});
+
+// Test suite for validate loan
+describe("validation.validateLoan(noamount)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLoan(noamount);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for validate loan
+describe("validation.validateLoan(noamount)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.validateLoan(notenor);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for validate loan
+describe("validation.validateUser(verify)", () => {
+  it("Should return true if password matches hashed", () => {
+    chai.request(app).post("/api/v1/users/bimpe@gmail.com/verify");
+    const result = validation.validateUser(verify);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
   });
 });

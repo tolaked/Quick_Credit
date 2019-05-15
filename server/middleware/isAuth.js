@@ -91,6 +91,32 @@ class Auth {
     }
     next();
   }
+  static alreadyVerified(req, res, next) {
+    const clientEmail = req.params.email;
+    const user = models.Users.find(oneUser => oneUser.email === clientEmail);
+    if (user.status == "verified") {
+      return res.status(404).json({
+        status: 404,
+        message: "user already verified"
+      });
+    }
+    next();
+  }
+  static foundLoan(req, res, next) {
+    const loanId = req.params.id;
+    const clientLoans = models.Loans;
+    const repaymentTrans = clientLoans.find(loan => loan.id == loanId);
+    if (repaymentTrans) {
+      if (repaymentTrans.repaid === true) {
+        return res.status(409).json({
+          status: 409,
+          error: `Loan with the id ${loanId} has been fully repaid`
+        });
+      }
+    }
+
+    return next();
+  }
 }
 
 // expose auth

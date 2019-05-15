@@ -19,12 +19,6 @@ class Admin {
         message: "user does not exist"
       });
     }
-    if (user.status == "verified") {
-      return res.status(404).json({
-        status: 404,
-        message: "user already verified"
-      });
-    }
 
     user.status = req.body.status;
     user.modifiedOn = moment(new Date());
@@ -126,6 +120,14 @@ class Admin {
 
   static postPayment(req, res) {
     const { body } = req;
+
+    const { error } = validation.postLoan(body);
+    if (error) {
+      return res.status(422).json({
+        status: 422,
+        error: error.details[0].message
+      });
+    }
     const loanId = req.params.id;
     const clientLoans = models.Loans;
     const repaymentTrans = clientLoans.find(loan => loan.id == loanId);
@@ -133,19 +135,6 @@ class Admin {
       return res.status(404).json({
         status: 404,
         error: "No loan found"
-      });
-    }
-    if (repaymentTrans.repaid === true) {
-      return res.status(409).json({
-        status: 409,
-        error: `Loan with the id ${loanId} has been fully repaid`
-      });
-    }
-    const { error } = validation.postLoan(body);
-    if (error) {
-      return res.status(422).json({
-        status: 422,
-        error: error.details[0].message
       });
     }
     const paidAmount = parseFloat(req.body.paidamount);

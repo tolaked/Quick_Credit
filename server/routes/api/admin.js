@@ -11,7 +11,7 @@ const {
   approveRejectLoan,
   postPayment
 } = admin;
-const { verifyToken, adminOnly } = Auth;
+const { verifyToken, adminOnly, alreadyVerified, foundLoan } = Auth;
 const { trimmer } = Helper;
 const router = express.Router();
 
@@ -20,6 +20,7 @@ router.patch(
   "/users/:email/verify",
   verifyToken,
   adminOnly,
+  alreadyVerified,
   trimmer,
   verifyClient
 );
@@ -37,6 +38,12 @@ router.get("/loans", verifyToken, adminOnly, getAllLoans);
 router.patch("/loans/:id", verifyToken, adminOnly, trimmer, approveRejectLoan);
 
 // Admin post loan repayment
-router.post("/loans/:id/repayment", verifyToken, adminOnly, postPayment);
+router.post(
+  "/loans/:id/repayment",
+  verifyToken,
+  adminOnly,
+  foundLoan,
+  postPayment
+);
 
 export default router;

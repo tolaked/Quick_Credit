@@ -13,9 +13,11 @@ class validate {
         .required(),
       firstName: Joi.string()
         .regex(/^[a-zA-Z]+$/)
+        .error(() => "Firstname is required and must contain only alphabets")
         .required(),
       lastName: Joi.string()
         .regex(/^[a-zA-Z]+$/)
+        .error(() => "Lastname is required and must contain only alphabets")
         .trim()
         .required(),
       password: Joi.string()
@@ -57,10 +59,15 @@ class validate {
     const schema = Joi.object().keys({
       tenor: Joi.number()
         .integer()
+        .error(
+          () => "tenor is required and must contain only numbers between 1 & 12"
+        )
         .min(1)
         .max(12)
         .required(),
-      amount: Joi.number().required()
+      amount: Joi.number()
+        .error(() => "Amount is required and must contain only number")
+        .required()
     });
     return Joi.validate(loan, schema);
   }
@@ -89,7 +96,12 @@ class validate {
   }
   static postLoan(loan) {
     const schema = Joi.object().keys({
-      paidamount: Joi.number().required()
+      paidamount: Joi.number()
+        .error(
+          () =>
+            "paidamount is required and must contain only be a number or decimal"
+        )
+        .required()
     });
     return Joi.validate(loan, schema);
   }
