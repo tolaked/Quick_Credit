@@ -50,7 +50,9 @@ const displaMainContent = evt => {
   if (evt.target.classList.contains("post")) {
     showListContent("post");
   }
-
+  if (evt.target.classList.contains("post")) {
+    showListContent("post");
+  }
   if (evt.target.classList.contains("apply")) {
     showListContent("apply");
   }
