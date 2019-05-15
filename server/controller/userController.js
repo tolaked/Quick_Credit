@@ -14,7 +14,7 @@ class userController {
    */
   static createUser(req, res) {
     const { body } = req;
-    const { error } = validation.validateUser(req.body);
+    const { error } = validation.validateUser(body);
     if (error)
       return res
         .status(422)
@@ -37,13 +37,12 @@ class userController {
       const hash = hashSync(body.password, salt);
 
       const usersLength = models.Users.length;
-      const lastUserId = models.Users[usersLength - 1].id;
 
       const post = {
-        id: lastUserId + 1,
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        id: usersLength + 1,
+        email: body.email,
+        firstName: body.firstName,
+        lastName: body.lastName,
         password: bcrypt.hashSync(body.password, salt),
         status: "unverified",
         address: req.body.address,
@@ -54,12 +53,25 @@ class userController {
 
       models.Users.push(post);
       const token = Auth.generateToken(post.email, post.isAdmin, post.id);
+      const newUser = models.Users.find(
+        presentUser => presentUser.id === post.id
+      );
 
+      const userDetails = {
+        id: newUser.id,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        status: newUser.status,
+        Address: newUser.address,
+        isAdmin: newUser.isAdmin,
+        createdOn: newUser.createdOn
+      };
       return res.status(201).json({
         status: 201,
         data: {
           token,
-          post
+          userDetails
         }
       });
     } catch (e) {
@@ -100,7 +112,7 @@ class userController {
 
     const hashedPassword = userExists.password;
 
-    // check if user provided password matches existing password
+    // check if password provided by user match existing password
     if (!bcrypt.compareSync(body.password, hashedPassword)) {
       return res.status(401).json({
         status: 401,
