@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import models from "../model/userData";
+import DB from "../Db/db";
 
 dotenv.config();
 
@@ -76,10 +77,8 @@ class Auth {
     try {
       // verify user provided token against existing token
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
       const queryString = "SELECT * FROM users WHERE id = $1";
       const { rows } = await DB.query(queryString, [decoded.id]);
-
       // check for valid app users
       if (!rows[0]) {
         return res.status(401).json({
@@ -90,8 +89,32 @@ class Auth {
 
       // get user id, email and isAdmin
       req.user = decoded;
-
       // fire next middleware
+      return next();
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        errors: [error]
+      });
+    }
+  }
+  static async adminRoute(req, res, next) {
+    const { token } = req.headers;
+    try {
+      // verify user provided token against existing token
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      const queryString = "SELECT * FROM users WHERE id= $1";
+      const { rows } = await DB.query(queryString, [decoded.id]);
+
+      if (!rows[0].isadmin) {
+        return res.status(403).json({
+          status: 403,
+          error: "!!!Unauthorized, admin only route"
+        });
+      }
+
+      req.user = decoded;
+
       return next();
     } catch (error) {
       return res.status(400).json({
@@ -108,10 +131,8 @@ class Auth {
       // decode and get token
       const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
-      // find user by email
-      const user = models.Users.find(user => user.id === decodedToken.id);
-      const authorizedAdmin = user.isAdmin;
-      // check if user exist
+      const authorizedAdmin = req.user.isadmin;
+      // check if user is an admin
       if (!authorizedAdmin) {
         return res.status(403).json({
           status: 403,

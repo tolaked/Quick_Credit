@@ -31,7 +31,7 @@ let models = {
       firstName: "Dimeji",
       lastName: "Akere",
       password: "Sweetmum",
-      Status: "unverified",
+      status: "unverified",
       Address: "20,okusaga",
       isAdmin: false,
       createdOn: "2019-04-21T17:11:37.631Z",
