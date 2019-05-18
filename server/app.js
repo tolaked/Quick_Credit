@@ -3,6 +3,9 @@ import bodyParser from "body-parser";
 import users from "./routes/api/users";
 import loans from "./routes/api/loans";
 import admin from "./routes/api/admin";
+import usersV2 from "./routes/v2api/usersV2";
+import loansv2 from "./routes/v2api/loansV2";
+import adminV2 from "./routes/v2api/v2admin";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 
@@ -33,6 +36,20 @@ app.get("/", (req, res) =>
 app.use("/api/v1/auth", users);
 app.use("/api/v1", loans);
 app.use("/api/v1", admin);
+app.use("/api/v2/auth", usersV2);
+app.use("/api/v2", loansv2);
+app.use("/api/v2", adminV2);
+
+// // Hnadles
+app.use((err, req, res, next) => {
+  if (err) {
+    return res.status(500).json({
+      status: 500,
+      error: "internal server error"
+    });
+  }
+  return next();
+});
 // Handle non existing route with with proper message
 app.all("*", (req, res) =>
   res.status(404).json({

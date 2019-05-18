@@ -22,9 +22,7 @@ class userController {
 
     try {
       // check if user already exists
-      const emailExists = models.Users.find(
-        user => user.email === req.body.email
-      );
+      const emailExists = models.Users.find(user => user.email === body.email);
 
       if (emailExists) {
         return res.status(409).json({
@@ -45,7 +43,7 @@ class userController {
         lastName: body.lastName,
         password: bcrypt.hashSync(body.password, salt),
         status: "unverified",
-        address: req.body.address,
+        address: body.address,
         isAdmin: "false",
         createdOn: moment(new Date()),
         modifiedOn: moment(new Date())
@@ -100,7 +98,7 @@ class userController {
 
     //  find user by email
 
-    const userExists = models.Users.find(user => user.email === req.body.email);
+    const userExists = models.Users.find(user => user.email === body.email);
 
     // check if user exists in our data structure
     if (!userExists) {

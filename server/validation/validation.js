@@ -35,6 +35,37 @@ class validate {
   }
 
   /**
+   *Database signup validation
+   * @param {user} object
+   */
+  static validateUserDb(user) {
+    const schema = Joi.object().keys({
+      email: Joi.string()
+        .email()
+        .trim()
+        .required(),
+      firstname: Joi.string()
+        .regex(/^[a-zA-Z]+$/)
+        .required(),
+      lastname: Joi.string()
+        .regex(/^[a-zA-Z]+$/)
+        .trim()
+        .required(),
+      password: Joi.string()
+        .regex(/^[a-zA-Z0-9]{3,30}$/)
+        .min(7)
+        .alphanum()
+        .required(),
+      address: Joi.string().required(),
+      status: Joi.string()
+        .insensitive()
+        .default("unverified"),
+      isadmin: Joi.string().default("true")
+    });
+    return Joi.validate(user, schema);
+  }
+
+  /**
    * @param{details} string
    */
   static validateLogin(details) {
@@ -70,6 +101,20 @@ class validate {
         .required()
     });
     return Joi.validate(loan, schema);
+  }
+
+  /**
+   *
+   * @param {user} object
+   */
+  static patchLoan(user) {
+    const schema = Joi.object().keys({
+      status: Joi.string()
+        .insensitive()
+        .valid("approved", "reject")
+        .required()
+    });
+    return Joi.validate(user, schema);
   }
 
   /**

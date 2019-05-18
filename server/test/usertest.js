@@ -12,8 +12,12 @@ const { expect } = chai;
 let userToken;
 let unAuthorizedUserToken;
 let loanUserToken;
+let loggedInUserToken;
+let DbUserToken;
 let signUpuserToken;
 let newUserToken;
+let clientToken;
+let hhh;
 let id;
 
 const user = {
@@ -24,9 +28,25 @@ const user = {
   address: "20,Okusaga"
 };
 
+const userDb = {
+  firstname: faker.name.firstName(),
+  lastname: faker.name.lastName(),
+  email: faker.internet.email(),
+  password: "Sweetmum",
+  address: "20,Okusaga"
+};
+
 const wronguser = {
   firstName: "Adeola",
   lastName: "Laid3e",
+  email: "lamijih@gmail.com",
+  password: "Sweetmum",
+  address: "20,Okusaga"
+};
+
+const wronguserDb = {
+  firstname: "Adeola",
+  lastname: "Laid3e",
   email: "lamijih@gmail.com",
   password: "Sweetmum",
   address: "20,Okusaga"
@@ -79,12 +99,14 @@ describe("GET /", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
+        console.log(body);
+        
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
-        expect(body.data[0]).to.haveOwnProperty("message");
+        expect(body.data).to.be.an("array");
         expect(body.data[0].message).to.be.a("string");
-
+        expect(body.data[0].message).to.be.equal("Welcome to QUICK CREDIT");
         done();
       });
   });
@@ -730,6 +752,27 @@ describe("GET api/v1/loans?status=approved&repaid=false", () => {
 });
 
 // Test suite to get all repaid loans
+describe("GET api/v1/loans?status=approd&repaid=false", () => {
+  it("should throw an error ", done => {
+    chai
+      .request(app)
+      .get("/api/v1/loans?status=approd&repaid=false")
+      .set("token", userToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equal(404);
+        expect(body.message).to.be.an("string");
+        expect(body.message).to.be.equal("Not Found");
+        done();
+      });
+  });
+});
+
+// Test suite to get all repaid loans
 describe("PATCH api/v1/loans/1", () => {
   it("should successfully approve a loan", done => {
     chai
@@ -882,6 +925,31 @@ describe("POST api/v1/loans/3/repayment", () => {
   });
 });
 
+
+// test for POST /post repayment
+describe(`GET api/v1/loans`, () => {
+  it("should return an error for malformed token", done => {
+    chai
+      .request(app)
+      .get(`/api/v1/loans`)
+      .set("token", "HHG")
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(400);
+        expect(body.error).to.be.an("object");
+        expect(body.error).to.be.haveOwnProperty("message");
+        expect(body.error.message).to.be.equal("jwt malformed");
+        done();
+      });
+  });
+});
+
+
+
 // Test suite to POST loan repayment in favour of a client
 describe("POST api/v1/loans/30/repayment", () => {
   it("should throw an error if no loan found", done => {
@@ -1010,7 +1078,7 @@ describe("POST api/v1/loans/4/repayment", () => {
 
 // Test Suite POST/ Admin verify user
 describe("PATCH api/v1/users/bimpe@gmail.com/verify", () => {
-  it("should throw an error if an unauthorized user tries to access post loan route", done => {
+  it("should throw an error if an unauthorized user tries to verify a user", done => {
     chai
       .request(app)
       .patch("/api/v1/users/bimpe@gmail.com/verify")
@@ -1028,6 +1096,28 @@ describe("PATCH api/v1/users/bimpe@gmail.com/verify", () => {
       });
   });
 });
+
+
+// test for GET /no token 
+describe("POST api/v1/loans/4877/repayment", () => {
+  it("should return an error if no token provided", done => {
+    chai
+      .request(app)
+      .post("/api/v1/loans/4877/repayment")
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("Unauthorize, please login");
+        done();
+      });
+  });
+});
+
 
 // tTESSSSSSSSSSSSSS=========IJHHHHHHHHHHH
 
@@ -1157,5 +1247,983 @@ describe("validation.validateUser(verify)", () => {
     const result = validation.validateUser(verify);
     expect(result).to.be.an("object");
     expect(result).to.haveOwnProperty("error");
+  });
+});
+
+//================= DATABASE TEST===============
+
+//  Test suite for POST /signup route
+describe("POST api/v2/auth/signup", () => {
+  it("Should successfully create a user account if inputs are valid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signup")
+      .send(userDb)
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        DbUserToken = body.data.token;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(201);
+        expect(body.data).to.be.an("object");
+        expect(body.data).to.haveOwnProperty("newUser");
+        expect(body.data.newUser).to.be.an("object")
+        expect(body.data.token).to.be.a("string");
+        expect(body.data.newUser.lastName).to.be.a("string")
+
+        done();
+      });
+  });
+});
+
+// test suite for POST /signup db user already exists
+describe("POST api/v2/auth/signup", () => {
+  it("should return an error if email already exists", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signup")
+      .send({
+        firstname: "alagba",
+        lastname: "Adeola",
+        email: "jame@gmail.com",
+        password: "dele1989",
+        address: "20,okusaga"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(409);
+        expect(body.error).to.be.a("string");
+        done();
+      });
+  });
+});
+
+describe("POST api/v2/auth/signup", () => {
+  it("Should return an error if inputs are invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signup")
+      .send(wronguserDb)
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.an("string");
+        done();
+      });
+  });
+});
+
+// test for POST /login suite
+describe("POST api/v2/auth/signin", () => {
+  it("should login successfully if user inputs are valid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        email: "Akeem19@hotmail.com",
+        password: "Sweetmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        loggedInUserToken = body.data.token;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.token).to.be.a("string");
+
+        done();
+      });
+  });
+});
+
+// test for POST /login suite
+describe("POST api/v2/auth/signin", () => {
+  it("should return an error if inputs are invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        emal: "Amari_Cronin20@yahoo.com",
+        password: "Sweetmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.a("string");
+
+        done();
+      });
+  });
+});
+// /test for POST /login suite
+describe("POST api/v2/auth/signin", () => {
+  it("should return an error if user does not exist", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        email: "Amari_Croniden@gmailcom",
+        password: "SweetTmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("User does not exist");
+
+        done();
+      });
+  });
+});
+
+// test for POST /login suite
+describe("POST api/v2/auth/signin", () => {
+  it("should return an error for invalid password", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        email: "Akeem19@hotmail.com",
+        password: "SweedtTmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(401);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("Invalid Email/Password");
+
+        done();
+      });
+  });
+});
+
+// test for POST /to verify user
+describe(`PATCH api/v2/users/${userDb.email}/verify`, () => {
+  it("should successfully verify a user", done => {
+    chai
+      .request(app)
+      .patch(`/api/v2/users/${userDb.email}/verify`)
+      .set("token", loggedInUserToken)
+      .send({
+        status: "verified"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.a("object");
+
+        done();
+      });
+  });
+});
+
+// test for POST /verify user
+describe(`PATCH api/v2/users/${user.email}/verify`, () => {
+  it("should return an error if user is not an admin", done => {
+    chai
+      .request(app)
+      .patch(`/api/v2/users/${user.email}/verify`)
+      .set("token", userToken)
+      .send({
+        status: "verified"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("!!!Unauthorized, admin only route");
+        done();
+      });
+  });
+});
+
+// test for PATCH /to verify user
+describe("PATCH api/v2/users/Kacie.Legros52@yahoo.com/verify", () => {
+  it("should return an error if user is already verified", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/users/Kacie.Legros52@yahoo.com/verify")
+      .set("token", loggedInUserToken)
+      .send({
+        status: "verified"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(409);
+        expect(body.error).to.be.a("string");
+
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("POST api/v2/loans", () => {
+  it("should successfully create a loan application", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", DbUserToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        id = res.body.data.Loan.id;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(201);
+        expect(body.data).to.be.a("object");
+        expect(body.data.Loan).to.be.a("object");
+        expect(body.data.Loan.id).to.be.a("number");
+        expect(body.data.Loan.clientemail).to.be.a("string");
+        expect(body.data.Loan.paymentinstallment).to.be.a("number");
+        expect(body.data.Loan.balance).to.be.a("number");
+        expect(body.data.Loan.interest).to.be.a("number");
+        expect(body.data.Loan.tenor).to.be.a("number");
+        expect(body.data.Loan.amount).to.be.a("number");
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("POST api/v2/loans", () => {
+  it("should return an error if no required input", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", DbUserToken)
+      .send({
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("POST api/v2/loans", () => {
+  it("should return an error if input is invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", DbUserToken)
+      .send({
+        amount: "rgtft",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("GET api/v2/loans/1", () => {
+  it("should view a specific loan by id", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/1")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.a("object");
+        expect(body.data.id).to.be.a("number");
+        expect(body.data.clientemail).to.be.a("string");
+        expect(body.data.tenor).to.be.a("number");
+        expect(body.data.amount).to.be.a("number");
+        expect(body.data.paymentinstallment).to.be.a("number");
+        expect(body.data.balance).to.be.a("number");
+        expect(body.data.interest).to.be.a("number");
+        done();
+      });
+  });
+});
+
+// test for POST /unauthorized user, create loan application
+describe("POST api/v2/loans", () => {
+  it("should return an error for unauthorized user", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", userToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(400);
+        expect(body.error).to.be.a("object");
+        done();
+      });
+  });
+});
+
+// test for POST /unauthorized access
+describe("POST api/v2/loans", () => {
+  it("should return an error if no token provided", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals("Unauthorized!, you have to login");
+        done();
+      });
+  });
+});
+
+// test for POST /to view loan
+describe("GET api/v2/loans/1", () => {
+  it("should throw an error if loan does not exist", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/899")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equal("Loan does not exist");
+        done();
+      });
+  });
+});
+
+// test for POST /to approve loan application
+describe(`PATCH api/v2/loans/${id}`, () => {
+  it("should successfully approve a loan application", done => {
+    chai
+      .request(app)
+      .patch(`/api/v2/loans/${id}`)
+      .set("token", loggedInUserToken)
+      .send({
+        status: "approved"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.clientemail).to.be.a("string");
+        expect(body.data.id).to.be.a("number");
+        expect(body.data.paymentinstallment).to.be.a("number");
+        expect(body.data.tenor).to.be.a("number");
+        expect(body.data.amount).to.be.a("number");
+        expect(body.data.interest).to.be.a("number");
+        expect(body.data.status).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for POST /to approve loan application
+describe("PATCH api/v2/loans/34", () => {
+  it("should return an error if loan has already been approved", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/34")
+      .set("token", loggedInUserToken)
+      .send({
+        status: "approved"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(409);
+        expect(body.error).to.be.an("string");
+        done();
+      });
+  });
+});
+
+// test for POST /to view loan application
+describe("PATCH api/v2/loans/344", () => {
+  it("should return an error if loan is not found", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/344")
+      .set("token", loggedInUserToken)
+      .send({
+        status: "approved"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("loan not found");
+        done();
+      });
+  });
+});
+
+// test for POST /unauthorized user, approve loan application
+describe("PATCH api/v2/loans/34", () => {
+  it("should return an error for unauthorized user to approve loan application", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/34")
+      .set("token", userToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for POST /unauthorized access to approve loan applicaion
+describe("PATCH api/v2/loans/34", () => {
+  it("should return an error if  user tries to approve loan application with no token provided", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/34")
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals("Unauthorized!, you have to login");
+        done();
+      });
+  });
+});
+
+// test for POST /no required input field
+describe("PATCH api/v2/loans/34", () => {
+  it("should return an error if required input is not provided", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/34")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.an("string");
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("POST api/v2/loans", () => {
+  it("should return an error if a user with a pending loan tries to make another loan application", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", DbUserToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equals(
+          "sorry, you cannot apply for a loan at the moment, you have an outstanding loan"
+        );
+        done();
+      });
+  });
+});
+
+// test for POST /login suite /For more than a loan at a time
+describe("POST api/v2/auth/signin", () => {
+  it("should login successfully if user inputs are valid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        email: "Lora_Weber@yahoo.com",
+        password: "Sweetmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        clientToken = body.data.token;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.token).to.be.a("string");
+
+        done();
+      });
+  });
+});
+
+// // test for POST /to create loan application for a yet to be verified user
+describe("POST api/v2/loans", () => {
+  it("should return an error if a user with a pending verification status tries to apply for a loan", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", clientToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equals(
+          "unverified user, you cannot apply for a loan at the moment"
+        );
+        done();
+      });
+  });
+});
+
+// test for GET /Admin get all loans
+describe("POST api/v2/loans", () => {
+  it("should successfully return all loan applications", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].interest).to.be.a("number");
+        expect(body.data[0].tenor).to.be.a("number");
+        expect(body.data[0].amount).to.be.a("number");
+        expect(body.data[0].id).to.be.a("number");
+        expect(body.data[0].status).to.be.a("string");
+        expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for GET /Admin get a loan repayment record
+describe("POST api/v2/loans/66/repayments", () => {
+  it("should get loan repayments", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/66/repayments")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
+        expect(body.data.loanid).to.be.a("number");
+        expect(body.data.amount).to.be.a("number");
+        expect(body.data.monthlyinstallment).to.be.a("number");
+        done();
+      });
+  });
+});
+
+// // test for GET /Admin get a loan repayment record
+describe("POST api/v2/loans/36777/repayments", () => {
+  it("should return an error if no loan record found", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/36777/repayments")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equals("loan not found");
+        done();
+      });
+  });
+});
+
+ // test for GET /Admin post loan repayment infavour of a client
+describe(`POST api/v2/loans/${id}/repayment`, () => {
+  it("should post loan repayment in favour of a client", done => {
+    chai
+      .request(app)
+      .post(`/api/v2/loans/${id}/repayment`)
+      .set("token", loggedInUserToken)
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(201);
+        expect(body.data).to.be.an("object");
+        expect(body.data.id).to.be.a("number");
+        expect(body.data.client).to.be.a("string");
+        expect(body.data.amount).to.be.a("number");
+        expect(body.data.loanid).to.be.a("number");
+        expect(body.data.monthlyinstallment).to.be.a("number");
+        expect(body.data.balance).to.be.a("number");
+        expect(body.data.paidamount).to.be.a("number");
+        done();
+      });
+  });
+});
+
+// test for GET /Admin post loan repayment infavour of a client
+describe("POST api/v2/loans/4877/repayment", () => {
+  it("should return an error if no loan found", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans/4877/repayment")
+      .set("token", loggedInUserToken)
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equal("loan not found");
+        done();
+      });
+  });
+});
+
+// // test for GET /Admin post loan repayment infavour of a client
+describe(`POST api/v2/loans/${id}/repayment`, () => {
+  it("should return an error if paidamount exceeds loan amount", done => {
+    chai
+      .request(app)
+      .post(`/api/v2/loans/${id}/repayment`)
+      .set("token", loggedInUserToken)
+      .send({ paidamount: "100000000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(409);
+        expect(body.message).to.be.a("string");
+        expect(body.message).to.be.equal(
+          "Paid amount can not be greater than balance"
+        );
+        done();
+      });
+  });
+});
+
+// test for GET /Admin post loan repayment infavour of a client
+describe(`POST api/v2/loans/${id}/repayment`, () => {
+  it("should return an error if no input field", done => {
+    chai
+      .request(app)
+      .post(`/api/v2/loans/${id}/repayment`)
+      .set("token", loggedInUserToken)
+      .send({})
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.a("string");
+        done();
+      });
+  });
+});
+
+// test for POST /post repayment
+describe(`POST api/v2/loans/${id}/repayment`, () => {
+  it("should return an error if user is not an admin", done => {
+    chai
+      .request(app)
+      .post(`/api/v2/loans/${id}/repayment`)
+      .set("token", userToken)
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("!!!Unauthorized, admin only route");
+        done();
+      });
+  });
+});
+
+
+// test for POST /get all loans 
+describe(`GET api/v2/loans`, () => {
+  it("should return an error if user is not an admin", done => {
+    chai
+      .request(app)
+      .get(`/api/v2/loans`)
+      .set("token", userToken)
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("!!!Unauthorized, admin only route");
+        done();
+      });
+  });
+});
+
+// test for POST loan repayment /unauthorized access
+describe(`POST api/v2/loans/${id}/repayment`, () => {
+  it("should return an error if no token provided", done => {
+    chai
+      .request(app)
+      .post(`/api/v2/loans/${id}/repayment`)
+      .send({ paidamount: "500000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equals("Unauthorized!, you have to login");
+        done();
+      });
+  });
+});
+
+
+// test for GET /Admin post loan repayment infavour of a client
+describe("POST api/v2/loans/4877/repayment", () => {
+  it("should return an error if no loan found", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans/4877/repayment")
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("Unauthorized!, you have to login");
+        done();
+      });
+  });
+});
+
+
+// test for POST /post repayment
+describe(`GET api/v2/loans`, () => {
+  it("should return an error if user is not an admin", done => {
+    chai
+      .request(app)
+      .get(`/api/v2/loans`)
+      .set("token", "HHG")
+      .send({ paidamount: "100000" })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(400);
+        expect(body.errors).to.be.an("array");
+        expect(body.errors[0]).to.be.an("object");
+        expect(body.errors[0]).to.be.haveOwnProperty("message");
+        expect(body.errors[0].message).to.be.equal("jwt malformed");
+        done();
+      });
+  });
+});
+
+// test for GET /Admin verify loan
+describe(`PATCH api/v2/loans/${id}`, () => {
+  it("should thrown an error if loan already verified", done => {
+    chai
+      .request(app)
+      .patch(`/api/v2/loans/${id}`)
+      .set("token", loggedInUserToken)
+      .send({ status: "approved" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(409);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal(`loan with the id ${id} already verified`);
+        done();
+      });
+  });
+});
+
+
+// test for GET /Admin verify user
+describe(`PATCH api/v2/users/dejiakere@gmail.com/verify`, () => {
+  it("should thrown an error if no user found", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/users/dejiakere@gmail.com/verify")
+      .set("token", loggedInUserToken)
+      .send({status:"verified"})
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(404);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("user not found");
+        done();
+      });
+  });
+});
+
+
+// test for GET /Admin verify user
+describe(`GET /api/v2/loans/%`, () => {
+  it("should thrown an error if no user found", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/4%")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(500);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("internal server error");
+        done();
+      });
+  });
+});
+
+
+// test for GET /Admin verify user
+describe(`GET /api/v1/loans/%`, () => {
+  it("should thrown an error if no user found", done => {
+    chai
+      .request(app)
+      .get("/api/v1/loans/%")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(500);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("internal server error");
+        done();
+      });
   });
 });
