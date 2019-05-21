@@ -1,9 +1,21 @@
+const drpcontent = document.querySelector(".dropdown-content");
+
+document.addEventListener("click", e => {
+  if (
+    e.target.classList[1] === "fa-user" ||
+    e.target.parentNode.className === "dropdown"
+  ) {
+    drpcontent.style.display = "block";
+  } else {
+    drpcontent.style.display = "none";
+  }
+});
 const showMessageContent = evt => {
   if (
     evt.target.classList.contains("messages") ||
     evt.target.classList.contains("loan-details")
   ) {
-    const messageContainer = document.querySelectorAll(".loan-container");
+    const messageContainer = document.querySelectorAll(".profile-card");
     messageContainer.forEach(currentElement => {
       currentElement.style.display = "none";
     });
@@ -63,9 +75,8 @@ const displaMainContent = evt => {
     ).style.display = "block");
     const closeForm = (document.querySelector(".compose-box").style.display =
       "none");
-    const closedForm = (document.querySelector(
-      ".loan-container"
-    ).style.display = "block");
+    const closedForm = (document.querySelector(".profile-card").style.display =
+      "block");
     const closeMessage = (document.querySelector(
       ".main-loan-body"
     ).style.display = "none");
@@ -73,9 +84,8 @@ const displaMainContent = evt => {
   if (evt.target.classList.contains("repayment")) {
     const createForm = (document.querySelector(".compose-box").style.display =
       "block");
-    const createdForm = (document.querySelector(
-      ".loan-container"
-    ).style.display = "none");
+    const createdForm = (document.querySelector(".profile-card").style.display =
+      "none");
     document.querySelector(".main-loan-body").style.display = "none";
     document.querySelector(".unpaid").style.display = "none";
     document.querySelector(".repaid").style.display = "none";
@@ -85,9 +95,8 @@ const displaMainContent = evt => {
   if (evt.target.classList.contains("repay")) {
     const createForm = (document.querySelector(".compose-box").style.display =
       "none");
-    const createdForm = (document.querySelector(
-      ".loan-container"
-    ).style.display = "none");
+    const createdForm = (document.querySelector(".profile-card").style.display =
+      "none");
     document.querySelector(".main-loan-body").style.display = "none";
     document.querySelector(".unpaid").style.display = "block";
     document.querySelector(".repaid").style.display = "none";
@@ -97,9 +106,8 @@ const displaMainContent = evt => {
   if (evt.target.classList.contains("paid")) {
     const createForm = (document.querySelector(".compose-box").style.display =
       "none");
-    const createdForm = (document.querySelector(
-      ".loan-container"
-    ).style.display = "none");
+    const createdForm = (document.querySelector(".profile-card").style.display =
+      "none");
     document.querySelector(".main-loan-body").style.display = "none";
     document.querySelector(".unpaid").style.display = "none";
     document.querySelector(".repaid").style.display = "block";
@@ -141,7 +149,7 @@ for (let i = 0; i < closeIt.length; i++) {
   closeIt[i].addEventListener("click", () => {
     const closeForm = (document.querySelector(".compose-box").style.display =
       "none");
-    const showM = (document.querySelector(".loan-container").style.display =
+    const showM = (document.querySelector(".profile-card").style.display =
       "block");
     const closeRepaid = (document.querySelector(".repaid").style.display =
       "none");
@@ -156,7 +164,7 @@ const post = document.querySelector(".post");
 post.addEventListener("click", () => {
   const closeFormm = (document.querySelector(".compose-box").style.display =
     "none");
-  const showMm = (document.querySelector(".loan-container").style.display =
+  const showMm = (document.querySelector(".profile-card").style.display =
     "none");
   const closeRepaidm = (document.querySelector(".repaid").style.display =
     "none");
