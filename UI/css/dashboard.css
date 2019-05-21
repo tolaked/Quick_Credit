@@ -1,6 +1,6 @@
 /*====================================================
   Basic css reset
-  ====================================================*/
+  /* ====================================================*/
 
 html,
 body {
@@ -8,8 +8,7 @@ body {
   margin: 0;
 }
 
-/* Style for body */
-body {
+style for body body {
   font-family: Verdana, "Geneva", Tahoma, sans-serif;
   font-size: 100%;
   color: #6c757d;
@@ -50,8 +49,8 @@ hr {
 }
 
 /*====================================================
-    users Dashboard styles 
-    ====================================================*/
+      users Dashboard styles 
+      ====================================================*/
 /* style for drop down menu */
 .dropicon {
   color: #35577a;
@@ -76,6 +75,7 @@ hr {
   font-size: 16px;
   cursor: pointer;
 }
+*/
 
 /* Style for dropdown contents */
 .dropdown-content {
@@ -176,13 +176,14 @@ img {
 }
 
 .profile-card {
-  width: 450px;
-  border-radius: 6px;
-  overflow: hidden;
+  width: 400px;
+  border-radius: 2px;
+  /* overflow: hidden; */
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   position: relative;
   margin: auto;
+  margin-top: 250px;
   background: rgba(255, 255, 255, 1);
   top: 50%;
   transform: translateY(-50%);
@@ -235,9 +236,9 @@ img {
 
 .profile-card header h1 {
   font-weight: 150;
-  font-size: 20px;
+  font-size: 26px;
   color: #444;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   text-align: left;
   margin: 0;
   padding-left: 8px;
@@ -357,7 +358,7 @@ a:hover {
 
 /* user dashboard container */
 .content-item {
-  min-width: calc(95vw - 220px);
+  /* min-width: calc(95vw - 220px); */
 }
 
 /* Styles the side bar */
@@ -452,7 +453,7 @@ a:hover {
 
 .compose-box {
   display: none;
-  width: 100%;
+  /* width: 100%; */
 }
 
 /* styles and overwrites default styles of hr */
@@ -541,8 +542,7 @@ hr {
   width: 10%;
   font-weight: bolder;
   font-size: 20px;
-  margin-left: 90%;
-  justify-content: right;
+  /* margin-right: 90%; */
 }
 
 /* style for modal box */
@@ -571,7 +571,7 @@ hr {
 /* style for admin profile on dashboard */
 .account-details {
   width: 40vw;
-  margin: 0.4em auto;
+  margin: 1em 13em;
   color: #212d57;
   font-weight: normal;
   padding: 0.7em;
@@ -597,6 +597,7 @@ hr {
   font-weight: bolder;
   padding: 0.7em;
   border-radius: 0.5em;
+  text-align: left;
 }
 
 /* style for loan repayment input field */
@@ -864,9 +865,7 @@ h1 {
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-.dropicon {
-  margin-right: 15px;
-}
+
 /* style for admin profile on dashboard */
 #profile {
   flex-direction: column;
@@ -876,6 +875,10 @@ h1 {
 
 .details {
   width: 100%;
+}
+
+.dropicon {
+  margin-right: 15px;
 }
 
 .details p {
@@ -976,6 +979,8 @@ h1 {
   .account-details {
     width: 80vw;
     font-weight: 500;
+    margin-left: 30px;
+    padding-right: 0px;
   }
   .account-details {
     width: 90%;
@@ -1074,7 +1079,7 @@ h1 {
   }
 
   .profile-card {
-    width: 300px;
+    width: 400px;
     border-radius: 2px;
     overflow: hidden;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
