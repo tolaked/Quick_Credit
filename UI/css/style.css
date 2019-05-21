@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
-html {
+html,
+body {
   height: 100%;
 }
 /* Style for body */
@@ -15,9 +16,13 @@ body {
   font-family: "Raleway", sans-serif;
   background: #f3f3f3;
   background-image: url("../img/laptop.jpg");
+  background-size: cover;
 }
 #bg-wrapper {
-  min-height: 70vh;
+  min-height: 100%;
+  height: auto;
+  height: 100%;
+  margin: 0 auto -4em;
 }
 #home {
   background: #fff;
@@ -439,7 +444,6 @@ form .label .fa {
   color: inherit;
   outline: none;
   text-decoration: none;
-
   background-size: 100% 0.6em;
   background-repeat: no-repeat;
   background-position: left 0 bottom -40%;
@@ -489,16 +493,22 @@ button[type="submit"]:focus {
 
 /* Styles the footer */
 #footer {
-  margin-top: 50px;
-  padding: 4em 2em;
+  margin-top: 10px;
+  padding: 25px;
   width: 100%;
   font-size: 13px;
-  line-height: 2em;
+  line-height: 0.2em;
   background-color: var(--sec-color);
   color: #ddd;
   text-align: center;
   clear: both;
   position: absolute;
+  display: inline-block;
+  margin: 0;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  max-height: 2px;
 }
 #footer h4 {
   margin: 0px;

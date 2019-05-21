@@ -2,7 +2,7 @@ import validation from "../../validation/validation";
 
 import DB from "../../Db/db";
 
-class AdminController {
+export default class AdminController {
   static async verifyUser(req, res) {
     const { status } = req.body;
     const { email } = req.params;
@@ -264,5 +264,3 @@ class AdminController {
     }
   }
 }
-
-export default AdminController;
