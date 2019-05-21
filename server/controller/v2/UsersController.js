@@ -5,7 +5,7 @@ import validation from "../../validation/validation";
 
 const { genSaltSync, hashSync, compareSync } = bcrypt;
 
-class UsersController {
+export default class UsersController {
   /**
    * Create a new user
    *
@@ -137,5 +137,3 @@ class UsersController {
     }
   }
 }
-
-export default UsersController;

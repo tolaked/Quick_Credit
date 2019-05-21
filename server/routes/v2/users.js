@@ -1,5 +1,5 @@
 import express from "express";
-import userController from "../../controller/v2/usersControllerV2";
+import userController from "../../controller/v2/UsersController";
 import Helper from "../../helper/users";
 
 const { createUserDb, loginDb } = userController;

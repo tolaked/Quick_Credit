@@ -1,15 +1,15 @@
 import express from "express";
-import admin from "../../controller/adminController";
+import admin from "../../controller/v1/AdminController";
 import Auth from "../../middleware/isAuth";
 import Helper from "../../helper/users";
 
 const {
-  loanRepayment,
   getAllLoans,
-  specificLoan,
+  viewSpecificLoan,
   verifyClient,
-  approveRejectLoan,
-  postPayment
+  approveOrRejectLoan,
+  postLoanPayment,
+  viewLoanRepayment
 } = admin;
 const { verifyToken, adminOnly, alreadyVerified, foundLoan } = Auth;
 const { trimmer } = Helper;
@@ -26,16 +26,22 @@ router.patch(
 );
 
 // Admin view specific loan by id
-router.get("/loans/:id", verifyToken, adminOnly, specificLoan);
+router.get("/loans/:id", verifyToken, adminOnly, viewSpecificLoan);
 
 // Admin get loan repayment status
-router.get("/loans", verifyToken, adminOnly, loanRepayment);
+router.get("/loans", verifyToken, adminOnly, viewLoanRepayment);
 
 // Admin get all loans route
 router.get("/loans", verifyToken, adminOnly, getAllLoans);
 
 // Admin approve or reject loan route
-router.patch("/loans/:id", verifyToken, adminOnly, trimmer, approveRejectLoan);
+router.patch(
+  "/loans/:id",
+  verifyToken,
+  adminOnly,
+  trimmer,
+  approveOrRejectLoan
+);
 
 // Admin post loan repayment
 router.post(
@@ -43,7 +49,7 @@ router.post(
   verifyToken,
   adminOnly,
   foundLoan,
-  postPayment
+  postLoanPayment
 );
 
 export default router;

@@ -41,19 +41,25 @@ class validate {
   static validateUserDb(user) {
     const schema = Joi.object().keys({
       email: Joi.string()
+        .error(() => "email is required and must be a valid email")
         .email()
         .trim()
         .required(),
       firstname: Joi.string()
         .regex(/^[a-zA-Z]+$/)
+        .error(() => "Firstname is required and must contain only alphabets")
         .required(),
       lastname: Joi.string()
         .regex(/^[a-zA-Z]+$/)
+        .error(() => "Lastname is required and must contain only alphabets")
         .trim()
         .required(),
       password: Joi.string()
         .regex(/^[a-zA-Z0-9]{3,30}$/)
-        .min(7)
+        .error(
+          () => "password is required and must be at least 6 characters long"
+        )
+        .min(6)
         .alphanum()
         .required(),
       address: Joi.string().required(),
@@ -72,10 +78,12 @@ class validate {
     const schema = Joi.object().keys({
       email: Joi.string()
         .email()
+        .error(() => "email is required ")
         .trim()
         .required(),
       password: Joi.string()
         .regex(/^[a-zA-Z0-9]{3,30}$/)
+        .error(() => "password is required")
         .trim()
         .required()
     });
@@ -107,11 +115,12 @@ class validate {
    *
    * @param {user} object
    */
-  static patchLoan(user) {
+  static approveOrReject(user) {
     const schema = Joi.object().keys({
       status: Joi.string()
         .insensitive()
-        .valid("approved", "reject")
+        .valid("approved", "rejected")
+        .error(() => "status is required and can only be approved or rejected")
         .required()
     });
     return Joi.validate(user, schema);

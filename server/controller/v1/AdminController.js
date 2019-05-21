@@ -1,8 +1,8 @@
-import models from "../model/userData";
+import models from "../../model/userData";
 import moment from "moment";
-import validation from "../validation/validation";
+import validation from "../../validation/validation";
 
-class Admin {
+export default class Admin {
   static verifyClient(req, res) {
     const { error } = validation.verifyUser(req.body);
     if (error) {
@@ -28,7 +28,7 @@ class Admin {
     });
   }
 
-  static specificLoan(req, res) {
+  static viewSpecificLoan(req, res) {
     const currentLoan = req.params.id;
     const getLoan = models.Loans.find(oneLoan => oneLoan.id == currentLoan);
     if (!getLoan) {
@@ -59,7 +59,7 @@ class Admin {
     });
   }
 
-  static loanRepayment(req, res, next) {
+  static viewLoanRepayment(req, res, next) {
     const { status, repaid } = req.query;
 
     const loans = models.Loans;
@@ -82,7 +82,7 @@ class Admin {
     }
     next();
   }
-  static approveRejectLoan(req, res) {
+  static approveOrRejectLoan(req, res) {
     const { body } = req;
     const loanId = req.params.id;
     const clientLoans = models.Loans;
@@ -118,7 +118,7 @@ class Admin {
     }
   }
 
-  static postPayment(req, res) {
+  static postLoanPayment(req, res) {
     const { body } = req;
 
     const { error } = validation.postLoan(body);
@@ -170,4 +170,3 @@ class Admin {
     });
   }
 }
-export default Admin;

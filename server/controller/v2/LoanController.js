@@ -1,14 +1,13 @@
-import moment from "moment";
-import validation from "../../validation/validation";
 import DB from "../../Db/db";
+import validation from "../../validation/validation";
 
-class LoansDb {
+export default class LoansDb {
   /** *
    * @param{req} object
    * @param{res} object
    */
 
-  static async createLoan(req, res) {
+  static async applyForLoan(req, res) {
     const { email } = req.user;
     const { error } = validation.validateLoan(req.body);
     if (error)
@@ -86,7 +85,12 @@ class LoansDb {
       });
     }
   }
-  static async repayments(req, res) {
+
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async viewRepayments(req, res) {
     const { id } = req.params;
     const getUser = req.user.email;
     const admin = req.user.isadmin;
@@ -103,7 +107,7 @@ class LoansDb {
       }
 
       if (rows[0].client !== getUser && admin === false) {
-        return res.status(404).json({
+        return res.status(403).json({
           status: 403,
           message: `Sorry, you can't view this loan`
         });
@@ -111,7 +115,7 @@ class LoansDb {
 
       return res.status(200).json({
         status: 200,
-        data: rows[0]
+        data: rows
       });
     } catch (error) {
       return res.status(500).json({
@@ -121,4 +125,3 @@ class LoansDb {
     }
   }
 }
-export default LoansDb;

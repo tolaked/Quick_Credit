@@ -1,5 +1,5 @@
 import express from "express";
-import userController from "../../controller/userController";
+import userController from "../../controller/v1/UserController";
 import Helper from "../../helper/users";
 
 const { createUser, loginUser } = userController;

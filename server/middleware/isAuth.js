@@ -2,10 +2,9 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import models from "../model/userData";
 import DB from "../Db/db";
-
 dotenv.config();
 
-class Auth {
+export default class Auth {
   /**
    *Generate token
    *
@@ -63,12 +62,20 @@ class Auth {
     }
     next();
   }
+
+  /**
+   * Verify token
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   */
   static async verifyTokendb(req, res, next) {
     const { token } = req.headers;
 
     // check if token was provided
     if (!token) {
-      return res.status(403).json({
+      return res.status(401).json({
         status: 403,
         error: "Unauthorized!, you have to login"
       });
@@ -98,6 +105,14 @@ class Auth {
       });
     }
   }
+
+  /**
+   * Verifies admin authorization
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   */
   static async adminRoute(req, res, next) {
     const { token } = req.headers;
     try {
@@ -123,6 +138,14 @@ class Auth {
       });
     }
   }
+
+  /**
+   * Verifies admin authorization
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   */
   static adminOnly(req, res, next) {
     const { token } = req.headers;
 
@@ -150,17 +173,33 @@ class Auth {
     }
     next();
   }
+
+  /**
+   * Finds already verified user
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   */
   static alreadyVerified(req, res, next) {
     const clientEmail = req.params.email;
     const user = models.Users.find(oneUser => oneUser.email === clientEmail);
     if (user.status == "verified") {
-      return res.status(404).json({
-        status: 404,
+      return res.status(409).json({
+        status: 409,
         message: "user already verified"
       });
     }
     next();
   }
+
+  /**
+   * Finds repaid Loans
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   */
   static foundLoan(req, res, next) {
     const loanId = req.params.id;
     const clientLoans = models.Loans;
@@ -177,6 +216,3 @@ class Auth {
     return next();
   }
 }
-
-// expose auth
-export default Auth;

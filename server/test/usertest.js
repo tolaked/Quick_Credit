@@ -85,6 +85,9 @@ const notenor = {
   amount: 55999,
   tenor: "gd"
 };
+const reject = {
+  status: "hh"
+};
 
 const verify = {
   status: "verified"
@@ -586,7 +589,7 @@ describe("POST api/v1/loans", () => {
 
 // Test for an admin to verify a user
 describe("POST api/v1/users/bayomi@gmail.com/verify", () => {
-  it("Should mark a user as verified", done => {
+  it("Should return an error if user is already verified", done => {
     chai
       .request(app)
       .patch("/api/v1/users/bayomi@gmail.com/verify")
@@ -597,7 +600,7 @@ describe("POST api/v1/users/bayomi@gmail.com/verify", () => {
         const { body } = res;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equal(404);
+        expect(body.status).to.be.equal(409);
         expect(body.message).to.be.a("string");
         expect(body.message).to.be.equal("user already verified");
 
@@ -618,7 +621,7 @@ describe("POST api/v1/users/bayomi@gmail.com/verify", () => {
         const { body } = res;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equal(404);
+        expect(body.status).to.be.equal(409);
         expect(body.message).to.be.an("string");
         expect(body.message).to.be.equal("user already verified");
         done();
@@ -1245,6 +1248,15 @@ describe("validation.validateUser(verify)", () => {
   it("Should return true if password matches hashed", () => {
     chai.request(app).post("/api/v1/users/bimpe@gmail.com/verify");
     const result = validation.validateUser(verify);
+    expect(result).to.be.an("object");
+    expect(result).to.haveOwnProperty("error");
+  });
+});
+
+// Test suite for validate loan
+describe("validation.approveOrReject(verify)", () => {
+  it("Should return true if password matches hashed", () => {
+    const result = validation.approveOrReject(reject);
     expect(result).to.be.an("object");
     expect(result).to.haveOwnProperty("error");
   });
@@ -1912,10 +1924,12 @@ describe("POST api/v2/loans/66/repayments", () => {
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
-        expect(body.data).to.be.an("object");
-        expect(body.data.loanid).to.be.a("number");
-        expect(body.data.amount).to.be.a("number");
-        expect(body.data.monthlyinstallment).to.be.a("number");
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].id).to.be.a("number");
+        expect(body.data[0].monthlyinstallment).to.be.a("number");
+        expect(body.data[0].paidamount).to.be.a("number");
+        expect(body.data[0].balance).to.be.a("number");
         done();
       });
   });
