@@ -124,6 +124,7 @@ hr {
   display: none;
 }
 
+/* Styles the main-body */
 .main-body {
   display: flex;
   min-height: calc(100vh - 59px);
