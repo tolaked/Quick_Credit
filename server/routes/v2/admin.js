@@ -1,15 +1,15 @@
 import express from "express";
-import Admin from "../../controller/v2/adminContoller";
+import Admin from "../../controller/v2/AdminController";
 import Auth from "../../middleware/isAuth";
 import Helper from "../../helper/users";
 
 const {
   verifyUser,
-  specificLoan,
-  patchLoan,
-  loanRepayment,
-  allLoans,
-  postRepayment
+  viewSpecificLoan,
+  viewRepaidLoans,
+  approveOrRejectLoan,
+  getAllLoans,
+  postLoanRepayment
 } = Admin;
 const { verifyTokendb, adminRoute } = Auth;
 const { trimmer } = Helper;
@@ -25,16 +25,22 @@ router.patch(
 );
 
 // Admin get specific loan route
-router.get("/loans/:id", verifyTokendb, adminRoute, specificLoan);
+router.get("/loans/:id", verifyTokendb, adminRoute, viewSpecificLoan);
 
 // Approve or reject loan application
-router.patch("/loans/:id", verifyTokendb, adminRoute, trimmer, patchLoan);
-
-// Get all loans
-router.get("/loans", verifyTokendb, adminRoute, allLoans);
+router.patch(
+  "/loans/:id",
+  verifyTokendb,
+  adminRoute,
+  trimmer,
+  approveOrRejectLoan
+);
 
 // Get all repaid and unrepaid loans
-router.get("/loans", verifyTokendb, adminRoute, loanRepayment);
+router.get("/loans", verifyTokendb, adminRoute, viewRepaidLoans);
+
+// Get all loans
+router.get("/loans", verifyTokendb, adminRoute, getAllLoans);
 
 // Post loan repayment route
 router.post(
@@ -42,7 +48,7 @@ router.post(
   verifyTokendb,
   adminRoute,
   trimmer,
-  postRepayment
+  postLoanRepayment
 );
 
 // expose router

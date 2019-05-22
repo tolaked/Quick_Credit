@@ -57,7 +57,7 @@ export default class AdminController {
     }
   }
 
-  static async specificLoan(req, res) {
+  static async viewSpecificLoan(req, res) {
     const { id } = req.params;
 
     try {
@@ -82,12 +82,16 @@ export default class AdminController {
     }
   }
 
-  static async patchLoan(req, res) {
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async approveOrRejectLoan(req, res) {
     const { status } = req.body;
     const { id } = req.params;
     const value = [status, id];
 
-    const { error } = validation.patchLoan(req.body);
+    const { error } = validation.approveOrReject(req.body);
     if (error)
       return res.status(422).json({
         status: 422,
@@ -126,32 +130,43 @@ export default class AdminController {
     }
   }
 
-  static async loanRepayment(req, res, next) {
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async viewRepaidLoans(req, res, next) {
     const { status, repaid } = req.query;
+    if (status && repaid) {
+      try {
+        const repaidLoan = JSON.parse(repaid);
+        const clientQuery = "SELECT * FROM loans WHERE status=$1 AND repaid=$2";
+        const { rows } = await DB.query(clientQuery, [status, repaidLoan]);
 
-    try {
-      const clientQuery = "SELECT * FROM loans WHERE (status,repaid) =($1,$2)";
-      const { rows } = await DB.query(clientQuery, [status, repaid]);
+        if (!rows[0]) {
+          return res.status(404).json({
+            status: 404,
+            message: "Not found"
+          });
+        }
 
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          message: "Not found"
+        return res.status(200).json({
+          status: 200,
+          data: rows
+        });
+      } catch (error) {
+        return res.status(500).json({
+          status: 500,
+          error
         });
       }
-
-      return res.status(200).json({
-        status: 200,
-        data: rows
-      });
-    } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
-      });
     }
+    return next();
   }
-  static async allLoans(req, res) {
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async getAllLoans(req, res) {
     try {
       const allLoansQuery = "SELECT * FROM loans ";
       const { rows } = await DB.query(allLoansQuery);
@@ -176,7 +191,11 @@ export default class AdminController {
     }
   }
 
-  static async postRepayment(req, res) {
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async postLoanRepayment(req, res) {
     const { id } = req.params;
     const { paidamount } = req.body;
     const newId = parseInt(id);

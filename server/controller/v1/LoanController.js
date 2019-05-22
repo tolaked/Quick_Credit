@@ -1,13 +1,13 @@
-import models from "../model/userData";
+import models from "../../model/userData";
 import moment from "moment";
-import validation from "../validation/validation";
+import validation from "../../validation/validation";
 
-class Loans {
+export default class Loans {
   /** *
    * @param{req} object
    * @param{res} object
    */
-  static applyloan(req, res) {
+  static applyLoan(req, res) {
     const { error } = validation.validateLoan(req.body);
     if (error) {
       return res.status(422).json({
@@ -98,4 +98,3 @@ class Loans {
     });
   }
 }
-export default Loans;

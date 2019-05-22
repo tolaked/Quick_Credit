@@ -3,9 +3,9 @@ import bodyParser from "body-parser";
 import users from "./routes/api/users";
 import loans from "./routes/api/loans";
 import admin from "./routes/api/admin";
-import usersV2 from "./routes/v2api/usersV2";
-import loansv2 from "./routes/v2api/loansV2";
-import adminV2 from "./routes/v2api/v2admin";
+import usersV2 from "./routes/v2/users";
+import loansv2 from "./routes/v2/loans";
+import adminV2 from "./routes/v2/admin";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 

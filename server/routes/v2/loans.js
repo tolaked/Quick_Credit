@@ -1,19 +1,19 @@
 import express from "express";
-import LoansDb from "../../controller/v2/v2loanController";
+import LoansDb from "../../controller/v2/LoanController";
 import Auth from "../../middleware/isAuth";
 import Helper from "../../helper/users";
 
-const { createLoan, repayments } = LoansDb;
+const { applyForLoan, viewRepayments } = LoansDb;
 const { verifyTokendb } = Auth;
 const { trimmer } = Helper;
 
 const router = express.Router();
 
 // user create loan route
-router.post("/loans", verifyTokendb, trimmer, createLoan);
+router.post("/loans", verifyTokendb, trimmer, applyForLoan);
 
 // Get loan repayment history
-router.get("/loans/:id/repayments", verifyTokendb, repayments);
+router.get("/loans/:id/repayments", verifyTokendb, viewRepayments);
 
 // expose router
 export default router;
