@@ -52,8 +52,6 @@ const signUp = e => {
       address
     };
 
-    console.log(formData);
-
     // Make a post request to sign up endpoint
     fetch(
       url,
@@ -70,8 +68,6 @@ const signUp = e => {
       .then(res => res.json())
       .then(body => {
         hideSpinner(e);
-        console.log(body);
-
         // check for success status
         if (body.status === 201) {
           // store user data in browser local storage
@@ -85,14 +81,12 @@ const signUp = e => {
           feedbackContainer.innerHTML = "welcome";
           feedbackContainer.classList.remove("feedback-message-error");
           feedbackContainer.classList.add("feedback-message-success");
-          window.scrollTo(0, 0);
 
           // redirect user to dashboard after 2 seconds
           window.location.href = "admin.html";
         } else {
           feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.add("feedback-message-error");
-          window.scrollTo(0, 0);
         }
       })
       .catch(err => err);
