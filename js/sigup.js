@@ -1,11 +1,18 @@
-const displayFeedbackLogin = responseData => {
+const displayFeedback = responseData => {
   let listItem = "";
 
   if (responseData.status === 422 && typeof responseData.error !== "string") {
+    listItem += "<li class='feedback-list-item'>First Name is required.</li>";
+    listItem += "<li class='feedback-list-item'>Last Name is required</li>";
     listItem +=
-      "<li class='feedback-list-item'>Please fill the required field below.</li>";
+      "<li class='feedback-list-item'>Address field is required.</li>";
+    listItem += "<li class='feedback-list-item'>Email field is required.</li>";
+    listItem +=
+      "<li class='feedback-list-item'>Password field is required and must be at least 6 characters</li>";
   } else if (responseData.status === 200 || responseData.status === 201) {
-    listItem += "<li class='feedback-list-item'>Login Successful</li>";
+    listItem += `<li class='feedback-list-item'>${
+      responseData.data[0].message
+    }</li>`;
   } else {
     listItem += `<li class='feedback-list-item'>${responseData.error}</li>`;
   }
@@ -78,12 +85,21 @@ const signUp = e => {
           });
           localStorage.setItem("user", userData);
 
-          feedbackContainer.innerHTML = "welcome";
+          feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.remove("feedback-message-error");
           feedbackContainer.classList.add("feedback-message-success");
+          window.scrollTo(0, 0);
 
-          // redirect user to dashboard after 2 seconds
-          window.location.href = "admin.html";
+          // redirect user to dashboard
+          if (body.data.newUser.isAdmin) {
+            setTimeout(() => {
+              window.location.href = "admin.html";
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              window.location.href = "user.html";
+            }, 1000);
+          }
         } else {
           feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.add("feedback-message-error");
