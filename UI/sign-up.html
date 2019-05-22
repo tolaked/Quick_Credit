@@ -23,7 +23,11 @@
       </header>
 
       <div class="container">
-        <form id="form">
+        <form action="admin.html" id="form" class="login-form" method="POST">
+            <div class="login_container">
+                <div class="feedback_container"></div>
+                <ul></ul>
+                <hr />
           <div>
             <h3>Create Account</h3>
             <p class="label"><label for="firstName" class="label">First Name</label></p>
@@ -56,6 +60,18 @@
               required
             />
 
+            <p class="label">
+                <label for="email" class="label">Address</label>
+              </p>
+              <input
+                type="text"
+                id="address"
+                class="signup-input"
+                name="address"
+                placeholder="Address"
+                required
+              />
+
             <p class="label"><label for="password" class="label">Password</label></p>
             <input
               type="password"
@@ -65,7 +81,7 @@
               placeholder="Enter password"
               required
             />
-
+            <div class="feedback_container2"></div>
             <p class="label"><label for="confirm-password" class="label">Confirm password</label><i class="fa fa-asterisk"></i></p>
             <input
               type="password"
@@ -76,15 +92,21 @@
               required
             />
             
-            <button type="submit" id="submit"><a id="submit" href="sign-in.html">Submit</a></button>
-            <p class="acct">
+            <button type="submit" id="submit">
+                <div class="signuptit">Sign up</div>
+              <i class="fas fa-spinner btnspinner" id="spinbtn2"> </i>
+            </button>
+            <div class="acct">
+              <p>
               Already have an account?
-              <a class="sign-link" href="sign-in.html">Log In</a>
-            </p>
+              <em class="sign-link signinbtn actionbtn" >Log In</em>
+              </p>
+            </div>
           </div>
         </form>
       </div>
     </section>
+    
     <footer>
       <div class="" id="footer">
         <p>
@@ -92,6 +114,6 @@
         </p>
       </div>
     </footer>
-
+    <script src="js/sigup.js"></script>
   </body>
 </html>

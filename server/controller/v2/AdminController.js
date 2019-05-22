@@ -107,6 +107,13 @@ export default class AdminController {
           error: "loan not found"
         });
       }
+      if (loan.rows[0].status === "rejected") {
+        return res.status(409).json({
+          status: 409,
+          error: "Warning!!! This loan has been rejected"
+        });
+      }
+
       if (loan.rows[0].status === "approved") {
         return res.status(409).json({
           status: 409,
