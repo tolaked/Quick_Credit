@@ -17,8 +17,12 @@ let DbUserToken;
 let signUpuserToken;
 let newUserToken;
 let clientToken;
+
 let hhh;
 let id;
+let DbId;
+let loanToken;
+
 
 const user = {
   firstName: "Adeola",
@@ -102,8 +106,6 @@ describe("GET /", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
-        console.log(body);
-        
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
@@ -1601,11 +1603,11 @@ describe("GET api/v2/loans/1", () => {
 
 // test for POST /unauthorized user, create loan application
 describe("POST api/v2/loans", () => {
-  it("should return an error for unauthorized user", done => {
+  it("should return an error for unauthorized userr", done => {
     chai
       .request(app)
       .post("/api/v2/loans")
-      .set("token", userToken)
+      .set("token", DbUserToken)
       .send({
         amount: "500000",
         tenor: "6"
@@ -1613,10 +1615,12 @@ describe("POST api/v2/loans", () => {
       .end((err, res) => {
         if (err) done();
         const body = res.body;
+        console.log(body)
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equals(400);
-        expect(body.error).to.be.a("object");
+        expect(body.status).to.be.equals(403);
+        expect(body.error).to.be.a("string");
+        expect(body.error).to.be.equal("sorry, you can only apply for a loan at a time");
         done();
       });
   });
@@ -1857,31 +1861,6 @@ describe("POST api/v2/auth/signin", () => {
   });
 });
 
-// // test for POST /to create loan application for a yet to be verified user
-describe("POST api/v2/loans", () => {
-  it("should return an error if a user with a pending verification status tries to apply for a loan", done => {
-    chai
-      .request(app)
-      .post("/api/v2/loans")
-      .set("token", clientToken)
-      .send({
-        amount: "500000",
-        tenor: "6"
-      })
-      .end((err, res) => {
-        if (err) done();
-        const body = res.body;
-        expect(body).to.be.an("object");
-        expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equals(403);
-        expect(body.error).to.be.a("string");
-        expect(body.error).to.be.equals(
-          "unverified user, you cannot apply for a loan at the moment"
-        );
-        done();
-      });
-  });
-});
 
 // test for GET /Admin get all loans
 describe("POST api/v2/loans", () => {
@@ -2237,6 +2216,86 @@ describe(`GET /api/v1/loans/%`, () => {
         expect(body.status).to.be.equals(500);
         expect(body.error).to.be.an("string");
         expect(body.error).to.be.equal("internal server error");
+        done();
+      });
+  });
+});
+
+
+
+// test for POST /login suite
+describe("POST api/v2/auth/signin", () => {
+  it("should return an error if inputs are invalid", done => {
+    chai
+      .request(app)
+      .post("/api/v2/auth/signin")
+      .send({
+        email:"Ian63@hotmail.com",
+        password: "Sweetmum"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const { body } = res;
+        loanToken= body.data.token
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.a("object");
+        expect(body.data.token).to.be.a("string");
+
+        done();
+      });
+  });
+});
+
+// test for POST /to create loan application
+describe("POST api/v2/loans", () => {
+  it("should successfully create a loan application", done => {
+    chai
+      .request(app)
+      .post("/api/v2/loans")
+      .set("token", loanToken)
+      .send({
+        amount: "500000",
+        tenor: "6"
+      })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        DbId = body.data.Loan.id;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(201);
+        expect(body.data).to.be.a("object");
+        expect(body.data.Loan).to.be.a("object");
+        expect(body.data.Loan.id).to.be.a("number");
+        expect(body.data.Loan.clientemail).to.be.a("string");
+        expect(body.data.Loan.paymentinstallment).to.be.a("number");
+        expect(body.data.Loan.balance).to.be.a("number");
+        expect(body.data.Loan.interest).to.be.a("number");
+        expect(body.data.Loan.tenor).to.be.a("number");
+        expect(body.data.Loan.amount).to.be.a("number");
+        done();
+      });
+  });
+});
+
+
+// test for GET /Admin verify loan
+describe(`PATCH api/v2/loans/${DbId}`, () => {
+  it("should successfully reject a loan", done => {
+    chai
+      .request(app)
+      .patch(`/api/v2/loans/${DbId}`)
+      .set("token", loggedInUserToken)
+      .send({ status:"rejected" })
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("object");
         done();
       });
   });

@@ -32,16 +32,6 @@ export default class LoansDb {
       interest
     ];
     try {
-      const clientQuery = "SELECT * FROM users WHERE email = $1";
-      const newClient = await DB.query(clientQuery, [email]);
-
-      if (newClient.rows[0].status === "pending") {
-        return res.status(403).json({
-          status: 403,
-          error: "unverified user, you cannot apply for a loan at the moment"
-        });
-      }
-
       const userQuery = "SELECT * FROM loans WHERE clientemail = $1";
       const user = await DB.query(userQuery, [email]);
 
@@ -116,6 +106,36 @@ export default class LoansDb {
       return res.status(200).json({
         status: 200,
         data: rows
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error
+      });
+    }
+  }
+
+  /** *
+   * @param{req} object
+   * @param{res} object
+   */
+  static async userViewLoans(req, res) {
+    const loanOwner = req.user.email;
+
+    try {
+      const userLoans = "SELECT * FROM loans WHERE clientemail = $1";
+
+      const { rows } = await DB.query(userLoans, [loanOwner]);
+
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          error: "no loans found"
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: [rows]
       });
     } catch (error) {
       return res.status(500).json({
