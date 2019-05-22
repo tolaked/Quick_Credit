@@ -13,7 +13,7 @@ const displayFeedbackLogin = responseData => {
   return listItem;
 };
 
-const signUp = () => {
+const signUp = e => {
   e.preventDefault();
   // get all user input values
   const firstname = document.getElementById("firstName").value;
@@ -36,7 +36,7 @@ const signUp = () => {
       feedbackContainer2.innerHTML = "";
       feedbackContainer2.style.border = "none";
     }, 5000);
-    hideSpinner(e);
+    // hideSpinner(e);
   } else {
     feedbackContainer2.innerHTML = "";
     feedbackContainer2.style.border = "none";
