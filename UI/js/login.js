@@ -54,8 +54,6 @@ const signIn = e => {
   })
     .then(res => res.json())
     .then(body => {
-      // hideOverlay();
-
       // check for success status
       if (body.status === 200) {
         // store user data in browser local storage
@@ -64,10 +62,10 @@ const signIn = e => {
           token: body.data[0].token,
           access: body.data[0].user.iAdmin
         });
-
+        const loggedInUser = body.data[0].user.lastname;
         localStorage.setItem("user", userData);
 
-        feedbackContainer.innerHTML = "Welcome back";
+        feedbackContainer.innerHTML = `Welcome ${loggedInUser}`;
         feedbackContainer.classList.remove("feedback-message-error");
         feedbackContainer.classList.add("feedback-message-success");
         window.scrollTo(0, 0);
@@ -83,7 +81,7 @@ const signIn = e => {
           }, 2000);
         }
       } else {
-        feedbackContainer.innerHTML = "displayFeedback(body)";
+        feedbackContainer.innerHTML = "Please fill all required fields";
         feedbackContainer.classList.add("feedback-message-error");
         window.scrollTo(0, 0);
       }
