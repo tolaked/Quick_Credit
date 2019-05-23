@@ -115,7 +115,7 @@ The API is currently in version 1 (v2) and is hosted at
 
 ## API Documentation
 
-[https://https://my-quick-credit-app.herokuapp.com/api-docs](https://https://my-quick-credit-app.herokuapp.com/api-docs)
+[https://my-quick-credit-app.herokuapp.com/api-docs](https://my-quick-credit-app.herokuapp.com/api-docs)
 
 ## Author
 
