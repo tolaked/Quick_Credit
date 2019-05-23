@@ -50,9 +50,9 @@ export default class AdminController {
         data: verifiedUser
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -75,9 +75,9 @@ export default class AdminController {
         data: rows[0]
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -107,6 +107,20 @@ export default class AdminController {
           error: "loan not found"
         });
       }
+      const loanUser = loan.rows[0].clientemail;
+      const checkUserQuery = "SELECT * FROM users WHERE email = $1";
+      const userStatus = await DB.query(checkUserQuery, [loanUser]);
+
+      if (
+        userStatus.rows[0].status === "pending" &&
+        req.body.status === "approved"
+      ) {
+        return res.status(400).json({
+          status: 400,
+          error: "user with this loan application has not been verified"
+        });
+      }
+
       if (loan.rows[0].status === "rejected") {
         return res.status(409).json({
           status: 409,
@@ -130,9 +144,9 @@ export default class AdminController {
         data: rows[0]
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -161,9 +175,9 @@ export default class AdminController {
           data: rows
         });
       } catch (error) {
-        return res.status(500).json({
-          status: 500,
-          error
+        return res.status(400).json({
+          status: 400,
+          error: "Something went wrong, try again"
         });
       }
     }
@@ -191,9 +205,9 @@ export default class AdminController {
         data: rows
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -283,9 +297,9 @@ export default class AdminController {
         data: rows[0]
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }

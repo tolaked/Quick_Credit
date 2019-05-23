@@ -73,7 +73,7 @@ export default class UsersController {
 
       return res.status(400).json({
         status: 400,
-        errors: error
+        errors: "Something went wrong, try again"
       });
     }
   }
@@ -125,9 +125,13 @@ export default class UsersController {
       // return success message
       return res.status(200).json({
         status: 200,
-        data: {
-          token
-        }
+        data: [
+          {
+            message: "Logged in successfully",
+            user: { lastname: rows[0].lastname, isAdmin: rows[0].isadmin },
+            token
+          }
+        ]
       });
     } catch (error) {
       return res.status(400).json({
