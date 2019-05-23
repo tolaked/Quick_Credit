@@ -1346,12 +1346,18 @@ describe("POST api/v2/auth/signin", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
-        loggedInUserToken = body.data.token;
+        loggedInUserToken = body.data[0].token;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
-        expect(body.data).to.be.an("object");
-        expect(body.data.token).to.be.a("string");
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].message).to.be.a("string");
+        expect(body.data[0].message).to.be.equal("Logged in successfully");
+        expect(body.data[0].user).to.be.an("object");
+        expect(body.data[0].token).to.be.a("string");
+
+
 
         done();
       });
@@ -1603,7 +1609,7 @@ describe("GET api/v2/loans/1", () => {
 
 // test for POST /unauthorized user, create loan application
 describe("POST api/v2/loans", () => {
-  it("should return an error for unauthorized userr", done => {
+  it("should return an error for unauthorized user", done => {
     chai
       .request(app)
       .post("/api/v2/loans")
@@ -1615,7 +1621,7 @@ describe("POST api/v2/loans", () => {
       .end((err, res) => {
         if (err) done();
         const body = res.body;
-        console.log(body)
+      
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(403);
@@ -1849,12 +1855,16 @@ describe("POST api/v2/auth/signin", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
-        clientToken = body.data.token;
+        clientToken = body.data[0].token;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
-        expect(body.data).to.be.an("object");
-        expect(body.data.token).to.be.a("string");
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].message).to.be.a("string");
+        expect(body.data[0].message).to.be.equal("Logged in successfully");
+        expect(body.data[0].user).to.be.an("object");
+        expect(body.data[0].token).to.be.a("string");
 
         done();
       });
@@ -1929,7 +1939,7 @@ describe("POST api/v2/loans/36777/repayments", () => {
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(404);
         expect(body.message).to.be.a("string");
-        expect(body.message).to.be.equals("loan not found");
+        expect(body.message).to.be.equals("no repayment record found");
         done();
       });
   });
@@ -2225,7 +2235,7 @@ describe(`GET /api/v1/loans/%`, () => {
 
 // test for POST /login suite
 describe("POST api/v2/auth/signin", () => {
-  it("should return an error if inputs are invalid", done => {
+  it("should successfully login a user", done => {
     chai
       .request(app)
       .post("/api/v2/auth/signin")
@@ -2236,12 +2246,16 @@ describe("POST api/v2/auth/signin", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
-        loanToken= body.data.token
+        loanToken= body.data[0].token
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(200);
-        expect(body.data).to.be.a("object");
-        expect(body.data.token).to.be.a("string");
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].message).to.be.a("string");
+        expect(body.data[0].message).to.be.equal("Logged in successfully");
+        expect(body.data[0].user).to.be.an("object");
+        expect(body.data[0].token).to.be.a("string");
 
         done();
       });
@@ -2300,3 +2314,75 @@ describe(`PATCH api/v2/loans/${DbId}`, () => {
       });
   });
 });
+
+// / test for GET /Should get all loan applications
+describe("GET api/v2/loans/history", () => {
+  it("should get all loansr", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/history")
+      .set("token", loanToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(200);
+        expect(body.data).to.be.an("array");
+        expect(body.data[0]).to.be.an("object");
+        expect(body.data[0].id).to.be.a("number");
+        expect(body.data[0].clientemail).to.be.a("string");
+        expect(body.data[0].amount).to.be.a("number");
+        expect(body.data[0].balance).to.be.a("number");
+        expect(body.data[0].interest).to.be.a("number");
+        expect(body.data[0].status).to.be.a("string");
+        done();
+      });
+  });
+});
+
+
+// / test for GET /Should get all loan applications
+describe("GET api/v2/loans/6.8", () => {
+  it("should return an error if something goes wrong", done => {
+    chai
+      .request(app)
+      .get("/api/v2/loans/6.8")
+      .set("token", loggedInUserToken)
+      .send()
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(400);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("Something went wrong, try again");
+        done();
+      });
+  });
+});
+
+
+// / test for GET /Should get all loan applications
+describe("PATCH api/v2/loans/6.8", () => {
+  it("should return an error if something goes wrong", done => {
+    chai
+      .request(app)
+      .patch("/api/v2/loans/6.8")
+      .set("token", loggedInUserToken)
+      .send({status:"approved"})
+      .end((err, res) => {
+        if (err) done();
+        const body = res.body;
+        expect(body).to.be.an("object");
+        expect(body.status).to.be.a("number");
+        expect(body.status).to.be.equals(400);
+        expect(body.error).to.be.an("string");
+        expect(body.error).to.be.equal("Something went wrong, try again");
+        done();
+      });
+  });
+});
+

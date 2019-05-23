@@ -1,11 +1,13 @@
-const displayFeedbackLogin = responseData => {
+const displayFeedback = responseData => {
   let listItem = "";
 
   if (responseData.status === 422 && typeof responseData.error !== "string") {
     listItem +=
-      "<li class='feedback-list-item'>Please fill the required field below.</li>";
+      "<li class='feedback-list-item'>Please Fill all required fields.</li>";
   } else if (responseData.status === 200 || responseData.status === 201) {
-    listItem += "<li class='feedback-list-item'>Login Successful</li>";
+    listItem += `<li class='feedback-list-item'>${
+      responseData.data[0].message
+    }</li>`;
   } else {
     listItem += `<li class='feedback-list-item'>${responseData.error}</li>`;
   }
@@ -67,8 +69,9 @@ const signUp = e => {
     )
       .then(res => res.json())
       .then(body => {
-        hideSpinner(e);
+        // hideSpinner(e);
         // check for success status
+
         if (body.status === 201) {
           // store user data in browser local storage
           const userData = JSON.stringify({
@@ -76,14 +79,23 @@ const signUp = e => {
             username: body.data.newUser.lastName,
             token: body.data.token
           });
+
           localStorage.setItem("user", userData);
 
           feedbackContainer.innerHTML = "welcome";
           feedbackContainer.classList.remove("feedback-message-error");
           feedbackContainer.classList.add("feedback-message-success");
+          window.scrollTo(0, 0);
 
           // redirect user to dashboard
-          window.location.href = "admin.html";
+          if (body.data.newUser.isAdmin) {
+            setTimeout(() => {
+              window.location.href = "admin.html";
+            }, 2000);
+          }
+          setTimeout(() => {
+            window.location.href = "user.html";
+          }, 1000);
         } else {
           feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.add("feedback-message-error");

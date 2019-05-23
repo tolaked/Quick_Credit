@@ -71,7 +71,7 @@ export default class LoansDb {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: error
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -92,7 +92,7 @@ export default class LoansDb {
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,
-          message: "loan not found"
+          message: "no repayment record found"
         });
       }
 
@@ -108,9 +108,9 @@ export default class LoansDb {
         data: rows
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
@@ -135,12 +135,12 @@ export default class LoansDb {
       }
       return res.status(200).json({
         status: 200,
-        data: [rows]
+        data: rows
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error
+      return res.status(400).json({
+        status: 400,
+        error: "Something went wrong, try again"
       });
     }
   }
