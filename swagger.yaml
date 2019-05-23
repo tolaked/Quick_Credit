@@ -1,284 +1,333 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '1.0'
+  version: "1.0"
   title: Quick_Credit
   description: Quick Credit is an online lending platform that provides short term soft loans to individuals. This helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.
   contact: {}
 host: my-quick-credit-app.herokuapp.com
-basePath: /api/v1
+basePath: /api
 schemes:
-- https
+  - https
+  - http
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 paths:
-  /auth/signup:
+  /v2/auth/signup:
     post:
-      description: 'TODO: Add Description'
+      description: "TODO: Add Description"
       summary: Signup
       tags:
-      - Auth
-      operationId: AuthSignupPost
+        - Auth
+      operationId: V2AuthSignupPost
       deprecated: false
       produces:
-      - application/json
+        - application/json
       consumes:
-      - application/x-www-form-urlencoded
+        - application/x-www-form-urlencoded
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: firstName
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: lastName
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: email
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: password
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: address
-        in: formData
-        required: true
-        type: string
-        description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: firstName
+          in: formData
+          required: true
+          type: string
+          description: ""
+        - name: lastName
+          in: formData
+          required: true
+          type: string
+          description: ""
+        - name: email
+          in: formData
+          required: true
+          type: string
+          description: ""
+        - name: password
+          in: formData
+          required: true
+          type: string
+          description: ""
+        - name: address
+          in: formData
+          required: true
+          type: string
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
-  /auth/login:
+  /v1/auth/signin:
     post:
-      description: 'TODO: Add Description'
+      description: "TODO: Add Description"
       summary: Login
       tags:
-      - Auth
-      operationId: AuthLoginPost
+        - Auth
+      operationId: V1AuthSigninPost
       deprecated: false
       produces:
-      - application/json
+        - application/json
       consumes:
-      - application/x-www-form-urlencoded
+        - application/x-www-form-urlencoded
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: email
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: password
-        in: formData
-        required: true
-        type: string
-        description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: email
+          in: formData
+          required: true
+          type: string
+          description: ""
+        - name: password
+          in: formData
+          required: true
+          type: string
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
-  /loans:
+  /v1/loans:
     post:
-      description: 'TODO: Add Description'
+      description: "TODO: Add Description"
       summary: Apply for Loan
       tags:
-      - User-Loans
-      operationId: LoansPost
+        - User-Loans
+      operationId: V1LoansPost
       deprecated: false
       produces:
-      - application/json
+        - application/json
       consumes:
-      - application/x-www-form-urlencoded
+        - application/x-www-form-urlencoded
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: amount
-        in: formData
-        required: true
-        type: string
-        description: ''
-      - name: tenor
-        in: formData
-        required: true
-        type: string
-        description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: amount
+          in: formData
+          required: true
+          type: integer
+          format: int32
+          description: ""
+        - name: tenor
+          in: formData
+          required: true
+          type: integer
+          format: int32
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
+  /%%:
     get:
-      description: 'TODO: Add Description'
-      summary: Repayment status
-      tags:
-      - Admin
-      operationId: LoansGet
-      deprecated: false
-      produces:
-      - application/json
-      parameters:
-      - name: status
-        in: query
-        required: true
-        type: string
-        description: ''
-      - name: repaid
-        in: query
-        required: true
-        type: boolean
-        description: ''
-      - name: token
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      responses:
-        200:
-          description: ''
-          headers: {}
-    patch:
-      description: 'TODO: Add Description'
-      summary: Approve/Reject Loans
-      tags:
-      - Admin
-      operationId: LoansPatch
-      deprecated: false
-      produces:
-      - application/json
-      consumes:
-      - application/x-www-form-urlencoded
-      parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: token
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: status
-        in: formData
-        required: true
-        type: string
-        description: ''
-      responses:
-        200:
-          description: ''
-          headers: {}
-  /loans/3/repayments:
-    get:
-      description: 'TODO: Add Description'
+      description: "TODO: Add Description"
       summary: Repayment status by id
       tags:
-      - User-Loans
-      operationId: Loans3RepaymentsGet
+        - User-Loans
+      operationId: APIGet
       deprecated: false
       produces:
-      - application/json
-      parameters: []
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
-  /users/bayomi@gmail.com/verify:
-    patch:
-      description: 'TODO: Add Description'
+  /v2/loans/history:
+    get:
+      description: "TODO: Add Description"
+      summary: User Get Own Loans
+      tags:
+        - User-Loans
+      operationId: V2LoansHistoryGet
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
+      responses:
+        200:
+          description: ""
+          headers: {}
+  /v1/users/dimeji@gmail.com/verify:
+    get:
+      description: "TODO: Add Description"
       summary: Verify User
       tags:
-      - Admin
-      operationId: UsersBayomiGmailComVerifyPatch
+        - Admin
+      operationId: V1UsersDimejiGmailComVerifyGet
       deprecated: false
       produces:
-      - application/json
-      consumes:
-      - application/x-www-form-urlencoded
+        - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: status
-        in: formData
-        required: true
-        type: string
-        description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
-  /loans/2:
+  /v2/loans/7:
     get:
-      description: 'TODO: Add Description'
+      description: "TODO: Add Description"
       summary: View specific loan
       tags:
-      - Admin
-      operationId: Loans2Get
+        - Admin
+      operationId: V2Loans7Get
       deprecated: false
       produces:
-      - application/json
-      parameters: []
+        - application/json
+      parameters:
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
-  /loans/4/repayment:
-    post:
-      description: 'TODO: Add Description'
+  /v2/loans:
+    get:
+      description: "TODO: Add Description"
+      summary: Repayment status
+      tags:
+        - Admin
+      operationId: V2LoansGet
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          required: true
+          type: string
+          description: ""
+        - name: repaid
+          in: query
+          required: true
+          type: boolean
+          description: ""
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+      responses:
+        200:
+          description: ""
+          headers: {}
+  /v2/loans/13:
+    patch:
+      description: "TODO: Add Description"
+      summary: Approve/Reject Loans
+      tags:
+        - Admin
+      operationId: V2Loans13Patch
+      deprecated: false
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: status
+          in: formData
+          required: true
+          type: string
+          description: ""
+      responses:
+        200:
+          description: ""
+          headers: {}
+  /v1/loans/4:
+    patch:
+      description: "TODO: Add Description"
       summary: Post loan repayment
       tags:
-      - Admin
-      operationId: Loans4RepaymentPost
+        - Admin
+      operationId: V1Loans4Patch
       deprecated: false
       produces:
-      - application/json
+        - application/json
       consumes:
-      - application/x-www-form-urlencoded
+        - application/x-www-form-urlencoded
       parameters:
-      - name: token
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
-        description: ''
-      - name: paidamount
-        in: formData
-        required: true
-        type: string
-        description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: paidamount
+          in: formData
+          required: true
+          type: integer
+          format: int32
+          description: ""
       responses:
         200:
-          description: ''
+          description: ""
           headers: {}
 tags:
-- name: Auth
-- name: User-Loans
-- name: Admin
+  - name: Auth
+  - name: User-Loans
+  - name: Admin

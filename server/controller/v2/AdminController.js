@@ -59,6 +59,12 @@ export default class AdminController {
 
   static async viewSpecificLoan(req, res) {
     const { id } = req.params;
+    const { error } = validation.validateParams(req.params);
+    if (error)
+      return res.status(422).json({
+        status: 422,
+        message: error.details[0].message
+      });
 
     try {
       const clientLoan = "SELECT * FROM loans WHERE id = $1";

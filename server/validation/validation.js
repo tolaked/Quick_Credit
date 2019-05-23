@@ -159,6 +159,15 @@ class validate {
     });
     return Joi.validate(loan, schema);
   }
-}
 
+  static validateParams(loan) {
+    const schema = Joi.object().keys({
+      id: Joi.number()
+        .integer()
+        .error(() => "invalid id")
+        .required()
+    });
+    return Joi.validate(loan, schema);
+  }
+}
 export default validate;
