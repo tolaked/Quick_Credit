@@ -2,13 +2,8 @@ const displayFeedback = responseData => {
   let listItem = "";
 
   if (responseData.status === 422 && typeof responseData.error !== "string") {
-    listItem += "<li class='feedback-list-item'>First Name is required.</li>";
-    listItem += "<li class='feedback-list-item'>Last Name is required</li>";
     listItem +=
-      "<li class='feedback-list-item'>Address field is required.</li>";
-    listItem += "<li class='feedback-list-item'>Email field is required.</li>";
-    listItem +=
-      "<li class='feedback-list-item'>Password field is required and must be at least 6 characters</li>";
+      "<li class='feedback-list-item'>Please Fill all required fields.</li>";
   } else if (responseData.status === 200 || responseData.status === 201) {
     listItem += `<li class='feedback-list-item'>${
       responseData.data[0].message
@@ -74,8 +69,9 @@ const signUp = e => {
     )
       .then(res => res.json())
       .then(body => {
-        hideSpinner(e);
+        // hideSpinner(e);
         // check for success status
+
         if (body.status === 201) {
           // store user data in browser local storage
           const userData = JSON.stringify({
@@ -83,9 +79,10 @@ const signUp = e => {
             username: body.data.newUser.lastName,
             token: body.data.token
           });
+
           localStorage.setItem("user", userData);
 
-          feedbackContainer.innerHTML = displayFeedback(body);
+          feedbackContainer.innerHTML = "welcome";
           feedbackContainer.classList.remove("feedback-message-error");
           feedbackContainer.classList.add("feedback-message-success");
           window.scrollTo(0, 0);
@@ -94,12 +91,11 @@ const signUp = e => {
           if (body.data.newUser.isAdmin) {
             setTimeout(() => {
               window.location.href = "admin.html";
-            }, 1000);
-          } else {
-            setTimeout(() => {
-              window.location.href = "user.html";
-            }, 1000);
+            }, 2000);
           }
+          setTimeout(() => {
+            window.location.href = "user.html";
+          }, 1000);
         } else {
           feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.add("feedback-message-error");

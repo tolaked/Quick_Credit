@@ -20,20 +20,23 @@
         </nav>
       </header>
 
+    
       <div class="container">
         <form id="login-form" action="">
           <div>
             <h3>Please enter your credentials to log in</h3>
-
+            <div class="feedback-message"></div>
             <p class="label"><label for="email" class="label">Email</label></p>
 
             <input
               type="text"
               id="email"
               name="email"
-              placeholder="Enter email"
+              placeholder="you@example.com"
+              autofocus
               required
             />
+            <small class="error"></small>
 
             <p class="label">
               <label for="password" class="label">Password</label>
@@ -45,11 +48,7 @@
               placeholder="Enter password"
               required
             />
-            <button
-              type="submit"
-              id="submit-login"
-              onclick="window.location.href = 'proceed.html';"
-            >
+            <button type="submit" id="submit-login">
               Login
             </button>
             <p class="acct">
@@ -64,6 +63,27 @@
           </div>
         </form>
       </div>
+<!-- 
+      <div class="overlay">
+        <div class="spinner-icon-container">
+          <svg
+            version="1.2"
+            class="spinner-icon"
+            height="80"
+            width="125"
+            xmlns="http://www.w3.org/2000/svg"
+            viewport="0 0 125 80"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <path
+              fill="none"
+              stroke="#ffffff"
+              stroke-miterlimit="20"
+              d="M52,21 L81,40 L52,60 Z"
+            ></path>
+          </svg> -->
+        </div>
+      </div>
     </section>
     <footer>
       <div class="" id="footer">
@@ -72,5 +92,6 @@
         </p>
       </div>
     </footer>
+    <script src="js/login.js"></script>
   </body>
 </html>
