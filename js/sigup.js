@@ -69,7 +69,6 @@ const signUp = e => {
     )
       .then(res => res.json())
       .then(body => {
-        // hideSpinner(e);
         // check for success status
 
         if (body.status === 201) {
@@ -97,7 +96,7 @@ const signUp = e => {
             window.location.href = "user.html";
           }, 1000);
         } else {
-          feedbackContainer.innerHTML = displayFeedback(body);
+          feedbackContainer.innerHTML = displayFeedback();
           feedbackContainer.classList.add("feedback-message-error");
         }
       })
