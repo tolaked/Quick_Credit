@@ -55,6 +55,8 @@ npm test
 
 ## API-ENDPOINTS
 
+**V1**
+
 `- POST /api/v1/auth/signup Create a new user.`
 
 `- POST /api/v1/auth/login Login a user.`
@@ -75,6 +77,28 @@ npm test
 
 `- POST /api/v1/loans/<:id>/repayment" Post loan repayment transaction in favour of a client.`
 
+**V2**
+
+`- POST /api/v2/auth/signup Create a new user.`
+
+`- POST /api/v2/auth/login Login a user.`
+
+`- POST /api/v2/auth/loans Create a loan application.`
+
+`- GET /api/v2/auth/loans/<:id>/repayments Get loan repayment history.`
+
+`- PATCH /api/v2/users/<:email>/verify Mark a user as verified.`
+
+`- GET /api/v2/loans/<:id> View specific loan by id.`
+
+`- GET /api/v2/loans?status=approved&repaid=fals Get loan repayment status.`
+
+`- GET /api/v2/loans Get all loans.`
+
+`- PATCH /api/v2/loans/<:id>" Approve or reject a loan application.`
+
+`- POST /api/v2/loans/<:id>/repayment" Post loan repayment transaction in favour of a client.`
+
 ## Pivotal Tracker stories
 
 [https://www.pivotaltracker.com/n/projects/2326850](https://www.pivotaltracker.com/n/projects/2326850)
@@ -85,9 +109,9 @@ You can see a hosted version of the template at [https://tolaked.github.io/Quick
 
 ### API
 
-The API is currently in version 1 (v1) and is hosted at
+The API is currently in version 1 (v2) and is hosted at
 
-[https://my-quick-credit-app.herokuapp.com/](https://my-quick-credit-app.herokuapp.com/)
+[https://my-quick-credit-app.herokuapp.com/signup](https://my-quick-credit-app.herokuapp.com/signup)
 
 ## API Documentation
 

@@ -2356,9 +2356,9 @@ describe("GET api/v2/loans/6.8", () => {
         const body = res.body;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
-        expect(body.status).to.be.equals(400);
-        expect(body.error).to.be.an("string");
-        expect(body.error).to.be.equal("Something went wrong, try again");
+        expect(body.status).to.be.equals(422);
+        expect(body.message).to.be.an("string");
+        expect(body.message).to.be.equal("invalid id");
         done();
       });
   });
