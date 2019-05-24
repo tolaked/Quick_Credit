@@ -587,7 +587,9 @@ hr {
   border-radius: 10px;
   justify-content: space-between;
 }
-
+.acctt {
+  text-align: center;
+}
 .clientloans {
   background-color: white;
   border-radius: 5px;
