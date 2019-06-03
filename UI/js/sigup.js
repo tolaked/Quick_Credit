@@ -96,7 +96,7 @@ const signUp = e => {
             window.location.href = "user.html";
           }, 1000);
         } else {
-          feedbackContainer.innerHTML = displayFeedback();
+          feedbackContainer.innerHTML = "Please fill all required field";
           feedbackContainer.classList.add("feedback-message-error");
         }
       })

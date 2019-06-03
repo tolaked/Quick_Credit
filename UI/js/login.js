@@ -81,7 +81,7 @@ const signIn = e => {
           }, 2000);
         }
       } else {
-        feedbackContainer.innerHTML = "Please fill all required fields";
+        feedbackContainer.innerHTML = "Plese enter valid login details";
         feedbackContainer.classList.add("feedback-message-error");
         window.scrollTo(0, 0);
       }

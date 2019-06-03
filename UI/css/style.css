@@ -131,6 +131,7 @@ div[data-home="nav"] {
   color: green;
   border: 0.9px solid green;
   display: block;
+  border: none;
 }
 .error {
   color: #dc3545;
@@ -364,6 +365,7 @@ a {
   }
   .about-text h2 {
     margin-top: 0px;
+    display: inline;
   }
   .about-row {
     flex-direction: column;
@@ -572,6 +574,11 @@ button[type="submit"]:focus {
 @media screen and (max-width: 760px) {
   .container {
     margin: 100px auto 0px auto;
+  }
+  .acct {
+    margin-bottom: 3em;
+    text-align: center;
+    font-size: 16px;
   }
 
   #login-form input {
