@@ -7,6 +7,15 @@ const checkExpiredToken = responseBody => {
     }, 1000);
   }
 };
+const resetFields = () => {
+  const fields = document.querySelectorAll(".error");
+  const fieldsArr = Array.prototype.slice.call(fields);
+  fieldsArr.forEach(element => {
+    const currentField = element;
+    currentField.innerHTML = "";
+    currentField.previousElementSibling.style.border = "1px solid #f4f4f4";
+  });
+};
 
 const displayFeedback = responseData => {
   let listItem = "";
@@ -31,7 +40,6 @@ const displayFeedback = responseData => {
 const postLoanApp = e => {
   e.preventDefault();
   resetFields();
-  showOverlay();
 
   // get all user input values
   const loanTenor = document.getElementById("tenor").value;
