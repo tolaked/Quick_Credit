@@ -365,6 +365,7 @@ a {
   }
   .about-text h2 {
     margin-top: 0px;
+    display: inline;
   }
   .about-row {
     flex-direction: column;

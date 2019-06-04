@@ -30,7 +30,7 @@ const signUp = e => {
   feedbackContainer.innerHTML = "";
 
   if (password !== password2) {
-    feedbackContainer2.innerHTML = "comfirm password does not match";
+    feedbackContainer2.innerHTML = "password does not match";
     feedbackContainer2.style.color = "red";
     feedbackContainer2.style.border = "0.7px solid #dc3545";
 
@@ -38,7 +38,6 @@ const signUp = e => {
       feedbackContainer2.innerHTML = "";
       feedbackContainer2.style.border = "none";
     }, 5000);
-    // hideSpinner(e);
   } else {
     feedbackContainer2.innerHTML = "";
     feedbackContainer2.style.border = "none";
