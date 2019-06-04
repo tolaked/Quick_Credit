@@ -81,7 +81,7 @@ const postLoanApp = e => {
 
       // check for success status
       if (body.status === 201) {
-        feedbackContainer.innerHTML = displayFeedback(body);
+        feedbackContainer.innerHTML = "loa application sent successfully";
         feedbackContainer.classList.remove("feedback-message-error");
         feedbackContainer.classList.add("feedback-message-success");
         window.scrollTo(0, 0);
