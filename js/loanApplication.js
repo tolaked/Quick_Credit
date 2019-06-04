@@ -1,3 +1,13 @@
+// check if token has expired
+const checkExpiredToken = responseBody => {
+  if (responseBody.error.expiredAt) {
+    // Redirect user to home page
+    setTimeout(() => {
+      window.location.href = "sign-in.html";
+    }, 1000);
+  }
+};
+
 const displayFeedback = responseData => {
   let listItem = "";
 
@@ -33,8 +43,10 @@ const postLoanApp = e => {
 
   // User input data object
   const formData = {
+    clientemail: body.data.loan.clientemail,
+    createdon: new Date(),
     tenor: parseInt(loanTenor, 12),
-    Amount: parseInt(loanAmount, 10)
+    amount: parseInt(loanAmount, 10)
   };
 
   // get user object from
@@ -77,27 +89,6 @@ const postLoanApp = e => {
 
         // redirect to login if token has expired
         checkExpiredToken(body);
-
-        // cycle over each element in the error array
-        // cycle over each form field next sibling
-        // check and display error if any
-        // body.error.forEach(element => {
-        //   Object.keys(formData).forEach(key => {
-        //     if (element.key === key) {
-        //       document.querySelector(`.${element.key}`).style.border =
-        //         "0.7px solid #dc3545";
-        //       if (element.key === "meetup") {
-        //         document.querySelector(
-        //           `.${element.key}`
-        //         ).nextElementSibling.innerHTML = "Select meetup topic.";
-        //       } else {
-        //         document.querySelector(
-        //           `.${element.key}`
-        //         ).nextElementSibling.innerHTML = element.Rule;
-        //       }
-        //     }
-        //   });
-        // });
       }
     })
     .catch(err => err);
