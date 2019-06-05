@@ -60,7 +60,8 @@ const signIn = e => {
         const userData = JSON.stringify({
           username: body.data[0].user.lastname,
           token: body.data[0].token,
-          access: body.data[0].user.isAdmin
+          access: body.data[0].user.isAdmin,
+          email: body.data[0].user.email
         });
         const loggedInUser = body.data[0].user.lastname;
         localStorage.setItem("user", userData);

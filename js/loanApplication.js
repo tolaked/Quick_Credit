@@ -7,15 +7,15 @@ const checkExpiredToken = responseBody => {
     }, 1000);
   }
 };
-// const resetFields = () => {
-//   const fields = document.querySelectorAll(".error");
-//   const fieldsArr = Array.prototype.slice.call(fields);
-//   fieldsArr.forEach(element => {
-//     const currentField = element;
-//     currentField.innerHTML = "";
-//     currentField.previousElementSibling.style.border = "1px solid #f4f4f4";
-//   });
-// };
+const resetFields = () => {
+  const fields = document.querySelectorAll(".error");
+  const fieldsArr = Array.prototype.slice.call(fields);
+  fieldsArr.forEach(element => {
+    const currentField = element;
+    currentField.innerHTML = "";
+    currentField.previousElementSibling.style.border = "1px solid #f4f4f4";
+  });
+};
 
 const displayFeedback = responseData => {
   let listItem = "";
@@ -24,7 +24,10 @@ const displayFeedback = responseData => {
     if (responseData.error.expiredAt) {
       listItem +=
         "<li class='feedback-list-item'>Session expired, Please Login.</li>";
-    } else {
+    } else if (
+      responseData.status === 422 &&
+      typeof responseData.error !== "string"
+    ) {
       listItem +=
         "<li class='feedback-list-item'>Please fill the required field below.</li>";
     }
@@ -39,7 +42,7 @@ const displayFeedback = responseData => {
 
 const postLoanApp = e => {
   e.preventDefault();
-  // resetFields();
+  resetFields();
 
   // get all user input values
   const loanTenor = document.getElementById("tenor").value;
@@ -48,8 +51,8 @@ const postLoanApp = e => {
 
   // User input data object
   const formData = {
-    tenor: parseInt(loanTenor, 10),
-    amount: parseFloat(loanAmount)
+    amount: parseFloat(loanAmount),
+    tenor: parseInt(loanTenor, 10)
   };
 
   // sign up API-endpoint url
@@ -60,10 +63,9 @@ const postLoanApp = e => {
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
-
     userToken = token;
   }
-  console.log(userToken);
+
   // Make a post request to sign up endpoint
   fetch(url, {
     method: "POST",
@@ -83,7 +85,7 @@ const postLoanApp = e => {
 
         // Redirect user to home page
         setTimeout(() => {
-          window.location.href = "sign-in.html";
+          window.location.href = "user.html";
         }, 1000);
       } else {
         feedbackContainer.innerHTML = displayFeedback(body);
