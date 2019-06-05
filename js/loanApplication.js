@@ -48,7 +48,6 @@ const postLoanApp = e => {
 
   // User input data object
   const formData = {
-    clientemail: body.data.loan.clientemail,
     tenor: parseInt(loanTenor, 10),
     amount: parseFloat(loanAmount)
   };
@@ -87,7 +86,7 @@ const postLoanApp = e => {
           window.location.href = "sign-in.html";
         }, 1000);
       } else {
-        feedbackContainer.innerHTML = "error";
+        feedbackContainer.innerHTML = displayFeedback(body);
         feedbackContainer.classList.add("feedback-message-error");
 
         // redirect to login if token has expired
