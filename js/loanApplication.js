@@ -63,7 +63,7 @@ const postLoanApp = e => {
 
     userToken = token;
   }
-
+  console.log(userToken);
   // Make a post request to sign up endpoint
   fetch(url, {
     method: "POST",
