@@ -1,4 +1,21 @@
+let userToken = "";
+if (localStorage.getItem("user")) {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const { token } = userData;
+
+  userToken = token;
+}
+
 const feedbackContainer = document.querySelector(".feedback-message");
+
+const checkExpiredToken = responseBody => {
+  if (responseBody.error.expiredAt) {
+    // Redirect user to home page
+    setTimeout(() => {
+      window.location.href = "sign-in.html";
+    }, 1000);
+  }
+};
 
 const displayFeedback = responseData => {
   feedbackContainer.innerHTML = `<li class='feedback-list-item'>${
@@ -19,7 +36,8 @@ const getAllApplications = () => {
   fetch(url, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      token: userToken
     }
   })
     .then(res => res.json())
