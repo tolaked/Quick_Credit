@@ -51,7 +51,7 @@ const getAllApplications = () => {
         });
 
         // get loan container
-        const allLoansContainer = document.getElementById("clientloanss");
+        const allLoansContainer = document.querySelector(".clientloanss");
 
         // Display all loan record
         allLoansContainer.innerHTML = allLoans;
