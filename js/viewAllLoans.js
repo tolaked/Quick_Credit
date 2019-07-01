@@ -24,6 +24,13 @@ const getAllApplications = () => {
   // All loans endpoint url
   const url = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
+  let userToken;
+  if (localStorage.getItem("user")) {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const { token } = userData;
+    userToken = token;
+  }
+
   // make a GET request to meetups
   fetch(url, {
     method: "GET",
@@ -39,8 +46,7 @@ const getAllApplications = () => {
         feedbackContainer.classList.remove("feedback-message-error");
         let allLoans = "";
         body.data.forEach(userLoan => {
-          allLoans += `<div class="clientloanss">
-          <article>
+          allLoans += `<article>
               <p>Client's Email</p>
               <p>${userLoan.email}</p>
             </article>
@@ -56,12 +62,12 @@ const getAllApplications = () => {
                     
                   </article>
                   <div class="acctt"><a class="acctt" href="loan.html">View Application</a></div>
-                </div>
                 <br>`;
+          console.log(allLoans);
         });
 
         // get loan container
-        const allLoansContainer = document.querySelector(".clientloanss");
+        const allLoansContainer = document.getElementById("clientloanss");
 
         // Display all loan record
         allLoansContainer.innerHTML = allLoans;
