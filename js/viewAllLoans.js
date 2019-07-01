@@ -1,11 +1,3 @@
-let userToken = "";
-if (localStorage.getItem("user")) {
-  const userData = JSON.parse(localStorage.getItem("user"));
-  const { token } = userData;
-
-  userToken = token;
-}
-
 const feedbackContainer = document.querySelector(".feedback-message");
 
 const checkExpiredToken = responseBody => {
