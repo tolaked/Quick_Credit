@@ -46,9 +46,12 @@ const getAllApplications = () => {
         feedbackContainer.classList.remove("feedback-message-error");
         let allLoans = "";
         body.data.forEach(userLoan => {
+          const formatedDate = moment(allLoans.createdon).format(
+            "dddd, MMMM Do YYYY, h:mm:ss a"
+          );
           allLoans += `<article>
               <p>Client's Email</p>
-              <p>${userLoan.email}</p>
+              <p>${userLoan.clientemail}</p>
             </article>
             <article>
                 <p>Loan Amount</p>
@@ -56,7 +59,7 @@ const getAllApplications = () => {
               </article>
             <article>
               <p>Application Date</p>
-              <p ${userLoan.createdon}></p>
+              <p ${formatedDate}></p>
             </article>
                 <article class ="buttons">
                     
