@@ -59,7 +59,7 @@ const getAllApplications = () => {
               </article>
             <article>
               <p>Application Date</p>
-              <p ${formatedDate}></p>
+              <p ${userLoan.createdon}></p>
             </article>
                 <article class ="buttons">
                     
