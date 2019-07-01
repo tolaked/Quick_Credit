@@ -41,7 +41,7 @@ const getAllApplications = () => {
   })
     .then(res => res.json())
     .then(body => {
-      hideOverlay();
+      // hideOverlay();
       if (body.status === 200) {
         feedbackContainer.classList.remove("feedback-message-error");
         let allLoans = "";
@@ -67,7 +67,7 @@ const getAllApplications = () => {
         });
 
         // get loan container
-        const allLoansContainer = document.getElementById("clientloanss");
+        const allLoansContainer = document.getElementById("viewLoans");
 
         // Display all loan record
         allLoansContainer.innerHTML = allLoans;
