@@ -128,7 +128,11 @@ export default class UsersController {
         data: [
           {
             message: "Logged in successfully",
-            user: { lastname: rows[0].lastname, isAdmin: rows[0].isadmin },
+            user: {
+              lastname: rows[0].lastname,
+              isAdmin: rows[0].isadmin,
+              email: rows[0].email
+            },
             token
           }
         ]

@@ -105,6 +105,7 @@ class validate {
         .max(12)
         .required(),
       amount: Joi.number()
+        .integer()
         .error(() => "Amount is required and must contain only number")
         .required()
     });
