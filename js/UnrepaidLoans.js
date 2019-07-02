@@ -1,6 +1,6 @@
 const feedbackContainers = document.querySelector(".feedback-messages");
 
-const checkExpiredToken = responseBody => {
+const checkToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
     setTimeout(() => {
