@@ -594,6 +594,12 @@ hr {
   background-color: white;
   border-radius: 5px;
 }
+#notpaid {
+  background-color: white;
+  justify-content: right;
+  border-radius: 3px;
+}
+
 .clientloanss {
   background-color: white;
   justify-content: right;
