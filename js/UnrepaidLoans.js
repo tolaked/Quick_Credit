@@ -75,7 +75,7 @@ const unrepaidLoans = () => {
       </article>
       <article>
           <p>Payment Installment</p>
-          <p>&#8358;${debt.paymentinstallment}/p>
+          <p>&#8358;${debt.paymentinstallment}</p>
         </article><hr>`;
         });
 
