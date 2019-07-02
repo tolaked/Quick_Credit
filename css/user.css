@@ -601,9 +601,12 @@ hr {
 }
 
 #clientloanss {
-  background-color: white;
+  /* background-color: white; */
   justify-content: right;
   border-radius: 3px;
+}
+.out {
+  background-color: white;
 }
 #viewLoans {
   background-color: white;
