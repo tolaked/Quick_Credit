@@ -595,13 +595,11 @@ hr {
   border-radius: 5px;
 }
 #notpaid {
-  background-color: white;
   justify-content: right;
   border-radius: 3px;
 }
 
 #clientloanss {
-  /* background-color: white; */
   justify-content: right;
   border-radius: 3px;
 }
@@ -641,6 +639,7 @@ hr {
   display: flex;
   justify-content: space-between;
   border-bottom: 0.3px solid;
+  background-color: white;
 }
 
 .ref {

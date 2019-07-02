@@ -47,7 +47,7 @@ const unrepaidLoans = () => {
         feedbackContainers.classList.remove("feedback-message-error");
         let outstandingLoan = "";
         body.data.forEach(debt => {
-          outstandingLoan += `<div class="out"><article>
+          outstandingLoan += `<article>
           <p>Client's Email</p>
           <p>${debt.clientemail}</p>
         </article>
@@ -77,7 +77,7 @@ const unrepaidLoans = () => {
           <p>Payment Installment</p>
           <p>&#8358;${debt.paymentinstallment}</p>
         </article>
-        </div><hr>`;
+        <hr>`;
         });
 
         // get loan container
