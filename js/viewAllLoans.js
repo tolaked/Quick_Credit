@@ -62,7 +62,7 @@ const getAllApplications = () => {
                     
                   </article>
                   <div class="acctt"><a class="acctt" href="loan.html">View Application</a></div>
-                <br>`;
+                <hr>`;
           console.log(allLoans);
         });
 
