@@ -1,4 +1,4 @@
-const feedbackContainer = document.querySelector(".feedback-messages");
+const feedbackContainers = document.querySelector(".feedback-messages");
 
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
@@ -10,10 +10,10 @@ const checkExpiredToken = responseBody => {
 };
 
 const displayFeedback = responseData => {
-  feedbackContainer.innerHTML = `<li class='feedback-list-item'>${
+  feedbackContainers.innerHTML = `<li class='feedback-list-item'>${
     responseData.error
   }</li>`;
-  feedbackContainer.classList.add("feedback-message-error");
+  feedbackContainers.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
 
@@ -44,7 +44,7 @@ const unrepaidLoans = () => {
     .then(body => {
       // hideOverlay();
       if (body.status === 200) {
-        feedbackContainer.classList.remove("feedback-message-error");
+        feedbackContainers.classList.remove("feedback-message-error");
         let outstandingLoan = "";
         body.data.forEach(debt => {
           outstandingLoan += `<article>
