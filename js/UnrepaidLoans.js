@@ -9,7 +9,7 @@ const checkToken = responseBody => {
   }
 };
 
-const displayFeedback = responseData => {
+const feedback = responseData => {
   feedbackContainers.innerHTML = `<li class='feedback-list-item'>${
     responseData.error
   }</li>`;
@@ -22,22 +22,22 @@ const displayFeedback = responseData => {
  */
 const unrepaidLoans = () => {
   // All loans endpoint url
-  const url =
+  const urlpath =
     "https://my-quick-credit-app.herokuapp.com/api/v2/loans?status=approved&repaid=false";
 
-  let userToken;
+  let useToken;
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
-    userToken = token;
+    useToken = token;
   }
 
   // make a GET request to meetups
-  fetch(url, {
+  fetch(urlpath, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      token: userToken
+      token: useToken
     }
   })
     .then(res => res.json())
@@ -80,12 +80,12 @@ const unrepaidLoans = () => {
         });
 
         // get loan container
-        const allLoansContainer = document.getElementById("notpaid");
+        const allunrepaidContainer = document.getElementById("notpaid");
 
         // Display all loan record
-        allLoansContainer.innerHTML = outstandingLoan;
+        allunrepaidContainer.innerHTML = outstandingLoan;
       } else {
-        displayFeedback(body);
+        feedback(body);
       }
     })
     .catch(err => err);
