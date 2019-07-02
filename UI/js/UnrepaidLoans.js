@@ -1,6 +1,6 @@
-const feedbackContainer = document.querySelector(".feedback-messages");
+const feedbackContainers = document.querySelector(".feedback-messages");
 
-const checkExpiredToken = responseBody => {
+const checkToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
     setTimeout(() => {
@@ -9,11 +9,11 @@ const checkExpiredToken = responseBody => {
   }
 };
 
-const displayFeedback = responseData => {
-  feedbackContainer.innerHTML = `<li class='feedback-list-item'>${
+const feedback = responseData => {
+  feedbackContainers.innerHTML = `<li class='feedback-list-item'>${
     responseData.error
   }</li>`;
-  feedbackContainer.classList.add("feedback-message-error");
+  feedbackContainers.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
 
@@ -22,29 +22,29 @@ const displayFeedback = responseData => {
  */
 const unrepaidLoans = () => {
   // All loans endpoint url
-  const url =
+  const urlpath =
     "https://my-quick-credit-app.herokuapp.com/api/v2/loans?status=approved&repaid=false";
 
-  let userToken;
+  let useToken;
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
-    userToken = token;
+    useToken = token;
   }
 
   // make a GET request to meetups
-  fetch(url, {
+  fetch(urlpath, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      token: userToken
+      token: useToken
     }
   })
     .then(res => res.json())
     .then(body => {
       // hideOverlay();
       if (body.status === 200) {
-        feedbackContainer.classList.remove("feedback-message-error");
+        feedbackContainers.classList.remove("feedback-message-error");
         let outstandingLoan = "";
         body.data.forEach(debt => {
           outstandingLoan += `<article>
@@ -75,17 +75,17 @@ const unrepaidLoans = () => {
       </article>
       <article>
           <p>Payment Installment</p>
-          <p>&#8358;${debt.paymentinstallment}/p>
-        </article>`;
+          <p>&#8358;${debt.paymentinstallment}</p>
+        </article><hr>`;
         });
 
         // get loan container
-        const allLoansContainer = document.getElementById("notpaid");
+        const allunrepaidContainer = document.getElementById("notpaid");
 
         // Display all loan record
-        allLoansContainer.innerHTML = outstandingLoan;
+        allunrepaidContainer.innerHTML = outstandingLoan;
       } else {
-        displayFeedback(body);
+        feedback(body);
       }
     })
     .catch(err => err);
