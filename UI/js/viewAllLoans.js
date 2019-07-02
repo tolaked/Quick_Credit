@@ -62,8 +62,7 @@ const getAllApplications = () => {
                     
                   </article>
                   <div class="acctt"><a class="acctt" href="loan.html">View Application</a></div>
-                <br>`;
-          console.log(allLoans);
+                <hr>`;
         });
 
         // get loan container
