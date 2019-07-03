@@ -76,7 +76,8 @@ const unrepaidLoans = () => {
       <article>
           <p>Payment Installment</p>
           <p>&#8358;${debt.paymentinstallment}</p>
-        </article><hr>`;
+        </article>
+        <hr>`;
         });
 
         // get loan container
