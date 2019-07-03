@@ -30,7 +30,7 @@ const verifyUser = e => {
   const event = document.querySelector(".userStatus").value;
   // console.log(event);
   const formData = {
-    verificationStatus: event.options[event.selectedIndex].text
+    verificationStatus: event.options[event.selectedIndex].value
   };
 
   const userEmail = document.getElementById("email").value;
