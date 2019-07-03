@@ -28,6 +28,7 @@ const verifyUser = e => {
     const { token } = userData;
     usersToken = token;
   }
+  console.log(usersToken);
 
   const formData = {
     status: document.querySelector(".newStatus").value
