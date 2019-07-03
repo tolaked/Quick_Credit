@@ -59,4 +59,5 @@ const verifyUser = e => {
     .catch(err => err);
 };
 
-verifyUser();
+const verifyBtn = document.querySelector(".add-loan-button");
+verifyBtn.addEventListener("click", verifyUser);
