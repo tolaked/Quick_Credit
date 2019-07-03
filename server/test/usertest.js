@@ -1728,11 +1728,11 @@ describe("PATCH api/v2/loans/34", () => {
 });
 
 // test for POST /to view loan application
-describe("PATCH api/v2/loans/344", () => {
+describe("PATCH api/v2/loans/3464", () => {
   it("should return an error if loan is not found", done => {
     chai
       .request(app)
-      .patch("/api/v2/loans/344")
+      .patch("/api/v2/loans/3474")
       .set("token", loggedInUserToken)
       .send({
         status: "approved"
@@ -1740,6 +1740,7 @@ describe("PATCH api/v2/loans/344", () => {
       .end((err, res) => {
         if (err) done();
         const body = res.body;
+        console.log(body)
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
         expect(body.status).to.be.equals(404);

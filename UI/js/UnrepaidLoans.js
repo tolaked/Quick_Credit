@@ -30,8 +30,9 @@ const unrepaidLoans = () => {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
     useToken = token;
+  } else {
+    window.location.href = "sign-in.html";
   }
-
   // make a GET request to meetups
   fetch(urlpath, {
     method: "GET",
