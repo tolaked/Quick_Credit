@@ -29,7 +29,7 @@ const verifyUser = e => {
   } else {
     window.location.href = "sign-in.html";
   }
-  console.log(token);
+  console.log(usersToken);
 
   const formData = {
     status: document.querySelector(".newStatus").value
