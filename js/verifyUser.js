@@ -28,12 +28,12 @@ const verifyUser = e => {
     usersToken = token;
   }
   const event = document.querySelector(".userStatus").value;
+  console.log(event);
   const formData = {
     verificationStatus: event.options[event.selectedIndex].text
   };
 
   const userEmail = document.getElementById("email").value;
-  console.log(userEmail);
 
   const url = `https://my-quick-credit-app.herokuapp.com/api/v1/users/${userEmail}/verify`;
 
