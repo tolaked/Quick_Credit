@@ -1,6 +1,6 @@
-const feedContainers = document.querySelector(".feed");
+const feedContainrs = document.querySelector(".feed");
 
-const checkToken = responseBody => {
+const checkedToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
     setTimeout(() => {
@@ -10,10 +10,10 @@ const checkToken = responseBody => {
 };
 
 const feedbak = responseData => {
-  feedContainers.innerHTML = `<li class='feedback-list-item'>${
+  feedContainrs.innerHTML = `<li class='feedback-list-item'>${
     responseData.error
   }</li>`;
-  feedContainers.classList.add("feedback-message-error");
+  feedContainrs.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
 
@@ -51,7 +51,7 @@ const verifyUser = e => {
       // hideOverlay();
 
       if (body.status === 200) {
-        feedContainers.innerHTML = `User with the email ${userEmail} verified successfully`;
+        feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
       } else {
         feedbak(body);
       }
