@@ -37,7 +37,7 @@ const verifyUser = e => {
 
   const userEmail = document.getElementById("email").value;
 
-  const url = `https://my-quick-credit-app.herokuapp.com/api/v1/users/${userEmail}/verify`;
+  const url = `https://my-quick-credit-app.herokuapp.com/api/v2/users/${userEmail}/verify`;
 
   fetch(url, {
     method: "PATCH",
@@ -51,7 +51,6 @@ const verifyUser = e => {
     .then(body => {
       // eslint-disable-next-line no-undef
       // hideOverlay();
-
       if (body.status === 200) {
         feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
       } else {
