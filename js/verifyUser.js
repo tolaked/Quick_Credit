@@ -27,11 +27,11 @@ const verifyUser = e => {
     const { token } = userData;
     usersToken = token;
   }
-  const event = document.querySelector(".userStatus").value;
-  console.log(event);
+
   const formData = {
-    verificationStatus: event.options[event.selectedIndex].value
+    verificationStatus: document.querySelector(".newStatus").value
   };
+  console.log(formData);
 
   const userEmail = document.getElementById("email").value;
 
