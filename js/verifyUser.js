@@ -33,6 +33,7 @@ const verifyUser = e => {
   };
 
   const userEmail = document.getElementById("email").value;
+  console.log(userEmail);
 
   const url = `https://my-quick-credit-app.herokuapp.com/api/v1/users/${userEmail}/verify`;
 
