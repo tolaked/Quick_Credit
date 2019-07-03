@@ -16,6 +16,7 @@ const feedbak = responseData => {
   feedContainrs.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
+console.log(feedback);
 
 const verifyUser = e => {
   e.preventDefault();
