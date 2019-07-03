@@ -20,16 +20,16 @@ const feedbak = responseData => {
 const verifyUser = e => {
   e.preventDefault();
   // eslint-disable-next-line no-undef
-  showOverlay();
+  // showOverlay();
   let usersToken;
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
     usersToken = token;
   }
-
+  const e = document.querySelector(".userStatus").value;
   const formData = {
-    verificationStatus: document.querySelector(".userStatus").value
+    verificationStatus: e.options[e.selectedIndex].text
   };
 
   const userEmail = document.getElementById("email").value;
