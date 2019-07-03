@@ -28,7 +28,7 @@ const verifyUser = e => {
     usersToken = token;
   }
   const event = document.querySelector(".userStatus").value;
-  // console.log(event);
+  console.log(event);
   const formData = {
     verificationStatus: event.options[event.selectedIndex].value
   };
