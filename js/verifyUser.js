@@ -16,7 +16,6 @@ const feedbak = responseData => {
   feedContainrs.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
-console.log(feedback);
 
 const verifyUser = e => {
   e.preventDefault();
@@ -30,12 +29,11 @@ const verifyUser = e => {
   } else {
     window.location.href = "sign-in.html";
   }
-  console.log(usersToken);
+  console.log(token);
 
   const formData = {
     status: document.querySelector(".newStatus").value
   };
-  console.log(formData);
 
   const userEmail = document.getElementById("email").value;
 
