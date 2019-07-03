@@ -29,7 +29,7 @@ const verifyUser = e => {
   }
 
   const formData = {
-    verificationStatus: document.querySelector(".newStatus").value
+    status: document.querySelector(".newStatus").value
   };
   console.log(formData);
 
