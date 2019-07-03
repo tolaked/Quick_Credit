@@ -53,6 +53,7 @@ const verifyUser = e => {
       // hideOverlay();
       if (body.status === 200) {
         feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
+        feedContainrs.classList.remove("feedback-message-success");
         feedContainrs.classList.add("feedback-message-success");
       } else {
         feedbak(body);
