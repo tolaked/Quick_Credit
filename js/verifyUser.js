@@ -27,6 +27,8 @@ const verifyUser = e => {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
     usersToken = token;
+  } else {
+    window.location.href = "sign-in.html";
   }
   console.log(usersToken);
 
