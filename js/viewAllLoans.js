@@ -79,7 +79,6 @@ const getAllApplications = () => {
 
 const loanDetails = e => {
   // All loans endpoint url
-  e.preventDefault();
   const detailsurl = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
   let detailsToken;
