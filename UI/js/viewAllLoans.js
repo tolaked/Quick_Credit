@@ -77,10 +77,18 @@ const getAllApplications = () => {
     .catch(err => err);
 };
 
-const loanDetails = e => {
+const getId = () => {
+  const urlString = window.location.href;
+  const url = new URL(urlString);
+  const oneloanId = url.searchParams.get("id");
+
+  return oneloanId;
+};
+
+const loanDetails = () => {
+  const loanID = getId();
   // All loans endpoint url
-  e.preventDefault();
-  const detailsurl = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
+  const detailsurl = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/${loanID}`;
 
   let detailsToken;
   if (localStorage.getItem("user")) {
@@ -101,47 +109,44 @@ const loanDetails = e => {
     .then(body => {
       // hideOverlay();
       let loandetails = "";
-      body.data.forEach(getdetails => {
-        loandetails += ` <article>
+      loandetails += ` <article>
           <p>Client's email</p>
-          <p>${getdetails.clientemail}</p>
+          <p>${body.data[0].clientemail}</p>
         </article>
-        <article  id="${getdetails.id}" value="${getdetails.id}">
+        <article  id="${body.data[0].id}" value="${body.data[0].id}">
                 <p>loan id</p>
-                <p>${getdetails.id}</p>
+                <p>${body.data[0].id}</p>
               </article>
         <article>
                 <p>Amount</p>
-                <p>&#8358;${getdetails.amount}</p>
+                <p>&#8358;${body.data[0].amount}</p>
               </article>
         <article>
           <p>Tenor</p>
-          <p>${getdetails.tenor}</p>
+          <p>${body.data[0].tenor}</p>
         </article>
         <article>
           <p>Balance</p>
-          <p>&#8358;${getdetails.balance}</p>
+          <p>&#8358;${body.data[0].balance}</p>
         </article>
         <article>
             <p>Interest</p>
-            <p>${getdetails.interest}</p>
+            <p>${body.data[0].interest}</p>
           </article>
           <article>
               <p>Payment Installment</p>
-              <p>&#8358;${getdetails.paymentinstallment}</p>
+              <p>&#8358;${body.data[0].paymentinstallment}</p>
             </article>
         <article class ="buttons">
           <p>Status</p>
-          <p>${getdetails.status}</p>
+          <p>${body.data[0].status}</p>
         </article>
         <article >
                 <button class="ref" id="approv">Approve</button>
                 <button class="ref" id="reject">Reject</button>
               </article>`;
-      });
 
       // get loan container
-
       const getFulldetails = document.getElementById("fulldetails");
 
       // Display all loan record

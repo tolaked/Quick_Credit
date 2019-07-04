@@ -31,7 +31,7 @@ const displayFeedback = responseData => {
       listItem +=
         "<li class='feedback-list-item'>Please fill the required field below.</li>";
     }
-  } else if (responseData.status === 200 || responseData.status === 201) {
+  } else if (responseData.status === 201) {
     listItem += `<li class='feedback-list-item'>${responseData.message}</li>`;
   } else {
     listItem += `<li class='feedback-list-item'>${responseData.error}</li>`;
@@ -44,20 +44,6 @@ const postLoanApp = e => {
   e.preventDefault();
   resetFields();
 
-  // get all user input values
-  const loanTenor = document.getElementById("tenor").value;
-  const loanAmount = document.getElementById("amount").value;
-  const feedbackContainer = document.querySelector(".feedback-message");
-
-  // User input data object
-  const formData = {
-    amount: parseFloat(loanAmount),
-    tenor: parseInt(loanTenor, 10)
-  };
-
-  // sign up API-endpoint url
-  const url = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
-
   // get user object from
   let userToken = "";
   if (localStorage.getItem("user")) {
@@ -65,6 +51,20 @@ const postLoanApp = e => {
     const { token } = userData;
     userToken = token;
   }
+
+  // get all user input values
+  const loanTenor = document.getElementById("tenor").value;
+  const loanAmount = document.getElementById("amount").value;
+  const feedbackContainer = document.querySelector(".feedback-message");
+
+  // User input data object
+  const formData = {
+    amount: loanAmount,
+    tenor: loanTenor
+  };
+
+  // loan application API-endpoint url
+  const url = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
   // Make a post request to sign up endpoint
   fetch(url, {
@@ -92,7 +92,7 @@ const postLoanApp = e => {
         feedbackContainer.classList.add("feedback-message-error");
 
         // redirect to login if token has expired
-        checkExpiredToken(body);
+        // checkExpiredToken(body);
       }
     })
     .catch(err => err);
