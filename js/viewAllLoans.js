@@ -77,7 +77,7 @@ const getAllApplications = () => {
     .catch(err => err);
 };
 
-const loanDetails = e => {
+const loanDetails = () => {
   // All loans endpoint url
   const detailsurl = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
