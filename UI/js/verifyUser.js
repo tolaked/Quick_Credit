@@ -1,6 +1,6 @@
-const feedContainers = document.querySelector(".feed");
+const feedContainrs = document.querySelector(".feed");
 
-const checkToken = responseBody => {
+const checkedToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
     setTimeout(() => {
@@ -10,31 +10,34 @@ const checkToken = responseBody => {
 };
 
 const feedbak = responseData => {
-  feedContainers.innerHTML = `<li class='feedback-list-item'>${
+  feedContainrs.innerHTML = `<li class='feedback-list-item'>${
     responseData.error
   }</li>`;
-  feedContainers.classList.add("feedback-message-error");
+  feedContainrs.classList.add("feedback-message-error");
   window.scrollTo(0, 0);
 };
 
 const verifyUser = e => {
   e.preventDefault();
   // eslint-disable-next-line no-undef
-  showOverlay();
+  // showOverlay();
   let usersToken;
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
     usersToken = token;
+  } else {
+    window.location.href = "sign-in.html";
   }
+  console.log(usersToken);
 
   const formData = {
-    verificationStatus: document.querySelector(".userStatus").value
+    status: document.querySelector(".newStatus").value
   };
 
   const userEmail = document.getElementById("email").value;
 
-  const url = `https://my-quick-credit-app.herokuapp.com/api/v1/users/${userEmail}/verify`;
+  const url = `https://my-quick-credit-app.herokuapp.com/api/v2/users/${userEmail}/verify`;
 
   fetch(url, {
     method: "PATCH",
@@ -48,9 +51,10 @@ const verifyUser = e => {
     .then(body => {
       // eslint-disable-next-line no-undef
       // hideOverlay();
-
       if (body.status === 200) {
-        feedContainers.innerHTML = `User with the email ${userEmail} verified successfully`;
+        feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
+        feedContainrs.classList.remove("feedback-message-success");
+        feedContainrs.classList.add("feedback-message-success");
       } else {
         feedbak(body);
       }
@@ -58,4 +62,5 @@ const verifyUser = e => {
     .catch(err => err);
 };
 
-verifyUser();
+const verifyBtn = document.querySelector(".add-loan-button");
+verifyBtn.addEventListener("click", verifyUser);

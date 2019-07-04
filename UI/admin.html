@@ -43,7 +43,7 @@
     
     <main class="main-body">
       <section class="sidebar">
-        <div class="apply"><i class="fas fa-user-check"></i>Verification</div>
+        <div class="apply"><i class="fas fa-user-check"></i>Verifications</div>
 
         <div class="sidebar-icon">
           
@@ -79,11 +79,13 @@
               />
               
               <label for="verification">Verification status</label>
-              <select class="userStatus" name="inst">
-                  <option value="0">--Select--</option>
-                  <option value="monthly">verified</option>
-                  <option value="Quarterly">unverified</option>
-                </select>
+              <input
+                type="text"
+                placeholder="Status"
+                name="status"
+                class="newStatus"
+                required
+              />
               
               </div>
               <hr />
@@ -261,5 +263,6 @@
     <script src="js/userdashboard.js"></script>
     <script src="js/viewAllLoans.js"></script>
     <script src="js/UnrepaidLoans.js"></script>
+    <script src="js/verifyUser.js"></script>
   </body>
 </html>
