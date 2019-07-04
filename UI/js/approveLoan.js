@@ -17,11 +17,9 @@ const feedbak = responseData => {
   window.scrollTo(0, 0);
 };
 
-const verifyUser = e => {
+const verifyLoan = e => {
   e.preventDefault();
-  // eslint-disable-next-line no-undef
-  // showOverlay();
-  let usersToken;
+
   if (localStorage.getItem("user")) {
     const userData = JSON.parse(localStorage.getItem("user"));
     const { token } = userData;
@@ -30,13 +28,18 @@ const verifyUser = e => {
     window.location.href = "sign-in.html";
   }
 
-  const formData = {
-    status: document.querySelector(".newStatus").value
-  };
+  let formData;
+  const allinputs = document.querySelectorAll(".ref");
+  for (let i = 0; i < allinputs.length; i++) {
+    if (allinputs[i].value === "approved") {
+      formData = { status: "approved" };
+    } else {
+      formData = { status: "rejected" };
+    }
+  }
+  const loanid = `document.getElementById("${getdetails.id}").value`;
 
-  const userEmail = document.getElementById("email").value;
-
-  const url = `https://my-quick-credit-app.herokuapp.com/api/v2/users/${userEmail}/verify`;
+  const url = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/${loanid}`;
 
   fetch(url, {
     method: "PATCH",
@@ -48,11 +51,12 @@ const verifyUser = e => {
   })
     .then(res => res.json())
     .then(body => {
-      // eslint-disable-next-line no-undef
-      // hideOverlay();
       if (body.status === 200) {
-        feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
+        feedContainrs.innerHTML = `Loan with the id ${
+          getdetails.id
+        } has been approved successfully`;
         feedContainrs.classList.add("feedback-message-success");
+
         feedContainrs.classList.remove("feedback-message-error");
       } else {
         feedbak(body);
@@ -61,5 +65,8 @@ const verifyUser = e => {
     .catch(err => err);
 };
 
-const verifyBtn = document.querySelector(".add-loan-button");
-verifyBtn.addEventListener("click", verifyUser);
+const approveBtn = document.getElementById("approv");
+const rejectBtn = document.getElementById("reject");
+
+approveBtn.addEventListener("click", verifyLoan);
+rejectBtn.addEventListener("click", verifyLoan);

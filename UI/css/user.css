@@ -606,6 +606,13 @@ hr {
 .out {
   background-color: white;
 }
+
+#fulldetails {
+  background-color: white;
+  justify-content: right;
+  border-radius: 3px;
+}
+
 #viewLoans {
   background-color: white;
   justify-content: right;
