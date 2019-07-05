@@ -1,5 +1,5 @@
 const feedbackContainer = document.querySelector(".feedback-message");
-
+const loanDetailsFedback = document.querySelector(".detailFeedback");
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
@@ -20,7 +20,7 @@ const displayFeedback = responseData => {
 /**
  * Fetch all loan applications
  */
-const getAllApplications = () => {
+const getAllApplications = e => {
   // All loans endpoint url
   const url = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
@@ -61,10 +61,12 @@ const getAllApplications = () => {
                 <article class ="buttons">
                     
                   </article>
-                  <div class="acctt"><a class="acctt" href="loan.html">View Application</a></div>
+                  <div class="${userLoan.id}" id="acctt"><a class="${
+            userLoan.id
+          }" id="acctt" href="loan.html">View Application</a></div>
                 <hr>`;
         });
-
+        console.log(e.target.className);
         // get loan container
         const allLoansContainer = document.getElementById("viewLoans");
 
@@ -77,16 +79,16 @@ const getAllApplications = () => {
     .catch(err => err);
 };
 
-const getId = () => {
-  const urlString = window.location.href;
-  const url = new URL(urlString);
-  const oneloanId = url.searchParams.get("id");
+// const getId = () => {
+//   const urlString = window.location.href;
+//   const url = new URL(urlString);
+//   const oneloanId = url.searchParams.get("id");
 
-  return oneloanId;
-};
+//   return oneloanId;
+// };
 
-const loanDetails = () => {
-  const loanID = getId();
+const loanDetails = e => {
+  const loanID = e.target.className;
   // All loans endpoint url
   const detailsurl = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/${loanID}`;
 
@@ -108,8 +110,9 @@ const loanDetails = () => {
     .then(res => res.json())
     .then(body => {
       // hideOverlay();
-      let loandetails = "";
-      loandetails += ` <article>
+      if (body.status === 200) {
+        let loandetails = "";
+        loandetails += ` <article>
           <p>Client's email</p>
           <p>${body.data[0].clientemail}</p>
         </article>
@@ -146,11 +149,15 @@ const loanDetails = () => {
                 <button class="ref" id="reject">Reject</button>
               </article>`;
 
-      // get loan container
-      const getFulldetails = document.getElementById("fulldetails");
+        // get loan container
+        const getFulldetails = document.getElementById("fulldetails");
 
-      // Display all loan record
-      getFulldetails.innerHTML = loandetails;
+        // Display all loan record
+        getFulldetails.innerHTML = loandetails;
+      } else {
+        loanDetailsFedback.innerHTML = displayFeedback(body);
+        feedbackContainer.classList.add("feedback-message-error");
+      }
     })
     .catch(err => err);
 };
