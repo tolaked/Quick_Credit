@@ -1,6 +1,7 @@
 const loanDetailsFedback = document.querySelector(".feed");
-let loanID;
-loanID = document.getElementById("acctti").className;
+
+const loanID = elementNodeReference.className;
+elementNodeReference.className = loanID;
 
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
