@@ -24,10 +24,7 @@ const displayFeedback = responseData => {
     if (responseData.error.expiredAt) {
       listItem +=
         "<li class='feedback-list-item'>Session expired, Please Login.</li>";
-    } else if (
-      responseData.status === 422 &&
-      typeof responseData.error !== "string"
-    ) {
+    } else if (responseData.status === 422) {
       listItem +=
         "<li class='feedback-list-item'>Please fill the required field below.</li>";
     }
