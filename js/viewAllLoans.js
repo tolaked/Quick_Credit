@@ -158,3 +158,4 @@ const loanDetails = () => {
 
 // fetch all loan record
 getAllApplications();
+loanDetails();
