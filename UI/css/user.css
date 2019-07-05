@@ -587,9 +587,9 @@ hr {
   border-radius: 10px;
   justify-content: space-between;
 }
-.acctt {
+/* #acctt {
   text-align: center;
-}
+} */
 .clientloans {
   background-color: white;
   border-radius: 5px;
@@ -671,13 +671,22 @@ hr {
 }
 
 /* style for view loan application tab */
-.acctt {
+#acctt {
   padding: 0.6em 1.3em 0.6em 1.3em;
   background-color: #212d57;
   color: white;
   text-align: center;
   display: block;
 }
+
+#acctti {
+  padding: 0.6em 1.3em 0.6em 1.3em;
+  background-color: #212d57;
+  color: white;
+  text-align: center;
+  display: block;
+}
+
 .acctt:hover {
   color: #dfe0e2;
   cursor: pointer;
