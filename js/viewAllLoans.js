@@ -1,5 +1,6 @@
 const feedbackContainer = document.querySelector(".feedback-message");
 const loanDetailsFedback = document.querySelector(".detailFeedback");
+const loanID = document.getElementById("acctt").className;
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
@@ -66,8 +67,7 @@ const getAllApplications = () => {
           }" id="acctt" href="loan.html">View Application</a></div>
                 <hr>`;
         });
-        const loanID = document.getElementById("acctt").className;
-        console.log(loanID);
+
         // get loan container
         const allLoansContainer = document.getElementById("viewLoans");
 
@@ -149,7 +149,7 @@ const loanDetails = () => {
         // Display all loan record
         getFulldetails.innerHTML = loandetails;
       } else {
-        loanDetailsFedback.innerHTML = displayFeedback(body);
+        loanDetailsFedback.innerHTML = "nothing";
         feedbackContainer.classList.add("feedback-message-error");
       }
     })
