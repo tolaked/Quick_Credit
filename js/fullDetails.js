@@ -1,6 +1,6 @@
 const loanDetailsFedback = document.querySelector(".feed");
 
-const loanID = document.querySelector("#acctti");
+// const loanID = document.querySelector("#acctti");
 
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
@@ -12,9 +12,9 @@ const checkExpiredToken = responseBody => {
 };
 
 const loanDetails = () => {
-  console.log(loanID);
+  // console.log(loanID);
   // All loans endpoint url
-  const detailsurl = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/${loanID}`;
+  const detailsurl = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/4`;
 
   let detailsToken;
   if (localStorage.getItem("user")) {
