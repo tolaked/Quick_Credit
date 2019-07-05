@@ -1,5 +1,5 @@
 const feedbackContainer = document.querySelector(".feedback-message");
-const loanDetailsFedback = document.querySelector(".detailFeedback");
+// const loanDetailsFedback = document.querySelector(".detailFeedback");
 const checkExpiredToken = responseBody => {
   if (responseBody.error.expiredAt) {
     // Redirect user to home page
