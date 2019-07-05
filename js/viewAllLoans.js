@@ -20,7 +20,7 @@ const displayFeedback = responseData => {
 /**
  * Fetch all loan applications
  */
-const getAllApplications = e => {
+const getAllApplications = () => {
   // All loans endpoint url
   const url = "https://my-quick-credit-app.herokuapp.com/api/v2/loans";
 
@@ -66,7 +66,7 @@ const getAllApplications = e => {
           }" id="acctt" href="loan.html">View Application</a></div>
                 <hr>`;
         });
-        console.log(e.target.className);
+
         // get loan container
         const allLoansContainer = document.getElementById("viewLoans");
 
@@ -78,7 +78,7 @@ const getAllApplications = e => {
     })
     .catch(err => err);
 };
-
+getAllApplications();
 // const getId = () => {
 //   const urlString = window.location.href;
 //   const url = new URL(urlString);
