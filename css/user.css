@@ -678,6 +678,15 @@ hr {
   text-align: center;
   display: block;
 }
+
+#acctti {
+  padding: 0.6em 1.3em 0.6em 1.3em;
+  background-color: #212d57;
+  color: white;
+  text-align: center;
+  display: block;
+}
+
 .acctt:hover {
   color: #dfe0e2;
   cursor: pointer;
