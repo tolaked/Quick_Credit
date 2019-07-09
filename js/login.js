@@ -82,9 +82,20 @@ const signIn = e => {
           }, 2000);
         }
       } else {
-        feedbackContainer.innerHTML = "Plese enter valid login details";
+        feedbackContainer.innerHTML = displayFeedback(body);
         feedbackContainer.classList.add("feedback-message-error");
         window.scrollTo(0, 0);
+        // cycle over each element in the error array
+        // cycle over each form field next sibling
+        // check and display error if any
+        body.error.forEach((element) => {
+          Object.keys(formData).forEach((key) => {
+            if (element.key === key) {
+              document.querySelector(`.${element.key}`).style.border = '0.7px solid #dc3545';
+              document.querySelector(`.${element.key}`).nextElementSibling.innerHTML = element.Rule;
+            }
+          });
+        });
       }
     })
     .catch(err => err);

@@ -677,6 +677,11 @@ hr {
   color: white;
   text-align: center;
   display: block;
+  cursor: pointer;
+}
+
+#fulldetails {
+  /* display: none; */
 }
 
 #acctti {
