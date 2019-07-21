@@ -1,3 +1,31 @@
+const showOverlay = e => {
+  if (
+    e.target.className === "signuptit" ||
+    e.target.className === "registerbtn"
+  ) {
+    document.querySelector(".signuptit").innerHTML = "Loading ...";
+    document.querySelector(".signuptit").style.display = "inline-block";
+    document.querySelector(".registerbtn").disabled = true;
+
+    document.getElementById("spinbtn2").style.display = "inline-block";
+    document.getElementById("submit").style.backgroundColor = "#ddd";
+  }
+};
+
+const hideOverlay = () => {
+  document.querySelector(".overlay").style.display = "none";
+};
+
+// Clear all errors from field
+const resetFields = () => {
+  const fields = document.querySelectorAll(".error");
+  const fieldsArr = Array.prototype.slice.call(fields);
+  fieldsArr.forEach(element => {
+    const currentField = element;
+    currentField.innerHTML = "";
+    currentField.previousElementSibling.style.border = "1px solid #f4f4f4";
+  });
+};
 const displayFeedback = responseData => {
   let listItem = "";
 
@@ -17,6 +45,8 @@ const displayFeedback = responseData => {
 
 const signUp = e => {
   e.preventDefault();
+  resetFields();
+  showOverlay();
   // get all user input values
   const firstname = document.getElementById("firstName").value;
   const lastname = document.getElementById("lastName").value;
@@ -68,6 +98,7 @@ const signUp = e => {
     )
       .then(res => res.json())
       .then(body => {
+        hideOverlay();
         // check for success status
 
         if (body.status === 201) {
@@ -95,10 +126,22 @@ const signUp = e => {
             window.location.href = "user.html";
           }, 1000);
         } else {
-          feedbackContainer.innerHTML = "Please fill all required field";
+          feedbackContainer.innerHTML = displayFeedback(body);
           feedbackContainer.classList.add("feedback-message-error");
+          body.error.forEach(element => {
+            Object.keys(formData).forEach(key => {
+              if (element.key === key) {
+                document.querySelector(`.${element.key}`).style.border =
+                  "0.7px solid #dc3545";
+                document.querySelector(
+                  `.${element.key}`
+                ).nextElementSibling.innerHTML = element.Rule;
+              }
+            });
+          });
         }
       })
+
       .catch(err => err);
   }
 };

@@ -39,6 +39,7 @@
               placeholder="First name"
               required
             />
+            <small class="error"></small>
 
             <p class="label"><label for="lastName" class="label">Last Name</label></p>            
             <input
@@ -49,6 +50,7 @@
               placeholder="Last name"
               required
             />
+            <small class="error"></small>
 
             <p class="label"><label for="email" class="label">Email</label></p>
             <input
@@ -59,6 +61,7 @@
               placeholder="Enter email"
               required
             />
+            <small class="error"></small>
 
             <p class="label">
                 <label for="email" class="label">Address</label>
@@ -71,6 +74,7 @@
                 placeholder="Address"
                 required
               />
+              <small class="error"></small>
 
             <p class="label"><label for="password" class="label">Password</label></p>
             <input
@@ -81,6 +85,8 @@
               placeholder="Enter password"
               required
             />
+            <small class="error"></small>
+
             <div class="feedback_container2"></div>
             <p class="label"><label for="confirm-password" class="label">Confirm password</label><i class="fa fa-asterisk"></i></p>
             <input
@@ -90,9 +96,9 @@
               name="confirm-password"
               placeholder="Re-enter password"
               required
-            />
+            /><small class="error"></small>
             
-            <button type="submit" id="submit">
+            <button type="submit" class="registerbtn"  id="submit">
                 <div class="signuptit">Sign up</div>
               <i class="fas fa-spinner btnspinner" id="spinbtn2"> </i>
             </button>
@@ -104,6 +110,14 @@
             </div>
           </div>
         </form>
+      </div>
+      <div class="overlay">
+        <div class="spinner-icon-container">
+          <svg version="1.2" class="spinner-icon" height="80" width="125" xmlns="http://www.w3.org/2000/svg" viewport="0 0 125 80"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path fill="none" stroke="#ffffff" stroke-miterlimit="20" d="M52,21 L81,40 L52,60 Z"></path>
+          </svg>
+        </div>
       </div>
     </section>
     

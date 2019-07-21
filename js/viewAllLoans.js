@@ -64,9 +64,7 @@ const getAllApplications = () => {
                 <article class ="buttons">
                     
                   </article>
-                  <div class="${
-                    userLoan.id
-                  }" id="acctti"><a href="loan.html">View aplication</a></div>
+                  <div class="${userLoan.id}" id="acctti">View application</div>
                 <hr>
                 </div>`;
         });
@@ -93,6 +91,7 @@ const checkExpiredToken = responseBody => {
 };
 
 const loanDetails = e => {
+  e.preventDefault();
   if (e.target.id === "acctti") {
     // All loans endpoint url
     let loanID;
@@ -168,7 +167,7 @@ const loanDetails = e => {
 
           console.log(getFulldetails);
 
-          // window.location.href = "loan.html";
+          window.location.href = "loan.html";
         } else {
           loanDetailsFedback.innerHTML = "nothing";
           // feedbackContainer.classList.add("feedback-message-error");
