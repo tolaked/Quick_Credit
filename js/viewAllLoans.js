@@ -48,7 +48,8 @@ const getAllApplications = () => {
         feedbackContainer.classList.remove("feedback-message-error");
         let allLoans = "";
         body.data.forEach(userLoan => {
-          allLoans += `<article>
+          allLoans += `<div class="eachLoan">
+          <article>
               <p>Client's Email</p>
               <p>${userLoan.clientemail}</p>
             </article>
@@ -64,7 +65,8 @@ const getAllApplications = () => {
                     
                   </article>
                   <div class="${userLoan.id}" id="acctti">View aplication</div>
-                <hr>`;
+                <hr>
+                </div>`;
         });
 
         // get loan container
