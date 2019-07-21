@@ -66,7 +66,7 @@ const getAllApplications = () => {
                   </article>
                   <div class="${
                     userLoan.id
-                  }" id="acctti"><a href="loan.html>"View aplication</a></div>
+                  }" id="acctti"><a href="loan.html">View aplication</a></div>
                 <hr>
                 </div>`;
         });
