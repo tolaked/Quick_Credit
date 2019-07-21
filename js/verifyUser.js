@@ -35,6 +35,7 @@ const verifyUser = e => {
   };
 
   const userEmail = document.getElementById("email").value;
+ 
 
   const url = `https://my-quick-credit-app.herokuapp.com/api/v2/users/${userEmail}/verify`;
 
@@ -54,11 +55,13 @@ const verifyUser = e => {
         feedContainrs.innerHTML = `User with the email ${userEmail} verified successfully`;
         feedContainrs.classList.add("feedback-message-success");
         feedContainrs.classList.remove("feedback-message-error");
+       
       } else {
         feedbak(body);
       }
     })
     .catch(err => err);
+    console.log(err)
 };
 
 const verifyBtn = document.querySelector(".add-loan-button");
