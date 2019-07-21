@@ -64,7 +64,9 @@ const getAllApplications = () => {
                 <article class ="buttons">
                     
                   </article>
-                  <div class="${userLoan.id}" id="acctti">View aplication</div>
+                  <div class="${
+                    userLoan.id
+                  }" id="acctti"><a href="loan.html>"View aplication</a></div>
                 <hr>
                 </div>`;
         });
@@ -96,7 +98,7 @@ const loanDetails = e => {
     let loanID;
     // if(e.target.className !)
     loanID = e.target.className;
-    console.log(e.target.classList);
+    console.log(loanID);
 
     const detailsurl = `https://my-quick-credit-app.herokuapp.com/api/v2/loans/${loanID}`;
 
