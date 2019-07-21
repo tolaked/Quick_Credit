@@ -45,8 +45,8 @@ const displayFeedback = responseData => {
 
 const signUp = e => {
   e.preventDefault();
-  resetFields();
   showOverlay();
+  console.log(e.target.className);
   // get all user input values
   const firstname = document.getElementById("firstName").value;
   const lastname = document.getElementById("lastName").value;
