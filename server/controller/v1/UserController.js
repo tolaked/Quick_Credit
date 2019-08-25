@@ -16,10 +16,10 @@ export default class UserController {
     const { body } = req;
     const { error } = validation.validateUser(body);
     if (error) {
+      return res
+        .status(422)
+        .json({ status: 422, message: error.details[0].message });
     }
-    return res
-      .status(422)
-      .json({ status: 422, message: error.details[0].message });
 
     try {
       // check if user already exists
