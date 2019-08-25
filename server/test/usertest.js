@@ -150,6 +150,7 @@ describe("POST api/v1/auth/signup", () => {
       .end((err, res) => {
         if (err) done();
         const { body } = res;
+        console.log(body)
         signUpuserToken = body.data.token;
         expect(body).to.be.an("object");
         expect(body.status).to.be.a("number");
