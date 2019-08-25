@@ -31,7 +31,7 @@ const verifyUser = e => {
   }
 
   const formData = {
-    status: document.querySelector(".newStatus").value
+    status: document.getElementById("veriStatus").value
   };
 
   const userEmail = document.getElementById("email").value;
@@ -59,6 +59,7 @@ const verifyUser = e => {
       }
     })
     .catch(err => err);
+  console.log(err);
 };
 
 const verifyBtn = document.querySelector(".add-loan-button");

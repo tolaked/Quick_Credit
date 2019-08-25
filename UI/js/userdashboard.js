@@ -90,6 +90,7 @@ const displaMainContent = evt => {
     document.querySelector(".unpaid").style.display = "none";
     document.querySelector(".repaid").style.display = "none";
     document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".compose-box1").style.display = "none";
   }
 
   if (evt.target.classList.contains("repay")) {
@@ -101,6 +102,7 @@ const displaMainContent = evt => {
     document.querySelector(".unpaid").style.display = "block";
     document.querySelector(".repaid").style.display = "none";
     document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".compose-box1").style.display = "none";
   }
 
   if (evt.target.classList.contains("paid")) {
@@ -112,6 +114,21 @@ const displaMainContent = evt => {
     document.querySelector(".unpaid").style.display = "none";
     document.querySelector(".repaid").style.display = "block";
     document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".compose-box1").style.display = "none";
+  }
+  const loanClass = document.getElementById("acctti").className;
+  if (evt.target.classList.contains("loanClass")) {
+    const createForm = (document.querySelector(".compose-box").style.display =
+      "none");
+    const createdForm = (document.querySelector(".profile-card").style.display =
+      "none");
+    document.querySelector(".main-loan-body").style.display = "none";
+    document.querySelector(".unpaid").style.display = "none";
+    document.querySelector(".repaid").style.display = "none";
+    document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".loan-payment").style.display = "none";
+    document.querySelector(".compose-box1").style.display = "block";
   }
 };
 
@@ -157,6 +174,7 @@ for (let i = 0; i < closeIt.length; i++) {
       "none");
     const closeFormm = (document.querySelector(".loan-payment").style.display =
       "none");
+    document.querySelector(".compose-box1").style.display = "none";
   });
 }
 
@@ -171,5 +189,21 @@ post.addEventListener("click", () => {
   const closeUnpaidm = (document.querySelector(".unpaid").style.display =
     "none");
   const paid = (document.querySelector(".loan-payment").style.display =
+    "block");
+  document.querySelector(".compose-box1").style.display = "none";
+});
+
+const loanDetails = document.getElementById("acctti");
+loanDetails.addEventListener("click", () => {
+  const closeFormm = (document.querySelector(".compose-box").style.display =
+    "none");
+  const showMm = (document.querySelector(".profile-card").style.display =
+    "none");
+  const closeRepaidm = (document.querySelector(".repaid").style.display =
+    "none");
+  const closeUnpaidm = (document.querySelector(".unpaid").style.display =
+    "none");
+  const paid = (document.querySelector(".loan-payment").style.display = "none");
+  const loanDetails = (document.querySelector(".compose-box1").style.display =
     "block");
 });

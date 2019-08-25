@@ -563,7 +563,7 @@ hr {
 }
 .message-header {
   color: #35577a;
-  text-align: left;
+  text-align: center;
 }
 
 /* style for admin dashboard */
@@ -614,8 +614,13 @@ hr {
 }
 
 #viewLoans {
-  background-color: white;
   justify-content: right;
+  border-radius: 3px;
+}
+
+.eachLoan {
+  background-color: white;
+  margin-bottom: 20px;
   border-radius: 3px;
 }
 /* style for post loan repayment */
@@ -646,7 +651,7 @@ hr {
   display: flex;
   justify-content: space-between;
   border-bottom: 0.3px solid;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .ref {
@@ -677,6 +682,11 @@ hr {
   color: white;
   text-align: center;
   display: block;
+  cursor: pointer;
+}
+
+#fulldetails {
+  /* display: none; */
 }
 
 #acctti {
@@ -780,7 +790,7 @@ hr {
 .loan_container input[type="text"],
 .loan_container input[type="number"],
 .loan_containerr input[type="password"],
-.loan_container select[name="inst"],
+.loan_container select[name="verif"],
 .loan_container textarea {
   width: 90%;
   padding: 15px;
@@ -793,8 +803,8 @@ hr {
   z-index: 1;
 }
 
-.loan_container select[name="inst"] {
-  width: 98%;
+.loan_container select[name="verif"] {
+  width: 97%;
 }
 
 .loan_container input[type="text"]:focus,

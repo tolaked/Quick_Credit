@@ -79,19 +79,18 @@
               />
               
               <label for="verification">Verification status</label>
-              <input
-                type="text"
-                placeholder="Status"
-                name="status"
-                class="newStatus"
-                required
-              />
+              
+              <select name="verif" id="veriStatus" class="newStatus">
+                  <option value="verified">--Select--</option>
+                <option value="verified">verified</option>
+                <option value="unverified">unverified</option>
+              </select>
               
               </div>
               <hr />
-              <!-- <div class="add-loan-btn"> -->
+              
                 <button type="submit" class="add-loan-button">Submit</button>
-              <!-- </div> -->
+             
             </div>
           </form>
         </div>
@@ -217,6 +216,32 @@
      </section>
      </div>
     </div>
+
+    <!-- LOAN DETAIL -->
+
+    <div class="compose-box1 compose-container">
+      <form action="" class="box">
+          
+          <section id="admin-dashboard-section">
+              <h1>Loan Application</h1>
+              <div class="feed"></div>
+              <section class ="accounts">
+                <article class="account-details">
+                    <div class="fulldetails">
+                 
+                   
+                  </div>
+                 
+                   
+                </article> 
+              </section>
+              </section>
+        </form>
+      
+  </div>
+
+    <!-- LOAN DETAIL -->
+
      
     <div class="post-container">
      <div class="loan-payment">
@@ -260,9 +285,12 @@
   </div>
   </div>
      </main>
+     <script src="js/fullDetails.js"></script>
     <script src="js/userdashboard.js"></script>
     <script src="js/viewAllLoans.js"></script>
     <script src="js/UnrepaidLoans.js"></script>
     <script src="js/verifyUser.js"></script>
+   
+
   </body>
 </html>
